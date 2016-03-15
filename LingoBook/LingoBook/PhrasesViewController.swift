@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhrasesViewController: UIViewController {
+class PhrasesViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

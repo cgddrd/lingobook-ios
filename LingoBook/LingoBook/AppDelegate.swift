@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if let font = UIFont (name: "Bariol", size: 20) {
+            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font]
+        }
+        
         return true
     }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		996F00641C988D9000FDC20F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 996F00631C98898D00FDC20F /* Bariol_Regular.otf */; };
 		999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993213F1C8F654400BA86F5 /* AppDelegate.swift */; };
 		999321421C8F654400BA86F5 /* PhrasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999321411C8F654400BA86F5 /* PhrasesViewController.swift */; };
 		999321441C8F654400BA86F5 /* RevisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999321431C8F654400BA86F5 /* RevisionViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		996F00631C98898D00FDC20F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
 		9993213C1C8F654400BA86F5 /* LingoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LingoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9993213F1C8F654400BA86F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		999321411C8F654400BA86F5 /* PhrasesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				999321481C8F654400BA86F5 /* Assets.xcassets */,
 				9993214A1C8F654400BA86F5 /* LaunchScreen.storyboard */,
 				9993214D1C8F654400BA86F5 /* Info.plist */,
+				996F00631C98898D00FDC20F /* Bariol_Regular.otf */,
 			);
 			path = LingoBook;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				9993214C1C8F654400BA86F5 /* LaunchScreen.storyboard in Resources */,
 				999321491C8F654400BA86F5 /* Assets.xcassets in Resources */,
 				999321471C8F654400BA86F5 /* Main.storyboard in Resources */,
+				996F00641C988D9000FDC20F /* Bariol_Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +490,7 @@
 				999321681C8F654400BA86F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		999321691C8F654400BA86F5 /* Build configuration list for PBXNativeTarget "LingoBookTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +499,7 @@
 				9993216B1C8F654400BA86F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9993216C1C8F654400BA86F5 /* Build configuration list for PBXNativeTarget "LingoBookUITests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +508,7 @@
 				9993216E1C8F654400BA86F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
