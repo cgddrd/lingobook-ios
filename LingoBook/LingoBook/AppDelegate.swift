@@ -17,9 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        let barTintColour = UIColor(red: 250.0/255.0, green: 214.9/255.0, blue: 75.4/255.0, alpha: 1.0);
+        
         if let font = UIFont (name: "Bariol", size: 20) {
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font]
         }
+        
+        UINavigationBar.appearance().barTintColor = barTintColour;
+        
+        //UISearchBar.appearance().barTintColor = UIColor(red: 250.0/255.0, green: 214.9/255.0, blue: 75.4/255.0, alpha: 1.0)
+        //UISearchBar.appearance().tintColor = UIColor.whiteColor()
+        //UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor(red: 98.0/255.0, green: 83.9/255.0, blue: 29.4/255.0, alpha: 1.0)
         
         return true
     }
