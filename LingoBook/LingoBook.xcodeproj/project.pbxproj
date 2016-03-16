@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9911310C1C9A184C00FE0D42 /* LingoBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9911310A1C9A184C00FE0D42 /* LingoBook.xcdatamodeld */; };
 		996F00641C988D9000FDC20F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 996F00631C98898D00FDC20F /* Bariol_Regular.otf */; };
 		999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993213F1C8F654400BA86F5 /* AppDelegate.swift */; };
 		999321421C8F654400BA86F5 /* PhrasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999321411C8F654400BA86F5 /* PhrasesViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9911310B1C9A184C00FE0D42 /* LingoBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LingoBook.xcdatamodel; sourceTree = "<group>"; };
 		996F00631C98898D00FDC20F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
 		9993213C1C8F654400BA86F5 /* LingoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LingoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9993213F1C8F654400BA86F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		9993213E1C8F654400BA86F5 /* LingoBook */ = {
 			isa = PBXGroup;
 			children = (
+				9911310A1C9A184C00FE0D42 /* LingoBook.xcdatamodeld */,
 				9993213F1C8F654400BA86F5 /* AppDelegate.swift */,
 				999321411C8F654400BA86F5 /* PhrasesViewController.swift */,
 				999321431C8F654400BA86F5 /* RevisionViewController.swift */,
@@ -265,6 +268,7 @@
 			files = (
 				999321441C8F654400BA86F5 /* RevisionViewController.swift in Sources */,
 				999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */,
+				9911310C1C9A184C00FE0D42 /* LingoBook.xcdatamodeld in Sources */,
 				999321421C8F654400BA86F5 /* PhrasesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +515,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9911310A1C9A184C00FE0D42 /* LingoBook.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9911310B1C9A184C00FE0D42 /* LingoBook.xcdatamodel */,
+			);
+			currentVersion = 9911310B1C9A184C00FE0D42 /* LingoBook.xcdatamodel */;
+			path = LingoBook.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 999321341C8F654300BA86F5 /* Project object */;
 }

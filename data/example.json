@@ -1,0 +1,27 @@
+{
+
+  "phrases": [{
+    "text": "ladder",
+    "translations": [{
+      "locale": "cy",
+      "text": "ladder-cy"
+    }, {
+      "locale": "fr",
+      "text": "échelle"
+    }],
+    "note": "climbing",
+    "type": "noun"
+  }, {
+    "text": "school",
+    "translations": [{
+      "locale": "cy",
+      "text": "ysgol"
+    }, {
+      "locale": "fr",
+      "text": "école"
+    }],
+    "note": "education",
+    "type": "noun"
+  }]
+
+}
