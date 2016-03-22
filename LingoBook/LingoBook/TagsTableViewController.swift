@@ -15,7 +15,7 @@ class TagsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        super.setEditing(true, animated: true)
+        //super.setEditing(true, animated: true)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,43 +41,43 @@ class TagsTableViewController: UITableViewController {
         return count + 1;
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-
-        if indexPath.section == 0 {
-            return .Insert
-        }
-
-        return .None
-        
-    }
-    
-        override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-            if editingStyle == UITableViewCellEditingStyle.Insert {
-    
-                count++;
-    
-                print(count)
-                
-                //self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-    
-                self.tableView.beginUpdates()
-                self.tableView.insertRowsAtIndexPaths([
-                    NSIndexPath(forRow: count, inSection: 0)
-                    ], withRowAnimation: .Automatic)
-                self.tableView.endUpdates()
-    
-                
-            }
-        }
-
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-
-        return cell
-        
-    }
+//    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+//
+//        if indexPath.section == 0 {
+//            return .Insert
+//        }
+//
+//        return .None
+//        
+//    }
+//    
+//        override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//            if editingStyle == UITableViewCellEditingStyle.Insert {
+//    
+//                count++;
+//    
+//                print(count)
+//                
+//                //self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+//    
+//                self.tableView.beginUpdates()
+//                self.tableView.insertRowsAtIndexPaths([
+//                    NSIndexPath(forRow: count, inSection: 0)
+//                    ], withRowAnimation: .Automatic)
+//                self.tableView.endUpdates()
+//    
+//                
+//            }
+//        }
+//
+//    
+//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        
+//        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+//
+//        return cell
+//        
+//    }
     
 
     /*
