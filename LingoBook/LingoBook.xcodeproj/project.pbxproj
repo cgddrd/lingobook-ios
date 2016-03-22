@@ -20,6 +20,7 @@
 		999321621C8F654400BA86F5 /* LingoBookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999321611C8F654400BA86F5 /* LingoBookUITests.swift */; };
 		9994FB0C1CA1950E00675259 /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB0B1CA1950E00675259 /* TagsTableViewController.swift */; };
 		9994FB0E1CA1BDBB00675259 /* AddTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB0D1CA1BDBB00675259 /* AddTagTableViewCell.swift */; };
+		9994FB101CA1F65300675259 /* AddTranslationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB0F1CA1F65300675259 /* AddTranslationTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		999321631C8F654400BA86F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9994FB0B1CA1950E00675259 /* TagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		9994FB0D1CA1BDBB00675259 /* AddTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagTableViewCell.swift; sourceTree = "<group>"; };
+		9994FB0F1CA1F65300675259 /* AddTranslationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTranslationTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				999321411C8F654400BA86F5 /* PhrasesViewController.swift */,
 				999321431C8F654400BA86F5 /* RevisionViewController.swift */,
 				999321451C8F654400BA86F5 /* Main.storyboard */,
+				9994FB0F1CA1F65300675259 /* AddTranslationTableViewController.swift */,
 				9994FB0D1CA1BDBB00675259 /* AddTagTableViewCell.swift */,
 				996694EB1CA0852700058701 /* AddPhraseViewController.swift */,
 				9994FB0B1CA1950E00675259 /* TagsTableViewController.swift */,
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				999321441C8F654400BA86F5 /* RevisionViewController.swift in Sources */,
+				9994FB101CA1F65300675259 /* AddTranslationTableViewController.swift in Sources */,
 				996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */,
 				999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */,
 				9911310C1C9A184C00FE0D42 /* LingoBook.xcdatamodeld in Sources */,

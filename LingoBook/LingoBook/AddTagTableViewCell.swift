@@ -9,7 +9,7 @@
 import UIKit
 
 class AddTagTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var textTag: UITextField!
     
     override func awakeFromNib() {

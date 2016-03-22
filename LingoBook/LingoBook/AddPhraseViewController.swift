@@ -10,7 +10,7 @@ import UIKit
 
 class AddPhraseViewController: UITableViewController {
     
-    var count = 0;
+    var tags = [String]();
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,18 +44,35 @@ class AddPhraseViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 4
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
             
         case 0:
-            return "Words"
+            return "New Phrase"
         case 1:
+            return "Translations"
+        case 2:
             return "Tags"
+        case 3:
+            return "Notes"
         default:
-            return "";
+            return ""
+            
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        if (indexPath.section == 3) {
+            
+            return 120;
+            
+        } else {
+            
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
             
         }
     }
@@ -64,9 +81,13 @@ class AddPhraseViewController: UITableViewController {
         switch section {
             
         case 0:
-            return 2
+            return 1
         case 1:
-            return count + 1;
+            return 1
+        case 2:
+            return tags.count + 1
+        case 3:
+            return 1
         default:
             assert(false, "section \(section)")
             return 0
@@ -74,36 +95,63 @@ class AddPhraseViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        
+        switch section {
+            
+        case 0:
+            return "Enter the new phrase in English."
+        case 1:
+            return "Enter at least one translation for the new phrase."
+        case 2:
+            return "Enter any tags associated with the new phrase. (Optional)"
+        case 3:
+            return "Enter a note associated with the new phrase. (Optional)"
+        default:
+            return ""
+            
+        }
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("dynamic");
+        var cell = tableView.dequeueReusableCellWithIdentifier("dynamic")
         
-        if (indexPath.section == 0) {
+        if indexPath.section == 0 {
             
-            if (indexPath.row == 0) {
+            if indexPath.row == 0 {
                 
                 cell = tableView.dequeueReusableCellWithIdentifier("static1")
-                
-            } else if (indexPath.row == 1) {
-                
-                cell = tableView.dequeueReusableCellWithIdentifier("static2")
             }
+                
+//            } else if indexPath.row == 1 {
+//                
+//                cell = tableView.dequeueReusableCellWithIdentifier("static2")
+//            }
         
+        } else if indexPath.section == 1 {
             
-        } else if (indexPath.section == 1) {
             
-            cell = tableView.dequeueReusableCellWithIdentifier("dynamic")
+            cell = tableView.dequeueReusableCellWithIdentifier("dynamic2")
             
-            if(indexPath.row >= count){
+        
+        } else if indexPath.section == 2 {
+            
+            if indexPath.row < tags.count {
                 
-                //cell!.textLabel!.text = "Add Row";
-                
-            } else {
-                
-                //cell!.textLabel!.text = "Dynamic";
+                if let tagCell = cell as? AddTagTableViewCell {
+                    
+                    tagCell.textTag.text = tags[indexPath.row]
+                    
+                    return tagCell
+                    
+                }
                 
             }
             
+        } else if indexPath.section == 3 {
+            
+            cell = tableView.dequeueReusableCellWithIdentifier("static3")
         }
         
         return cell!
@@ -112,15 +160,19 @@ class AddPhraseViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        if (indexPath.section == 1) {
+        if indexPath.section == 1 {
             
-            if(indexPath.row >= count) {
+            return .Insert
+        
+        } else if indexPath.section == 2 {
+            
+            if indexPath.row >= tags.count {
                 
-                return .Insert;
+                return .Insert
                 
             } else {
                 
-                return .Delete;
+                return .Delete
                 
             }
             
@@ -132,19 +184,13 @@ class AddPhraseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-//        if indexPath.section == 1 {
-//            return true
-//        }
-//        
-//        return false
-        
-        return indexPath.section == 1
+        return indexPath.section == 1 || indexPath.section == 2
         
     }
    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if (indexPath.section == 1) {
+        if indexPath.section == 2 {
             
             if editingStyle == UITableViewCellEditingStyle.Insert {
                 
@@ -152,22 +198,25 @@ class AddPhraseViewController: UITableViewController {
                 
                 if let text = currentCell.textTag.text where text.isEmpty
                 {
-                    //do something if it's empty
-                    print("bollocks!")
+                    displayErrorMessage("Please enter a tag to continue.")
+                    
+                } else {
+                    
+                    tags.append(currentCell.textTag.text!)
+                    
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    self.tableView.endUpdates()
+                    
+                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: tags.count, inSection: 1)) as! AddTagTableViewCell
+                
+                    currentCell.textTag.text = ""
+                    
                 }
-                
-                count++;
-                
-                print(count)
-                
-                self.tableView.beginUpdates()
-                self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: count, inSection: 1)], withRowAnimation: .Automatic)
-                self.tableView.endUpdates()
-                
                 
             } else if editingStyle == UITableViewCellEditingStyle.Delete {
                 
-                count--;
+                tags.removeAtIndex(indexPath.row)
                 
                 self.tableView.beginUpdates()
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -175,9 +224,15 @@ class AddPhraseViewController: UITableViewController {
                 
             }
             
+        } else if indexPath.section == 1 {
+            
+            
+            if editingStyle == UITableViewCellEditingStyle.Insert {
+                
+                performSegueWithIdentifier("testSegue", sender: nil)
+            }
         }
         
-
     }
 
 
