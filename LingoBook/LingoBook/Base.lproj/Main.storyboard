@@ -241,9 +241,6 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="FYJ-up-qGD"/>
                     </navigationItem>
-                    <connections>
-                        <segue destination="7mT-XJ-Xwe" kind="presentation" identifier="testSegue" id="tFa-7N-fXk"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcX-Kd-Ab6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -346,7 +343,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQY-0h-5LK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3859" y="384"/>
+            <point key="canvasLocation" x="5073" y="-12"/>
         </scene>
         <!--Phrases-->
         <scene sceneID="z6Y-ba-ywx">
@@ -458,7 +455,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="toY-wc-heN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3098" y="384"/>
+            <point key="canvasLocation" x="4348" y="-12"/>
         </scene>
     </scenes>
     <resources>

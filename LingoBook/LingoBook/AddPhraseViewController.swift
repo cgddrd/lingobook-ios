@@ -44,19 +44,17 @@ class AddPhraseViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
             
         case 0:
-            return "New Phrase"
+            return "Translation"
         case 1:
-            return "Translations"
-        case 2:
             return "Tags"
-        case 3:
+        case 2:
             return "Notes"
         default:
             return ""
@@ -66,7 +64,7 @@ class AddPhraseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if (indexPath.section == 3) {
+        if (indexPath.section == 2) {
             
             return 120;
             
@@ -81,12 +79,10 @@ class AddPhraseViewController: UITableViewController {
         switch section {
             
         case 0:
-            return 1
+            return 2
         case 1:
-            return 1
-        case 2:
             return tags.count + 1
-        case 3:
+        case 2:
             return 1
         default:
             assert(false, "section \(section)")
@@ -100,12 +96,10 @@ class AddPhraseViewController: UITableViewController {
         switch section {
             
         case 0:
-            return "Enter the new phrase in English."
+            return "Enter the translation for the new phrase."
         case 1:
-            return "Enter at least one translation for the new phrase."
-        case 2:
             return "Enter any tags associated with the new phrase. (Optional)"
-        case 3:
+        case 2:
             return "Enter a note associated with the new phrase. (Optional)"
         default:
             return ""
@@ -122,20 +116,19 @@ class AddPhraseViewController: UITableViewController {
             if indexPath.row == 0 {
                 
                 cell = tableView.dequeueReusableCellWithIdentifier("static1")
-            }
                 
-//            } else if indexPath.row == 1 {
-//                
-//                cell = tableView.dequeueReusableCellWithIdentifier("static2")
-//            }
+            } else if indexPath.row == 1 {
+                
+                cell = tableView.dequeueReusableCellWithIdentifier("static2")
+            }
+        
+//        } else if indexPath.section == 1 {
+//            
+//            
+//            cell = tableView.dequeueReusableCellWithIdentifier("dynamic2")
+//            
         
         } else if indexPath.section == 1 {
-            
-            
-            cell = tableView.dequeueReusableCellWithIdentifier("dynamic2")
-            
-        
-        } else if indexPath.section == 2 {
             
             if indexPath.row < tags.count {
                 
@@ -149,7 +142,7 @@ class AddPhraseViewController: UITableViewController {
                 
             }
             
-        } else if indexPath.section == 3 {
+        } else if indexPath.section == 2 {
             
             cell = tableView.dequeueReusableCellWithIdentifier("static3")
         }
@@ -161,10 +154,6 @@ class AddPhraseViewController: UITableViewController {
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
         if indexPath.section == 1 {
-            
-            return .Insert
-        
-        } else if indexPath.section == 2 {
             
             if indexPath.row >= tags.count {
                 
@@ -184,13 +173,13 @@ class AddPhraseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-        return indexPath.section == 1 || indexPath.section == 2
+        return indexPath.section == 1
         
     }
    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 2 {
+        if indexPath.section == 1 {
             
             if editingStyle == UITableViewCellEditingStyle.Insert {
                 
@@ -223,15 +212,16 @@ class AddPhraseViewController: UITableViewController {
                 self.tableView.endUpdates()
                 
             }
-            
-        } else if indexPath.section == 1 {
-            
-            
-            if editingStyle == UITableViewCellEditingStyle.Insert {
-                
-                performSegueWithIdentifier("testSegue", sender: nil)
-            }
         }
+            
+//        } else if indexPath.section == 1 {
+//            
+//            
+//            if editingStyle == UITableViewCellEditingStyle.Insert {
+//                
+//                performSegueWithIdentifier("testSegue", sender: nil)
+//            }
+//        }
         
     }
 
