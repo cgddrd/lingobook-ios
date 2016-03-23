@@ -106,17 +106,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static1" id="DJZ-TU-Zs5">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static1" id="DJZ-TU-Zs5" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DJZ-TU-Zs5" id="1nS-XE-0ld">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="English" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VW7-8e-m2C">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Original" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VW7-8e-m2C">
                                             <rect key="frame" x="16" y="8" width="568" height="27"/>
                                             <attributedString key="attributedText"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="textPhraseValueChanged:" destination="DJZ-TU-Zs5" eventType="editingChanged" id="bHH-z8-aR0"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -126,52 +129,39 @@
                                         <constraint firstItem="VW7-8e-m2C" firstAttribute="top" secondItem="1nS-XE-0ld" secondAttribute="topMargin" id="vtB-kG-KD6"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textPhrase" destination="VW7-8e-m2C" id="4Wf-By-MJj"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static2" id="I1P-mM-uDU">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static2" id="IKJ-Dz-cUe" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="158" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I1P-mM-uDU" id="c0J-Ek-ocP">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IKJ-Dz-cUe" id="1GC-pm-Kcm">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Welsh" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wb4-HK-1Hk">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Translation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-Os-bmH">
                                             <rect key="frame" x="16" y="8" width="568" height="27"/>
                                             <attributedString key="attributedText"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="textPhraseValueChanged:" destination="IKJ-Dz-cUe" eventType="editingChanged" id="BrE-t7-9G2"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Wb4-HK-1Hk" firstAttribute="bottom" secondItem="c0J-Ek-ocP" secondAttribute="bottomMargin" id="3Q4-Qh-mL1"/>
-                                        <constraint firstItem="Wb4-HK-1Hk" firstAttribute="top" secondItem="c0J-Ek-ocP" secondAttribute="topMargin" id="5GP-bf-Exr"/>
-                                        <constraint firstItem="Wb4-HK-1Hk" firstAttribute="centerX" secondItem="c0J-Ek-ocP" secondAttribute="centerX" id="Ycc-An-znR"/>
-                                        <constraint firstItem="Wb4-HK-1Hk" firstAttribute="leading" secondItem="c0J-Ek-ocP" secondAttribute="leadingMargin" constant="8" id="dVa-eb-Njf"/>
+                                        <constraint firstItem="DAu-Os-bmH" firstAttribute="leading" secondItem="1GC-pm-Kcm" secondAttribute="leadingMargin" constant="8" id="PFR-3B-zpk"/>
+                                        <constraint firstItem="DAu-Os-bmH" firstAttribute="top" secondItem="1GC-pm-Kcm" secondAttribute="topMargin" id="ajk-fR-aHD"/>
+                                        <constraint firstItem="DAu-Os-bmH" firstAttribute="centerX" secondItem="1GC-pm-Kcm" secondAttribute="centerX" id="bZa-MT-nLh"/>
+                                        <constraint firstItem="DAu-Os-bmH" firstAttribute="bottom" secondItem="1GC-pm-Kcm" secondAttribute="bottomMargin" id="cSb-Rx-BcA"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textPhrase" destination="DAu-Os-bmH" id="5nY-h1-ywS"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dynamic2" textLabel="fRh-qr-aoT" detailTextLabel="odw-Sv-DvV" style="IBUITableViewCellStyleValue1" id="cno-Dd-rOm">
-                                <rect key="frame" x="0.0" y="202" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cno-Dd-rOm" id="WxK-eZ-fuZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add Translation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fRh-qr-aoT">
-                                            <rect key="frame" x="15" y="11" width="120" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="odw-Sv-DvV">
-                                            <rect key="frame" x="541" y="11" width="44" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static3" rowHeight="132" id="ow2-Sk-OUS">
-                                <rect key="frame" x="0.0" y="246" width="600" height="132"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static3" rowHeight="132" id="ow2-Sk-OUS" customClass="AddPhraseNoteTableViewCell" customModule="LingoBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="202" width="600" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ow2-Sk-OUS" id="kFE-XF-ged">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="131"/>
@@ -191,9 +181,12 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="ZGt-bP-vlR" secondAttribute="trailing" constant="8" id="iEa-Th-N0g"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textPhraseNote" destination="ZGt-bP-vlR" id="bNL-kP-LlN"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dynamic" id="hPd-1U-A7T" customClass="AddTagTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="378" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dynamic" id="hPd-1U-A7T" customClass="AddPhraseTagTableViewCell" customModule="LingoBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="334" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hPd-1U-A7T" id="Nks-VT-GyZ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -236,10 +229,14 @@
                     <navigationItem key="navigationItem" title="Add Phrase" id="5zv-L7-aJV">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FXu-dZ-aUc">
                             <connections>
-                                <action selector="cancelView:" destination="FsZ-f8-gah" id="tNl-bs-cOb"/>
+                                <action selector="cancelPressed:" destination="FsZ-f8-gah" id="k2X-hb-51Z"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FYJ-up-qGD"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FYJ-up-qGD">
+                            <connections>
+                                <action selector="donePressed:" destination="FsZ-f8-gah" id="0p1-Lc-3k8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcX-Kd-Ab6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -309,8 +306,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="213"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3i-1Z-ATP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="216"/>
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3i-1Z-ATP">
+                                                    <rect key="frame" x="0.0" y="-3" width="600" height="216"/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="hAq-P4-bqp" id="FW7-3c-hLp"/>
                                                         <outlet property="delegate" destination="hAq-P4-bqp" id="hF4-ze-CsD"/>

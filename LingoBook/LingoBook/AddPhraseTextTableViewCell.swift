@@ -1,16 +1,18 @@
 //
-//  AddTabTableViewCell.swift
+//  AddPhraseTableViewCell.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 22/03/2016.
+//  Created by Connor Goddard on 23/03/2016.
 //  Copyright © 2016 Connor Goddard. All rights reserved.
 //
 
 import UIKit
 
-class AddTagTableViewCell: UITableViewCell {
+class AddPhraseTextTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var textPhrase: UITextField!
     
-    @IBOutlet weak var textTag: UITextField!
+    var delegate: UITableViewCellUpdateDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +23,12 @@ class AddTagTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    @IBAction func textPhraseValueChanged(sender: AnyObject) {
+        
+        self.delegate?.cellDidChangeValue(self)
+        
     }
 
 }

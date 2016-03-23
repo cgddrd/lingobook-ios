@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
-    <entity name="OriginPhrase" syncable="YES">
+    <entity name="OriginPhrase" representedClassName=".OriginPhrase" syncable="YES">
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="textValue" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="originWords" inverseEntity="Tag" syncable="YES"/>
         <relationship name="translations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TranslatedPhrase" inverseName="origin" inverseEntity="TranslatedPhrase" syncable="YES"/>
     </entity>
-    <entity name="Tag" syncable="YES">
+    <entity name="Tag" representedClassName=".Tag" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="originWords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OriginPhrase" inverseName="tags" inverseEntity="OriginPhrase" syncable="YES"/>
     </entity>
-    <entity name="TranslatedPhrase" syncable="YES">
+    <entity name="TranslatedPhrase" representedClassName=".TranslatedPhrase" syncable="YES">
         <attribute name="locale" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="textValue" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OriginPhrase" inverseName="translations" inverseEntity="OriginPhrase" syncable="YES"/>

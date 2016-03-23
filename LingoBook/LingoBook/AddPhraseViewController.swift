@@ -7,19 +7,117 @@
 //
 
 import UIKit
+import CoreData
 
-class AddPhraseViewController: UITableViewController {
+class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDelegate {
     
-    var tags = [String]();
+    var phraseTags = [String]()
+    var phraseOriginalText = String()
+    var phraseTranslatedtext = String()
+    var phraseNote = String()
+    
+    var managedContext : NSManagedObjectContext! = nil;
+    
+    func getExistingTag(tagName: String) -> Tag? {
+        
+        do {
+            
+            let tagFetch = NSFetchRequest(entityName: "Tag")
+            
+            // '[c]' tells the predicate to use case-insensitive equality comparison.
+            tagFetch.predicate = NSPredicate(format: "name LIKE[c] %@", tagName)
+            
+            if let retrievedTags = try managedContext.executeFetchRequest(tagFetch) as? [Tag] {
+                
+                if (retrievedTags.count > 0) {
+                    
+                    return retrievedTags.first
+                
+                }
+                
+            }
+            
+            
+        } catch let error as NSError {
+            NSLog("Error whilst printing Speaker results: \(error)")
+        }
+        
+        return nil
+        
+    }
+    
+    func addNewPhrase() {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        managedContext = appDelegate.managedObjectContext
+        
+        let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: managedContext)
+        let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: managedContext)
+        
+        //let newPhraseFetch = NSFetchRequest(entityName: "OriginPhrase")
+        
+        let newOriginPhrase = OriginPhrase(entity: newOriginPhraseEntity!, insertIntoManagedObjectContext: managedContext)
+        let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: managedContext)
+        
+        newOriginPhrase.textValue = self.phraseOriginalText
+        newOriginPhrase.note = self.phraseNote
+        
+        newTranslatedPhrase.textValue = self.phraseTranslatedtext
+        
+        let translations = newOriginPhrase.translations!.mutableCopy() as! NSMutableSet
+        translations.addObject(newTranslatedPhrase)
+        newOriginPhrase.translations = translations as NSSet
+        
+        for newTagName in phraseTags {
+            
+            let trimmedTagName = newTagName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            
+            var currentTag = getExistingTag(trimmedTagName)
+            
+            if (currentTag == nil) {
+                
+                print("Creating new tag: \(trimmedTagName)")
+                
+                currentTag = Tag(entity: NSEntityDescription.entityForName("Tag", inManagedObjectContext: managedContext)!, insertIntoManagedObjectContext: managedContext)
+                currentTag?.name = trimmedTagName
+
+            }
+            
+            let mutableOriginWords = currentTag!.originWords?.mutableCopy() as! NSMutableSet
+            mutableOriginWords.addObject(newOriginPhrase)
+            currentTag!.originWords = mutableOriginWords as NSSet
+            
+            
+            let mutableNewPhraseTags = newOriginPhrase.tags?.mutableCopy() as! NSMutableSet
+            mutableNewPhraseTags.addObject(currentTag!)
+            newOriginPhrase.tags = mutableNewPhraseTags as NSSet
+            
+        }
+        
+        do {
+            
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            
+            print ("SOMETHING WENT WRONG: \(error)")
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         super.setEditing(true, animated: true)
         
+        //self.tableView.registerClass(AddPhraseTableViewCell.self, forCellReuseIdentifier: "static1")
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
@@ -32,7 +130,19 @@ class AddPhraseViewController: UITableViewController {
         
     }
     
-    @IBAction func cancelView(sender: AnyObject) {
+    @IBAction func donePressed(sender: AnyObject) {
+        
+        print(phraseOriginalText)
+        print(phraseTranslatedtext)
+        print(phraseNote)
+        
+        addNewPhrase();
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    @IBAction func cancelPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -40,9 +150,9 @@ class AddPhraseViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
@@ -81,7 +191,7 @@ class AddPhraseViewController: UITableViewController {
         case 0:
             return 2
         case 1:
-            return tags.count + 1
+            return phraseTags.count + 1
         case 2:
             return 1
         default:
@@ -109,53 +219,55 @@ class AddPhraseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("dynamic")
-        
         if indexPath.section == 0 {
             
-            if indexPath.row == 0 {
+            let cellIdentifier = indexPath.row == 0 ? "static1" : "static2"
+            
+            if let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? AddPhraseTextTableViewCell {
                 
-                cell = tableView.dequeueReusableCellWithIdentifier("static1")
+                cell.delegate = self
                 
-            } else if indexPath.row == 1 {
+                return cell
                 
-                cell = tableView.dequeueReusableCellWithIdentifier("static2")
             }
-        
-//        } else if indexPath.section == 1 {
-//            
-//            
-//            cell = tableView.dequeueReusableCellWithIdentifier("dynamic2")
-//            
-        
+            
+            
         } else if indexPath.section == 1 {
             
-            if indexPath.row < tags.count {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("dynamic") as? AddPhraseTagTableViewCell {
                 
-                if let tagCell = cell as? AddTagTableViewCell {
+                if indexPath.row < phraseTags.count {
                     
-                    tagCell.textTag.text = tags[indexPath.row]
-                    
-                    return tagCell
+                    cell.textTag.text = phraseTags[indexPath.row]
                     
                 }
+                
+                return cell
                 
             }
             
         } else if indexPath.section == 2 {
             
-            cell = tableView.dequeueReusableCellWithIdentifier("static3")
+            //return tableView.dequeueReusableCellWithIdentifier("static3")!
+            
+            if let cell = tableView.dequeueReusableCellWithIdentifier("static3") as? AddPhraseNoteTableViewCell {
+                
+                cell.delegate = self
+                
+                return cell
+                
+            }
         }
         
-        return cell!
-
+        return tableView.dequeueReusableCellWithIdentifier("static1")!;
+        
     }
-
+    
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
         if indexPath.section == 1 {
             
-            if indexPath.row >= tags.count {
+            if indexPath.row >= phraseTags.count {
                 
                 return .Insert
                 
@@ -176,36 +288,36 @@ class AddPhraseViewController: UITableViewController {
         return indexPath.section == 1
         
     }
-   
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 1 {
             
             if editingStyle == UITableViewCellEditingStyle.Insert {
                 
-                let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! AddTagTableViewCell;
+                let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! AddPhraseTagTableViewCell;
                 
-                if let text = currentCell.textTag.text where text.isEmpty
-                {
+                if let text = currentCell.textTag.text where text.isEmpty {
+                    
                     displayErrorMessage("Please enter a tag to continue.")
                     
                 } else {
                     
-                    tags.append(currentCell.textTag.text!)
+                    phraseTags.append(currentCell.textTag.text!)
                     
                     self.tableView.beginUpdates()
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                     self.tableView.endUpdates()
                     
-                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: tags.count, inSection: 1)) as! AddTagTableViewCell
-                
+                    // Force the "new" input cell to be blank in order to display the placeholder text.
+                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: phraseTags.count, inSection: 1)) as! AddPhraseTagTableViewCell
                     currentCell.textTag.text = ""
                     
                 }
                 
             } else if editingStyle == UITableViewCellEditingStyle.Delete {
                 
-                tags.removeAtIndex(indexPath.row)
+                phraseTags.removeAtIndex(indexPath.row)
                 
                 self.tableView.beginUpdates()
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -213,17 +325,43 @@ class AddPhraseViewController: UITableViewController {
                 
             }
         }
-            
-//        } else if indexPath.section == 1 {
-//            
-//            
-//            if editingStyle == UITableViewCellEditingStyle.Insert {
-//                
-//                performSegueWithIdentifier("testSegue", sender: nil)
-//            }
-//        }
         
     }
-
-
+    
+    func cellDidChangeValue(senderCell: UITableViewCell) {
+        
+        guard let indexPath = self.tableView.indexPathForCell(senderCell) else {
+            return
+        }
+        
+        if indexPath.section == 0 {
+            
+            if let currentCell = senderCell as? AddPhraseTextTableViewCell {
+                
+                switch indexPath.row {
+                case 0:
+                    self.phraseOriginalText = currentCell.textPhrase.text!
+                    break
+                case 1:
+                    self.phraseTranslatedtext = currentCell.textPhrase.text!
+                    break
+                    
+                default:
+                    break
+                }
+                
+            }
+            
+        } else if indexPath.section == 2 {
+            
+            if let currentCell = senderCell as? AddPhraseNoteTableViewCell {
+                
+                self.phraseNote = currentCell.textPhraseNote.text
+                
+            }
+            
+        }
+        
+    }
+    
 }
