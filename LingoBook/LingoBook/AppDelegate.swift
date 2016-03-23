@@ -21,13 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Set custom font for navigation bar.
-        if (appFont != nil) {
+        if appFont != nil {
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: appFont!]
         }
         
         // Set navigation bar colour.
-        UINavigationBar.appearance().barTintColor = barTintColour;
-            
+        UINavigationBar.appearance().barTintColor = barTintColour
+        
         
         //UISearchBar.appearance().barTintColor = UIColor(red: 250.0/255.0, green: 214.9/255.0, blue: 75.4/255.0, alpha: 1.0)
         //UISearchBar.appearance().tintColor = UIColor.whiteColor()
