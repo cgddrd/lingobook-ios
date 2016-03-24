@@ -18,102 +18,13 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
     
     var managedContext : NSManagedObjectContext! = nil;
     
-    func getExistingTag(tagName: String) -> Tag? {
-        
-        do {
-            
-            let tagFetch = NSFetchRequest(entityName: "Tag")
-            
-            // '[c]' tells the predicate to use case-insensitive equality comparison.
-            tagFetch.predicate = NSPredicate(format: "name LIKE[c] %@", tagName)
-            
-            if let retrievedTags = try managedContext.executeFetchRequest(tagFetch) as? [Tag] {
-                
-                if (retrievedTags.count > 0) {
-                    
-                    return retrievedTags.first
-                
-                }
-                
-            }
-            
-            
-        } catch let error as NSError {
-            NSLog("Error whilst printing Speaker results: \(error)")
-        }
-        
-        return nil
-        
-    }
-    
-    func addNewPhrase() {
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        managedContext = appDelegate.managedObjectContext
-        
-        let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: managedContext)
-        let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: managedContext)
-        
-        //let newPhraseFetch = NSFetchRequest(entityName: "OriginPhrase")
-        
-        let newOriginPhrase = OriginPhrase(entity: newOriginPhraseEntity!, insertIntoManagedObjectContext: managedContext)
-        let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: managedContext)
-        
-        newOriginPhrase.textValue = self.phraseOriginalText
-        newOriginPhrase.note = self.phraseNote
-        
-        newTranslatedPhrase.textValue = self.phraseTranslatedtext
-        
-        let translations = newOriginPhrase.translations!.mutableCopy() as! NSMutableSet
-        translations.addObject(newTranslatedPhrase)
-        newOriginPhrase.translations = translations as NSSet
-        
-        for newTagName in phraseTags {
-            
-            let trimmedTagName = newTagName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            
-            var currentTag = getExistingTag(trimmedTagName)
-            
-            if (currentTag == nil) {
-                
-                print("Creating new tag: \(trimmedTagName)")
-                
-                currentTag = Tag(entity: NSEntityDescription.entityForName("Tag", inManagedObjectContext: managedContext)!, insertIntoManagedObjectContext: managedContext)
-                currentTag?.name = trimmedTagName
-
-            }
-            
-            let mutableOriginWords = currentTag!.originWords?.mutableCopy() as! NSMutableSet
-            mutableOriginWords.addObject(newOriginPhrase)
-            currentTag!.originWords = mutableOriginWords as NSSet
-            
-            
-            let mutableNewPhraseTags = newOriginPhrase.tags?.mutableCopy() as! NSMutableSet
-            mutableNewPhraseTags.addObject(currentTag!)
-            newOriginPhrase.tags = mutableNewPhraseTags as NSSet
-            
-        }
-        
-        do {
-            
-            try managedContext.save()
-            
-        } catch let error as NSError {
-            
-            print ("SOMETHING WENT WRONG: \(error)")
-            
-        }
-        
-    }
+    var dataController = DataController.sharedInstance;
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         super.setEditing(true, animated: true)
-        
-        //self.tableView.registerClass(AddPhraseTableViewCell.self, forCellReuseIdentifier: "static1")
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -136,7 +47,7 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         print(phraseTranslatedtext)
         print(phraseNote)
         
-        addNewPhrase();
+        dataController.addNewPhrase(phraseOriginalText, translatedPhraseText: phraseTranslatedtext, phraseTags: phraseTags, phraseNote: phraseNote)
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
@@ -363,5 +274,66 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         }
         
     }
+    
+//    func addNewPhrase() {
+//        
+//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        
+//        managedContext = appDelegate.coreDataStack.managedObjectContext
+//        
+//        let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: managedContext)
+//        let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: managedContext)
+//        
+//        //let newPhraseFetch = NSFetchRequest(entityName: "OriginPhrase")
+//        
+//        let newOriginPhrase = OriginPhrase(entity: newOriginPhraseEntity!, insertIntoManagedObjectContext: managedContext)
+//        let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: managedContext)
+//        
+//        newOriginPhrase.textValue = self.phraseOriginalText
+//        newOriginPhrase.note = self.phraseNote
+//        
+//        newTranslatedPhrase.textValue = self.phraseTranslatedtext
+//        
+//        let translations = newOriginPhrase.translations!.mutableCopy() as! NSMutableSet
+//        translations.addObject(newTranslatedPhrase)
+//        newOriginPhrase.translations = translations as NSSet
+//        
+//        for newTagName in phraseTags {
+//            
+//            let trimmedTagName = newTagName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+//            
+//            var currentTag = dataController.getExistingTag(trimmedTagName)
+//            
+//            if (currentTag == nil) {
+//                
+//                print("Creating new tag: \(trimmedTagName)")
+//                
+//                currentTag = Tag(entity: NSEntityDescription.entityForName("Tag", inManagedObjectContext: managedContext)!, insertIntoManagedObjectContext: managedContext)
+//                currentTag?.name = trimmedTagName
+//                
+//            }
+//            
+//            let mutableOriginWords = currentTag!.originWords?.mutableCopy() as! NSMutableSet
+//            mutableOriginWords.addObject(newOriginPhrase)
+//            currentTag!.originWords = mutableOriginWords as NSSet
+//            
+//            
+//            let mutableNewPhraseTags = newOriginPhrase.tags?.mutableCopy() as! NSMutableSet
+//            mutableNewPhraseTags.addObject(currentTag!)
+//            newOriginPhrase.tags = mutableNewPhraseTags as NSSet
+//            
+//        }
+//        
+//        do {
+//            
+//            try managedContext.save()
+//            
+//        } catch let error as NSError {
+//            
+//            print ("SOMETHING WENT WRONG: \(error)")
+//            
+//        }
+//        
+//    }
     
 }

@@ -30,6 +30,8 @@
 		9994FB211CA29E4F00675259 /* AddPhraseTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB201CA29E4F00675259 /* AddPhraseTextTableViewCell.swift */; };
 		9994FB231CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB221CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift */; };
 		9994FB251CA2E81200675259 /* UITableViewCellUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB241CA2E81200675259 /* UITableViewCellUpdateDelegate.swift */; };
+		9994FB291CA354A400675259 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB281CA354A400675259 /* CoreDataStack.swift */; };
+		9994FB2B1CA3568200675259 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB2A1CA3568200675259 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		9994FB201CA29E4F00675259 /* AddPhraseTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseTextTableViewCell.swift; sourceTree = "<group>"; };
 		9994FB221CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseNoteTableViewCell.swift; sourceTree = "<group>"; };
 		9994FB241CA2E81200675259 /* UITableViewCellUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCellUpdateDelegate.swift; sourceTree = "<group>"; };
+		9994FB281CA354A400675259 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9994FB2A1CA3568200675259 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,8 @@
 		9994FB1E1CA29DD200675259 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				9994FB281CA354A400675259 /* CoreDataStack.swift */,
+				9994FB2A1CA3568200675259 /* DataController.swift */,
 				9994FB111CA29AD300675259 /* TranslatedPhrase+CoreDataProperties.swift */,
 				9994FB121CA29AD300675259 /* TranslatedPhrase.swift */,
 				9994FB131CA29AD300675259 /* Tag+CoreDataProperties.swift */,
@@ -332,12 +338,14 @@
 				9994FB231CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift in Sources */,
 				9994FB1A1CA29AD300675259 /* Tag.swift in Sources */,
 				999321441C8F654400BA86F5 /* RevisionViewController.swift in Sources */,
+				9994FB291CA354A400675259 /* CoreDataStack.swift in Sources */,
 				9994FB101CA1F65300675259 /* AddTranslationTableViewController.swift in Sources */,
 				996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */,
 				999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */,
 				9911310C1C9A184C00FE0D42 /* LingoBook.xcdatamodeld in Sources */,
 				9994FB1C1CA29AD300675259 /* OriginPhrase.swift in Sources */,
 				9994FB0E1CA1BDBB00675259 /* AddPhraseTagTableViewCell.swift in Sources */,
+				9994FB2B1CA3568200675259 /* DataController.swift in Sources */,
 				9994FB1B1CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift in Sources */,
 				9994FB181CA29AD300675259 /* TranslatedPhrase.swift in Sources */,
 				9994FB191CA29AD300675259 /* Tag+CoreDataProperties.swift in Sources */,
