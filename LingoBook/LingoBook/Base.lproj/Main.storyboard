@@ -5,6 +5,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Bariol_Regular.otf">
+            <string>Bariol-Regular</string>
+            <string>Bariol-Regular</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -29,7 +35,7 @@
         <scene sceneID="85f-BK-PAw">
             <objects>
                 <tableViewController id="axk-sh-aoN" customClass="PhrasesViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yae-u7-ikp">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" id="yae-u7-ikp">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -42,29 +48,92 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="phraseCell" textLabel="8H3-FH-glV" detailTextLabel="bOY-th-Ry8" style="IBUITableViewCellStyleSubtitle" id="K7T-Ad-i45">
-                                <rect key="frame" x="0.0" y="136" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="phraseCell" rowHeight="110" id="K7T-Ad-i45" customClass="PhraseTableViewCell" customModule="LingoBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="136" width="600" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K7T-Ad-i45" id="fiI-1G-nIK">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8H3-FH-glV">
-                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irb-gl-kuC">
+                                            <rect key="frame" x="16" y="11" width="47" height="22"/>
+                                            <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="22"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bOY-th-Ry8">
-                                            <rect key="frame" x="15" y="25" width="41" height="14"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eme-XV-XMh">
+                                            <rect key="frame" x="16" y="51" width="37" height="17"/>
+                                            <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="17"/>
+                                            <color key="textColor" red="0.29575643499999998" green="0.54419104789999995" blue="0.88481658959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="volume" translatesAutoresizingMaskIntoConstraints="NO" id="uTZ-AZ-Eet">
+                                            <rect key="frame" x="562" y="78" width="22" height="22"/>
+                                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="1Q3-ma-4FN"/>
+                                                <constraint firstAttribute="height" constant="22" id="kro-k9-4gj"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron-arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="pNM-yo-0Xe">
+                                            <rect key="frame" x="572" y="15" width="14" height="14"/>
+                                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="14" id="Yhj-FZ-Qph"/>
+                                                <constraint firstAttribute="width" constant="14" id="pve-hn-g5c"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eT-hf-lSn">
+                                            <rect key="frame" x="16" y="84" width="37" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addrevision" translatesAutoresizingMaskIntoConstraints="NO" id="UWw-1C-Rve">
+                                            <rect key="frame" x="522" y="78" width="22" height="22"/>
+                                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="S8b-bW-HtQ"/>
+                                                <constraint firstAttribute="width" constant="22" id="wkP-ro-QIB"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Irb-gl-kuC" firstAttribute="top" secondItem="fiI-1G-nIK" secondAttribute="topMargin" constant="3" id="0ig-tv-XUz"/>
+                                        <constraint firstItem="uTZ-AZ-Eet" firstAttribute="trailing" secondItem="fiI-1G-nIK" secondAttribute="trailingMargin" id="4om-97-KY4"/>
+                                        <constraint firstItem="uTZ-AZ-Eet" firstAttribute="leading" secondItem="UWw-1C-Rve" secondAttribute="trailing" constant="13" id="Hnv-Oe-qpO"/>
+                                        <constraint firstItem="UWw-1C-Rve" firstAttribute="top" secondItem="fiI-1G-nIK" secondAttribute="topMargin" constant="67" id="J7u-Or-zZp"/>
+                                        <constraint firstItem="UWw-1C-Rve" firstAttribute="centerY" secondItem="uTZ-AZ-Eet" secondAttribute="centerY" id="SSN-7o-TBV"/>
+                                        <constraint firstItem="Irb-gl-kuC" firstAttribute="leading" secondItem="Eme-XV-XMh" secondAttribute="leading" id="TfI-8A-WBi"/>
+                                        <constraint firstAttribute="trailing" secondItem="UWw-1C-Rve" secondAttribute="trailing" constant="51" id="YMV-FS-gtc"/>
+                                        <constraint firstAttribute="trailing" secondItem="UWw-1C-Rve" secondAttribute="trailing" constant="56" id="a7l-hD-FGb"/>
+                                        <constraint firstItem="uTZ-AZ-Eet" firstAttribute="centerY" secondItem="Irb-gl-kuC" secondAttribute="centerY" constant="67" id="hro-xB-YWZ"/>
+                                        <constraint firstItem="uTZ-AZ-Eet" firstAttribute="top" secondItem="fiI-1G-nIK" secondAttribute="topMargin" constant="69" id="jKu-53-7Rz"/>
+                                        <constraint firstItem="Irb-gl-kuC" firstAttribute="leading" secondItem="fiI-1G-nIK" secondAttribute="leadingMargin" constant="8" id="lFk-j7-r6J"/>
+                                        <constraint firstItem="pNM-yo-0Xe" firstAttribute="leading" secondItem="uTZ-AZ-Eet" secondAttribute="leading" constant="10" id="lzl-Qh-PVO"/>
+                                        <constraint firstItem="uTZ-AZ-Eet" firstAttribute="leading" secondItem="UWw-1C-Rve" secondAttribute="trailing" constant="18" id="nWG-dQ-0f7"/>
+                                        <constraint firstItem="pNM-yo-0Xe" firstAttribute="centerY" secondItem="Irb-gl-kuC" secondAttribute="centerY" id="qS7-FB-bBY"/>
+                                        <constraint firstItem="UWw-1C-Rve" firstAttribute="centerY" secondItem="uTZ-AZ-Eet" secondAttribute="centerY" id="ubN-Qj-7U7"/>
+                                        <constraint firstItem="Eme-XV-XMh" firstAttribute="top" secondItem="Irb-gl-kuC" secondAttribute="bottom" constant="18" id="w7i-4b-EwJ"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="J7u-Or-zZp"/>
+                                            <exclude reference="YMV-FS-gtc"/>
+                                            <exclude reference="ubN-Qj-7U7"/>
+                                            <exclude reference="4om-97-KY4"/>
+                                            <exclude reference="Hnv-Oe-qpO"/>
+                                            <exclude reference="jKu-53-7Rz"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageArrow" destination="pNM-yo-0Xe" id="v1v-81-WmF"/>
+                                    <outlet property="imageRevisionStatus" destination="UWw-1C-Rve" id="cQg-je-eEg"/>
+                                    <outlet property="imageSpeak" destination="uTZ-AZ-Eet" id="zGs-hG-Jvc"/>
+                                    <outlet property="labelOriginPhrase" destination="Irb-gl-kuC" id="E4U-cN-d7h"/>
+                                    <outlet property="labelTranslatedPhrase" destination="Eme-XV-XMh" id="i3B-nX-lan"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -116,7 +185,7 @@
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Original" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VW7-8e-m2C">
                                             <rect key="frame" x="16" y="8" width="568" height="27"/>
                                             <attributedString key="attributedText"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                             <connections>
                                                 <action selector="textPhraseValueChanged:" destination="DJZ-TU-Zs5" eventType="editingChanged" id="bHH-z8-aR0"/>
                                             </connections>
@@ -143,7 +212,7 @@
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Translation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-Os-bmH">
                                             <rect key="frame" x="16" y="8" width="568" height="27"/>
                                             <attributedString key="attributedText"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                             <connections>
                                                 <action selector="textPhraseValueChanged:" destination="IKJ-Dz-cUe" eventType="editingChanged" id="BrE-t7-9G2"/>
                                             </connections>
@@ -195,7 +264,7 @@
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Add Tag" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crF-Rm-AKn">
                                             <rect key="frame" x="16" y="8" width="568" height="27"/>
                                             <attributedString key="attributedText"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -396,7 +465,7 @@
         <scene sceneID="2Sk-aL-p2a">
             <objects>
                 <navigationController id="NE2-Pu-1xf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Revision" image="reading" id="h1I-8R-jOF"/>
+                    <tabBarItem key="tabBarItem" title="Revision" image="chronometer" id="h1I-8R-jOF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lp2-z5-KDy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -456,7 +525,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="addrevision" width="22" height="22"/>
+        <image name="chevron-arrow-right" width="22" height="22"/>
+        <image name="chronometer" width="25" height="25"/>
         <image name="notebook" width="32" height="32"/>
-        <image name="reading" width="32" height="32"/>
+        <image name="volume" width="22" height="22"/>
     </resources>
 </document>

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ios7-volume-high.png",
+      "filename" : "chevron-arrow-right.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ios7-volume-high@2x.png",
+      "filename" : "chevron-arrow-right@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ios7-volume-high@3x.png",
+      "filename" : "chevron-arrow-right@3x.png",
       "scale" : "3x"
     }
   ],

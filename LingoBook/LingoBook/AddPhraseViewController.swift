@@ -51,6 +51,8 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
+        SweetAlert().showAlert("Good job!", subTitle: "You clicked the button!", style: AlertStyle.Success)
+        
     }
     
     @IBAction func cancelPressed(sender: AnyObject) {
