@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftyJSON
 
 class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
@@ -18,6 +19,8 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
     var phrases = [OriginPhrase]()
     
     var dataController = DataController.sharedInstance
+    
+    var networkController = NetworkController();
     
     var selectedCellIndexPath: NSIndexPath?
     
@@ -53,7 +56,7 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             
             emptyLabel.font = appFont
             
-            emptyLabel.text = "Woah! Your phrasebook is currently empty."
+            emptyLabel.text = "Hmm. Your phrasebook is currently empty. \n\n Why not add a new one?"
             
             emptyLabel.textAlignment = NSTextAlignment.Center
             
@@ -65,23 +68,7 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             self.tableView.backgroundView = nil
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             
-//            if let selectedRows = self.tableView.indexPathsForSelectedRows {
-//                
-//                for indexPath in selectedRows {
-//                    
-//                    self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
-//                }
-//                
-//            }
-            
             selectedCellIndexPath = nil;
-            
-            
-            
-//            let rowToSelect = NSIndexPath(forRow: 0, inSection: 0);
-//            self.tableView(self.tableView, didSelectRowAtIndexPath: rowToSelect); //Manually trigger the row to select
-//            self.tableView.selectRowAtIndexPath(rowToSelect, animated: true, scrollPosition: UITableViewScrollPosition.None);
-//            self.selectedCellIndexPath = rowToSelect;
             
         }
         
@@ -141,10 +128,6 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             
             selectedCell.contentView.backgroundColor = selectedColour
             
-            //selectedCell.imageSpeak.visible = true
-            //selectedCell.imageSpeak.hidden = false;
-            //selectedCell.imageRevisionStatus.hidden = false;
-            
             UIView.animateWithDuration(0.2, animations: {
                 selectedCell.imageArrow.transform = CGAffineTransformMakeRotation((90.0 * CGFloat(M_PI)) / 180.0)
             })
@@ -169,9 +152,6 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             })
             
         }
-    
-        //cellToDeSelect.imageSpeak.hidden = true;
-        //cellToDeSelect.imageRevisionStatus.hidden = true;
         
     }
     
@@ -211,34 +191,33 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
         return cell
         
     }
+    
+    @IBAction func getPhraseJSON() {
+        
+        let url = "http://users.aber.ac.uk/clg11/sem2220/lingobook.json";
+        
+        networkController.performFileDownload(url) { (data, response, error) in
+            
+            if let downloadedData = data {
+                
+                //let json = JSON(data: downloadedData)
+                
+               // dispatch_async(dispatch_get_main_queue()) {
+                    //print("Data is: \(json)")
+                    print("Processing JSON on main thread")
+                    self.dataController.processJSON(downloadedData)
+               // }
+                
+            } else {
+                print("downloaded data was empty \(error?.localizedDescription)")
+            }
+        }
+        
+    }
 
     func updateSearchResultsForSearchController(searchController: UISearchController) {
 
     }
-    
-    
-//    func getPhrases() -> [OriginPhrase]? {
-//        
-//        managedContext = appDelegate.managedObjectContext
-//        
-//        do {
-//            
-//            let phraseFetch = NSFetchRequest(entityName: "OriginPhrase")
-//            
-//            if let retrievedPhrases = try managedContext.executeFetchRequest(phraseFetch) as? [OriginPhrase] {
-//                
-//                return retrievedPhrases
-//                
-//            }
-//            
-//            
-//        } catch let error as NSError {
-//            NSLog("Error whilst returning OriginPhrases from Core Data: \(error)")
-//        }
-//        
-//        return nil
-//        
-//    }
 
 }
 

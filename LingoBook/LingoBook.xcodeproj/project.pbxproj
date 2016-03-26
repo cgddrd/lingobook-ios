@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9911310C1C9A184C00FE0D42 /* LingoBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9911310A1C9A184C00FE0D42 /* LingoBook.xcdatamodeld */; };
+		9941C72C1CA69790009A2638 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9941C72B1CA69790009A2638 /* NetworkController.swift */; };
 		996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996694EB1CA0852700058701 /* AddPhraseViewController.swift */; };
 		996F00641C988D9000FDC20F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 996F00631C98898D00FDC20F /* Bariol_Regular.otf */; };
 		999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993213F1C8F654400BA86F5 /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 		9994FB2B1CA3568200675259 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB2A1CA3568200675259 /* DataController.swift */; };
 		9994FB311CA42F5500675259 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB301CA42F5500675259 /* SweetAlert.swift */; };
 		9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */; };
+		A443DF5C7DAE60556E482B61 /* Pods_LingoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 879349E7E7D59241290C1065 /* Pods_LingoBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		77DABEA979245912B032DCF5 /* Pods-LingoBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LingoBook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LingoBook/Pods-LingoBook.debug.xcconfig"; sourceTree = "<group>"; };
+		879349E7E7D59241290C1065 /* Pods_LingoBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LingoBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9911310B1C9A184C00FE0D42 /* LingoBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LingoBook.xcdatamodel; sourceTree = "<group>"; };
+		9941C72B1CA69790009A2638 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		996694EB1CA0852700058701 /* AddPhraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseViewController.swift; sourceTree = "<group>"; };
 		996F00631C98898D00FDC20F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
 		9993213C1C8F654400BA86F5 /* LingoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LingoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +92,7 @@
 		9994FB2A1CA3568200675259 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9994FB301CA42F5500675259 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = ../SweetAlert.swift; sourceTree = "<group>"; };
 		9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseTableViewCell.swift; sourceTree = "<group>"; };
+		AD2B756DAD6CB926BB100ACB /* Pods-LingoBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LingoBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-LingoBook/Pods-LingoBook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A443DF5C7DAE60556E482B61 /* Pods_LingoBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +121,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08C5101853F123E00E6C194B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				77DABEA979245912B032DCF5 /* Pods-LingoBook.debug.xcconfig */,
+				AD2B756DAD6CB926BB100ACB /* Pods-LingoBook.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9941C72D1CA697A0009A2638 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9941C72B1CA69790009A2638 /* NetworkController.swift */,
+			);
+			name = Network;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		999321331C8F654300BA86F5 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +146,8 @@
 				999321551C8F654400BA86F5 /* LingoBookTests */,
 				999321601C8F654400BA86F5 /* LingoBookUITests */,
 				9993213D1C8F654400BA86F5 /* Products */,
+				08C5101853F123E00E6C194B /* Pods */,
+				BD795B2E7D2E6C528CE36454 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +164,7 @@
 		9993213E1C8F654400BA86F5 /* LingoBook */ = {
 			isa = PBXGroup;
 			children = (
+				9941C72D1CA697A0009A2638 /* Network */,
 				9994FB321CA42F5B00675259 /* ThirdParty */,
 				9994FB2C1CA3FD2200675259 /* Data */,
 				9994FB2D1CA3FD4500675259 /* UI */,
@@ -233,6 +261,14 @@
 			name = ThirdParty;
 			sourceTree = "<group>";
 		};
+		BD795B2E7D2E6C528CE36454 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				879349E7E7D59241290C1065 /* Pods_LingoBook.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -240,9 +276,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 999321661C8F654400BA86F5 /* Build configuration list for PBXNativeTarget "LingoBook" */;
 			buildPhases = (
+				FCA94D73CEC1325E5D491A75 /* Check Pods Manifest.lock */,
 				999321381C8F654300BA86F5 /* Sources */,
 				999321391C8F654300BA86F5 /* Frameworks */,
 				9993213A1C8F654300BA86F5 /* Resources */,
+				F21C923E80274E6C0D13E44F /* Embed Pods Frameworks */,
+				FD49FAF42785172B40DD02AB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -360,11 +399,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F21C923E80274E6C0D13E44F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LingoBook/Pods-LingoBook-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCA94D73CEC1325E5D491A75 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FD49FAF42785172B40DD02AB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LingoBook/Pods-LingoBook-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		999321381C8F654300BA86F5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9941C72C1CA69790009A2638 /* NetworkController.swift in Sources */,
 				9994FB231CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift in Sources */,
 				9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */,
 				9994FB1A1CA29AD300675259 /* Tag.swift in Sources */,
@@ -523,6 +611,7 @@
 		};
 		999321671C8F654400BA86F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77DABEA979245912B032DCF5 /* Pods-LingoBook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LingoBook/Info.plist;
@@ -534,6 +623,7 @@
 		};
 		999321681C8F654400BA86F5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD2B756DAD6CB926BB100ACB /* Pods-LingoBook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LingoBook/Info.plist;

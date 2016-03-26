@@ -9,11 +9,17 @@
 import Foundation
 import CoreData
 import UIKit
+import SwiftyJSON
 
 class DataController {
     
+    // By having a STATIC variable for the shared instance, we are guaranteeing that the Singleton is THREAD-SAFE.
+    // This is because under-the-hood, 'static let' calls 'dispatch_once', which guarantees the GCD will only ever run this code ONCE AND ONLY ONCE!
+    // See: http://stackoverflow.com/a/24147830/4768230 for more information.
     static let sharedInstance = DataController()
-    private init() {} //This prevents others from using the default '()' initializer for this class.
+    
+    //This prevents others from using the default '()' initializer for this class.
+    private init() {}
     
     // ManagedObjectContext from AppDelegate
     lazy var moc: NSManagedObjectContext = {
@@ -106,6 +112,7 @@ class DataController {
         newOriginPhrase.note = phraseNote
         
         newTranslatedPhrase.textValue = translatedPhraseText
+        newTranslatedPhrase.origin = newOriginPhrase
         
         let translations = newOriginPhrase.translations!.mutableCopy() as! NSMutableSet
         translations.addObject(newTranslatedPhrase)
@@ -134,6 +141,29 @@ class DataController {
         } catch let error as NSError {
             
             print ("SOMETHING WENT WRONG: \(error)")
+            
+        }
+        
+    }
+    
+    func processJSON(data: NSData) {
+        
+        let jsonData = JSON(data: data)
+        
+        self.processJSON(jsonData)
+        
+    }
+    
+    func processJSON(json: JSON?) {
+        
+        if (json != nil) {
+            
+            let phraseCollection = json!["phrases"]
+            
+            for (index, subJson):(String, JSON) in phraseCollection {
+                print(index)
+                print(subJson)
+            }
             
         }
         
