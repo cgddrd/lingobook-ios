@@ -12,7 +12,8 @@
 import Foundation
 import CoreData
 
-extension Tag {
+extension Tag
+{
 
     @NSManaged var name: String?
     @NSManaged var originWords: NSSet?

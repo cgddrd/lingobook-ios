@@ -29,6 +29,7 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
 //        searchController.searchResultsUpdater = self
 //        searchController.dimsBackgroundDuringPresentation = false
@@ -56,7 +57,7 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             
             emptyLabel.font = appFont
             
-            emptyLabel.text = "Hmm. Your phrasebook is currently empty. \n\n Why not add a new one?"
+            emptyLabel.text = "Hmm. Your phrasebook is currently empty. \n\n Why not add a new phrase?"
             
             emptyLabel.textAlignment = NSTextAlignment.Center
             
@@ -95,7 +96,7 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if selectedCellIndexPath != nil && selectedCellIndexPath == indexPath {
+        if (selectedCellIndexPath != nil) && (selectedCellIndexPath == indexPath) && (!self.tableView.editing) {
             
             return selectedCellHeight;
             
@@ -128,7 +129,7 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             
             selectedCell.contentView.backgroundColor = selectedColour
             
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animateWithDuration(0.1, animations: {
                 selectedCell.imageArrow.transform = CGAffineTransformMakeRotation((90.0 * CGFloat(M_PI)) / 180.0)
             })
 
@@ -147,7 +148,7 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             let cellToDeSelect = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
             cellToDeSelect.contentView.backgroundColor = UIColor.clearColor()
             
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animateWithDuration(0.1, animations: {
                 cellToDeSelect.imageArrow.transform = CGAffineTransformMakeRotation((0.0 * CGFloat(M_PI)) / 180.0)
             })
             
@@ -214,7 +215,19 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
         }
         
     }
-
+    
+    // We need to override the normal editing method for the ViewController so we can force a UITableview refresh.
+    override func setEditing(editing: Bool, animated: Bool) {
+        
+        super.setEditing(editing, animated: animated)
+        self.tableView.setEditing(editing, animated: animated)
+        
+        // Make sure to refresh the UITableView so that all of the row heights reset back to normal.
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
+        
+    }
+    
     func updateSearchResultsForSearchController(searchController: UISearchController) {
 
     }

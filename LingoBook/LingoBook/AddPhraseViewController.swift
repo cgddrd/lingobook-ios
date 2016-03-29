@@ -43,15 +43,34 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
     
     @IBAction func donePressed(sender: AnyObject) {
         
-        print(phraseOriginalText)
-        print(phraseTranslatedtext)
-        print(phraseNote)
+        var errorMessage : String? = nil;
         
-        dataController.addNewPhrase(phraseOriginalText, translatedPhraseText: phraseTranslatedtext, phraseTags: phraseTags, phraseNote: phraseNote)
+        if let newPhrase = dataController.addNewPhrase(phraseOriginalText, phraseTags: phraseTags, phraseNote: phraseNote) {
+            
+            // For now, we only allow a single translation in Welsh, but 'DataController.swift' has pre-exisiting support to add more translations in future.
+            let newPhraseTranslation = dataController.addPhraseTranslation(newPhrase, translationText: self.phraseTranslatedtext, translationLocale: "cy")
+            
+            if newPhraseTranslation == nil {
+                errorMessage = "An error has occured whilst adding a new translation to the phrase. Please try again later."
+            }
+            
+        } else {
+                
+            errorMessage = "An error has occured whilst adding a new phrase. Please try again later."
+            
+        }
+        
+        if (errorMessage != nil) {
+            
+            let alertView = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
+            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(alertView, animated: true, completion: nil)
+            
+        }
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        SweetAlert().showAlert("Good job!", subTitle: "You clicked the button!", style: AlertStyle.Success)
+        //SweetAlert().showAlert("Good job!", subTitle: "You clicked the button!", style: AlertStyle.Success)
         
     }
     

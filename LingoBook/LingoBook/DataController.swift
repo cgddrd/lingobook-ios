@@ -100,30 +100,81 @@ class DataController {
         
     }
     
-    func addNewPhrase(originPhraseText: String, translatedPhraseText: String, phraseTags: [String], phraseNote: String) {
+    func addTranslations(originPhrase: OriginPhrase, translations: [(locale: String, textValue: String)]) -> [TranslatedPhrase]{
+        
+        var newTranslatedPhrases = [TranslatedPhrase]()
+        
+        for newTranslation in translations {
+            
+            let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: moc)
+            let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: moc)
+            
+            newTranslatedPhrase.locale = newTranslation.locale
+            newTranslatedPhrase.textValue = newTranslation.textValue
+            
+            newTranslatedPhrases.append(newTranslatedPhrase)
+            
+        }
+        
+        return newTranslatedPhrases
+        
+    }
+    
+    private func saveManagedContext() -> NSError? {
+        
+        do {
+    
+            try moc.save()
+            
+        } catch let error as NSError {
+            
+            return error
+            
+        }
+        
+        return nil
+        
+    }
+    
+    func addPhraseTranslation(originPhrase: OriginPhrase, translationText: String, translationLocale: String) -> TranslatedPhrase? {
+        
+        let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: moc)
+        let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: moc)
+        
+        newTranslatedPhrase.textValue = translationText
+        newTranslatedPhrase.locale = translationLocale
+        newTranslatedPhrase.origin = originPhrase
+        
+        originPhrase.addNewTranslation(newTranslatedPhrase)
+        
+        if let error = self.saveManagedContext() {
+            
+            print("An error has occured whilst saving the new translated phrase: \(error.localizedDescription)")
+            return nil
+            
+        }
+        
+        return newTranslatedPhrase
+        
+    }
+    
+    // We return an Optional here in case the save to Core Data fails for some reason.
+    // TODO: Maybe this should be changed to just return the NSError Optional?
+    func addNewPhrase(originPhraseText: String, phraseTags: [String], phraseNote: String) -> OriginPhrase? {
         
         let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: moc)
-        let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: moc)
         
         let newOriginPhrase = OriginPhrase(entity: newOriginPhraseEntity!, insertIntoManagedObjectContext: moc)
-        let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: moc)
         
         newOriginPhrase.textValue = originPhraseText
         newOriginPhrase.note = phraseNote
-        
-        newTranslatedPhrase.textValue = translatedPhraseText
-        newTranslatedPhrase.origin = newOriginPhrase
-        
-        let translations = newOriginPhrase.translations!.mutableCopy() as! NSMutableSet
-        translations.addObject(newTranslatedPhrase)
-        newOriginPhrase.translations = translations as NSSet
         
         for newTagName in phraseTags {
             
             let trimmedTagName = newTagName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             
             let currentTag = findOrCreateTag(trimmedTagName)
-
+            
             let mutableOriginWords = currentTag.originWords?.mutableCopy() as! NSMutableSet
             mutableOriginWords.addObject(newOriginPhrase)
             currentTag.originWords = mutableOriginWords as NSSet
@@ -134,17 +185,64 @@ class DataController {
             
         }
         
-        do {
+        if let error = self.saveManagedContext() {
             
-            try moc.save()
-            
-        } catch let error as NSError {
-            
-            print ("SOMETHING WENT WRONG: \(error)")
+            print("An error has occured whilst saving the new origin phrase: \(error.localizedDescription)")
+            return nil
             
         }
         
+        return newOriginPhrase
+        
     }
+    
+//    func addNewPhrase(originPhraseText: String, translatedPhraseText: String, phraseTags: [String], phraseNote: String) {
+//        
+//        let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: moc)
+//        let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: moc)
+//        
+//        let newOriginPhrase = OriginPhrase(entity: newOriginPhraseEntity!, insertIntoManagedObjectContext: moc)
+//        let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: moc)
+//        
+//        newOriginPhrase.setValue(moc, forKey: "managedObjectContext")
+//        
+//        newOriginPhrase.textValue = originPhraseText
+//        newOriginPhrase.note = phraseNote
+//        
+//        newTranslatedPhrase.textValue = translatedPhraseText
+//        newTranslatedPhrase.origin = newOriginPhrase
+//        
+//        let translations = newOriginPhrase.translations!.mutableCopy() as! NSMutableSet
+//        translations.addObject(newTranslatedPhrase)
+//        newOriginPhrase.translations = translations as NSSet
+//        
+//        for newTagName in phraseTags {
+//            
+//            let trimmedTagName = newTagName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+//            
+//            let currentTag = findOrCreateTag(trimmedTagName)
+//
+//            let mutableOriginWords = currentTag.originWords?.mutableCopy() as! NSMutableSet
+//            mutableOriginWords.addObject(newOriginPhrase)
+//            currentTag.originWords = mutableOriginWords as NSSet
+//            
+//            let mutableNewPhraseTags = newOriginPhrase.tags?.mutableCopy() as! NSMutableSet
+//            mutableNewPhraseTags.addObject(currentTag)
+//            newOriginPhrase.tags = mutableNewPhraseTags as NSSet
+//            
+//        }
+//        
+//        do {
+//            
+//            try moc.save()
+//            
+//        } catch let error as NSError {
+//            
+//            print ("SOMETHING WENT WRONG: \(error)")
+//            
+//        }
+//        
+//    }
     
     func processJSON(data: NSData) {
         

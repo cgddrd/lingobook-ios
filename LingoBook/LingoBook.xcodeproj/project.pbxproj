@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9911310C1C9A184C00FE0D42 /* LingoBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9911310A1C9A184C00FE0D42 /* LingoBook.xcdatamodeld */; };
+		9919E4B11CAA9CBE003E32FD /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919E4B01CAA9CBE003E32FD /* Translation.swift */; };
 		9941C72C1CA69790009A2638 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9941C72B1CA69790009A2638 /* NetworkController.swift */; };
 		996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996694EB1CA0852700058701 /* AddPhraseViewController.swift */; };
 		996F00641C988D9000FDC20F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 996F00631C98898D00FDC20F /* Bariol_Regular.otf */; };
@@ -59,6 +60,7 @@
 		77DABEA979245912B032DCF5 /* Pods-LingoBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LingoBook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LingoBook/Pods-LingoBook.debug.xcconfig"; sourceTree = "<group>"; };
 		879349E7E7D59241290C1065 /* Pods_LingoBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LingoBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9911310B1C9A184C00FE0D42 /* LingoBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LingoBook.xcdatamodel; sourceTree = "<group>"; };
+		9919E4B01CAA9CBE003E32FD /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		9941C72B1CA69790009A2638 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		996694EB1CA0852700058701 /* AddPhraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseViewController.swift; sourceTree = "<group>"; };
 		996F00631C98898D00FDC20F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			children = (
 				9994FB281CA354A400675259 /* CoreDataStack.swift */,
 				9994FB2A1CA3568200675259 /* DataController.swift */,
+				9919E4B01CAA9CBE003E32FD /* Translation.swift */,
 				9994FB1E1CA29DD200675259 /* Models */,
 			);
 			name = Data;
@@ -457,6 +460,7 @@
 				9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */,
 				9994FB1A1CA29AD300675259 /* Tag.swift in Sources */,
 				999321441C8F654400BA86F5 /* RevisionViewController.swift in Sources */,
+				9919E4B11CAA9CBE003E32FD /* Translation.swift in Sources */,
 				9994FB291CA354A400675259 /* CoreDataStack.swift in Sources */,
 				9994FB101CA1F65300675259 /* AddTranslationTableViewController.swift in Sources */,
 				996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */,

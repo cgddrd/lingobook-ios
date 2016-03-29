@@ -142,12 +142,8 @@
                             <outlet property="delegate" destination="axk-sh-aoN" id="o3T-Ax-wFg"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Phrases" id="ePI-Cx-VWr">
-                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="Znx-vD-m7P">
-                            <connections>
-                                <action selector="getPhraseJSON" destination="axk-sh-aoN" id="xk4-2g-0EN"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zpk-K9-Oyo">
                             <connections>
                                 <segue destination="u2h-K6-WD1" kind="presentation" id="Kvb-RY-kzB"/>
@@ -421,6 +417,7 @@
             <objects>
                 <navigationController id="YDF-a1-z9b" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Phrases" image="notebook" id="Lgb-9V-oYl"/>
+                    <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F3e-ki-oo0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -429,6 +426,10 @@
                             <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="16"/>
                         </textAttributes>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Cap-1f-O0C">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="axk-sh-aoN" kind="relationship" relationship="rootViewController" id="sEK-Pj-NBi"/>
                     </connections>
