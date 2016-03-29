@@ -10,13 +10,13 @@ import UIKit
 import CoreData
 import SwiftyJSON
 
-class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
-    
-    let searchController = UISearchController(searchResultsController: nil)
+class PhrasesViewController: UITableViewController {
     
     var managedContext: NSManagedObjectContext! = nil;
     
-    var phrases = [OriginPhrase]()
+    var phrases: [OriginPhrase]?
+    
+    var phrasesSearchResults: [OriginPhrase]?
     
     var dataController = DataController.sharedInstance
     
@@ -26,15 +26,32 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
     
     let selectedCellHeight: CGFloat = 110.0
 
+    // iOS 8 introduced 'UISearchController' to replace 'UISearchDisplayController'.
+    // Unfortunatly, 'UISearchController' is currently not available via the Interface Builder (March 2016), so we have to define it manually.
+    // See: https://www.raywenderlich.com/113772/uisearchcontroller-tutorial for more information.
+    
+    // Setting 'searchResultsController' to 'nil' tells Swift to use this controller to handle all search-related logic. (See: 'PhrasesViewControllerSearch.swift' for extension methods)
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
-//        searchController.searchResultsUpdater = self
-//        searchController.dimsBackgroundDuringPresentation = false
-//        definesPresentationContext = true
-//        tableView.tableHeaderView = searchController.searchBar
+        
+        // Set up search controller - See: https://www.raywenderlich.com/113772/uisearchcontroller-tutorial for more information.
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        self.definesPresentationContext = true
+        self.tableView.tableHeaderView = searchController.searchBar
+        
+        // Set up our scope buttons.
+        searchController.searchBar.scopeButtonTitles = ["Original Phrase", "Translated Phrase", "Tag"]
+        
+        // Set a custom placeholder.
+        searchController.searchBar.placeholder = "Search Phrasebook"
+        
+        searchController.searchBar.delegate = self
         
     }
     
@@ -46,7 +63,14 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             phrases = retrievedPhrases
         }
         
-        if phrases.count == 0 {
+        if (phrases != nil) && (phrases!.count > 0) {
+            
+            self.tableView.backgroundView = nil
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            
+            selectedCellIndexPath = nil;
+            
+        } else {
             
             let emptyLabel = UILabel(frame: CGRectMake(50, 0, self.view.bounds.size.width - 50, self.view.bounds.size.height))
             
@@ -63,15 +87,8 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
             
             self.tableView.backgroundView = emptyLabel
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-            
-        } else {
-            
-            self.tableView.backgroundView = nil
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            
-            selectedCellIndexPath = nil;
-            
         }
+
         
         tableView.reloadData()
         
@@ -90,12 +107,24 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return phrases.count
+        if searchController.active && searchController.searchBar.text != "" && phrasesSearchResults != nil {
+            
+            return phrasesSearchResults!.count
+            
+        } else if phrases != nil {
+            
+            return phrases!.count
+            
+        }
+        
+        return 0
+        
         
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
+        // If we are in editing mode, we want to force all rows back to the standard height (to only display the origin phrase).
         if (selectedCellIndexPath != nil) && (selectedCellIndexPath == indexPath) && (!self.tableView.editing) {
             
             return selectedCellHeight;
@@ -168,15 +197,34 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("phraseCell", forIndexPath: indexPath) as! PhraseTableViewCell
+        // Make sure to use 'self.tableView' rather than just 'tableView' in order to fix 'unexpetced nil' error on Search bar component.
+        // Have no idea why this is the case, but it seems to work.
+        // See: http://stackoverflow.com/a/31999606/4768230 for more information.
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("phraseCell", forIndexPath: indexPath) as! PhraseTableViewCell
         
-        cell.labelOriginPhrase.text = phrases[indexPath.row].textValue;
+        var originPhrase: OriginPhrase? = nil
         
-        if let retrievedTranslations = phrases[indexPath.row].translations?.allObjects as? [TranslatedPhrase] {
+        if searchController.active && searchController.searchBar.text != "" && phrasesSearchResults != nil {
             
-            if (retrievedTranslations.first != nil) {
+            originPhrase = phrasesSearchResults![indexPath.row]
+            
+        } else if phrases != nil {
                 
-                cell.labelTranslatedPhrase.text = retrievedTranslations.first?.textValue
+            originPhrase = phrases![indexPath.row]
+            
+        }
+        
+        if originPhrase != nil {
+            
+            cell.labelOriginPhrase.text = originPhrase!.textValue;
+            
+            if let retrievedTranslations = originPhrase!.translations?.allObjects as? [TranslatedPhrase] {
+                
+                if (retrievedTranslations.first != nil) {
+                    
+                    cell.labelTranslatedPhrase.text = retrievedTranslations.first?.textValue
+                    
+                }
                 
             }
             
@@ -227,26 +275,5 @@ class PhrasesViewController: UITableViewController, UISearchBarDelegate, UISearc
         self.tableView.endUpdates()
         
     }
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-
-    }
 
 }
-
-//extension PhrasesViewController: UISearchBarDelegate {
-//    // MARK: - UISearchBar Delegate
-//    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-//        //filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
-//    }
-//}
-//
-//extension PhrasesViewController: UISearchResultsUpdating {
-//    // MARK: - UISearchResultsUpdating Delegate
-//    func updateSearchResultsForSearchController(searchController: UISearchController) {
-//        let searchBar = searchController.searchBar
-//        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-//        //filterContentForSearchText(searchController.searchBar.text!, scope: scope)
-//    }
-//}
-
