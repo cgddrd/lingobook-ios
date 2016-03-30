@@ -14,24 +14,42 @@ class PhraseTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelTranslatedPhrase: UILabel!
     
-    @IBOutlet weak var imageSpeak: UIImageView!
+    @IBOutlet weak var labelTags: UILabel!
     
-    @IBOutlet weak var imageRevisionStatus: UIImageView!
+    @IBOutlet weak var btnAddRevision: UIButton!
     
-    @IBOutlet weak var imageArrow: UIImageView!
+    @IBAction func btnRevisionPressed(sender: AnyObject) {
+        
+        self.setRevisionButtonStyleDelete()
+        
+    }
     
     override func awakeFromNib() {
         
         super.awakeFromNib()
-
         
         // Initialization code
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
+    }
+    
+    func setRevisionButtonStyleDelete() {
+        
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.btnAddRevision.backgroundColor = UIColor.flatWatermelonColor()
+            
+            if let image = UIImage(named: "glasses-filled") {
+                self.btnAddRevision.setImage(image, forState: .Normal)
+            }
+        })
+        
+        
     }
 
 }

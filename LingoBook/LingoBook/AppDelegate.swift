@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ChameleonFramework
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    lazy var dataController = DataController()
     
     let appFont = UIFont (name: "Bariol", size: 20);
-    let barTintColour = UIColor(red: 250.0/255.0, green: 214.9/255.0, blue: 75.4/255.0, alpha: 1.0);
+    let barTintColour = UIColor.flatYellowColor()
+    let barTextColour = UIColor.init(contrastingBlackOrWhiteColorOn: UIColor.flatYellowColor(), isFlat: true)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -26,12 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Set custom font for navigation bar.
         if (appFont != nil) {
-            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: appFont!]
+            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: appFont!, NSForegroundColorAttributeName: barTextColour]
         }
         
         // Set navigation bar colour.
-        UINavigationBar.appearance().barTintColor = barTintColour;
-            
+        UINavigationBar.appearance().barTintColor = barTintColour
+        UINavigationBar.appearance().tintColor = barTextColour
+        
         
         //UISearchBar.appearance().barTintColor = UIColor(red: 250.0/255.0, green: 214.9/255.0, blue: 75.4/255.0, alpha: 1.0)
         //UISearchBar.appearance().tintColor = UIColor.whiteColor()

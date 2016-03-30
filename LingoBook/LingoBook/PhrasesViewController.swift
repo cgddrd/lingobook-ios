@@ -24,7 +24,7 @@ class PhrasesViewController: UITableViewController {
     
     var selectedCellIndexPath: NSIndexPath?
     
-    let selectedCellHeight: CGFloat = 110.0
+    var selectedCellHeight: CGFloat = 110.0
 
     // iOS 8 introduced 'UISearchController' to replace 'UISearchDisplayController'.
     // Unfortunatly, 'UISearchController' is currently not available via the Interface Builder (March 2016), so we have to define it manually.
@@ -105,6 +105,18 @@ class PhrasesViewController: UITableViewController {
         
     }
     
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        
+        if self.editing {
+            
+            //SweetAlert().showAlert("Here's a message!", subTitle: "It's pretty, isn't it?", style: AlertStyle.None)
+            
+            performSegueWithIdentifier("PhraseEditSegue", sender: self)
+            
+        }
+        
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.active && searchController.searchBar.text != "" && phrasesSearchResults != nil {
@@ -125,7 +137,7 @@ class PhrasesViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         // If we are in editing mode, we want to force all rows back to the standard height (to only display the origin phrase).
-        if (selectedCellIndexPath != nil) && (selectedCellIndexPath == indexPath) && (!self.tableView.editing) {
+        if (selectedCellIndexPath != nil) && (selectedCellIndexPath == indexPath) && (!self.tableView.editing) && (!self.editing) {
             
             return selectedCellHeight;
             
@@ -135,13 +147,47 @@ class PhrasesViewController: UITableViewController {
         
     }
     
+    func deactivatePhraseCell(indexPath: NSIndexPath, isEditing: Bool = false) {
+        
+        let activeCell = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
+        
+        activeCell.btnAddRevision.hidden = isEditing
+        activeCell.labelTranslatedPhrase.hidden = true
+        activeCell.labelTags.hidden = true
+        
+        activeCell.contentView.backgroundColor = UIColor.clearColor()
+        
+    }
+    
+    func activatePhraseCell(indexPath: NSIndexPath) {
+        
+        let activeCell = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
+        
+        activeCell.btnAddRevision.hidden = false
+        activeCell.labelTranslatedPhrase.hidden = false
+        activeCell.labelTags.hidden = false
+        
+        let selectedColour = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0);
+
+        activeCell.contentView.backgroundColor = selectedColour
+        
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+//        let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
         
         if selectedCellIndexPath != nil && selectedCellIndexPath == indexPath {
             
             selectedCellIndexPath = nil
             
         } else {
+            
+            if selectedCellIndexPath != nil && selectedCellIndexPath != indexPath {
+                
+                deactivatePhraseCell(selectedCellIndexPath!)
+                
+            }
             
             selectedCellIndexPath = indexPath
             
@@ -152,16 +198,7 @@ class PhrasesViewController: UITableViewController {
         
         if selectedCellIndexPath != nil {
             
-            let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
-            
-            let selectedColour = UIColor(red: 243.0/255.0, green: 243.0/255.0, blue: 243.0/255.0, alpha: 1.0);
-            
-            selectedCell.contentView.backgroundColor = selectedColour
-            
-            UIView.animateWithDuration(0.1, animations: {
-                selectedCell.imageArrow.transform = CGAffineTransformMakeRotation((90.0 * CGFloat(M_PI)) / 180.0)
-            })
-
+            activatePhraseCell(selectedCellIndexPath!)
             
             // This ensures, that the cell is fully visible once expanded
             tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
@@ -170,20 +207,22 @@ class PhrasesViewController: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if selectedCellIndexPath != nil {
-            
-            let cellToDeSelect = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
-            cellToDeSelect.contentView.backgroundColor = UIColor.clearColor()
-            
-            UIView.animateWithDuration(0.1, animations: {
-                cellToDeSelect.imageArrow.transform = CGAffineTransformMakeRotation((0.0 * CGFloat(M_PI)) / 180.0)
-            })
-            
-        }
-        
-    }
+//    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//       // if selectedCellIndexPath != nil {
+//            
+//            let cellToDeSelect = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
+////            cellToDeSelect.contentView.backgroundColor = UIColor.clearColor()
+//            
+////            UIView.animateWithDuration(0.2, animations: {
+////                cellToDeSelect.imageArrow.transform = CGAffineTransformMakeRotation((0.0 * CGFloat(M_PI)) / 180.0)
+////            })
+//            
+//            //cellToDeSelect.btnAddRevision.hidden = true
+//            
+//      //  }
+//        
+//    }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
@@ -230,16 +269,31 @@ class PhrasesViewController: UITableViewController {
             
         }
         
-        if selectedCellIndexPath != nil && selectedCellIndexPath == indexPath {
-            
-            let selectedColour = UIColor(red: 243.0/255.0, green: 243.0/255.0, blue: 243.0/255.0, alpha: 1.0);
-            
-            cell.contentView.backgroundColor = selectedColour
-        }
+//        if selectedCellIndexPath != nil && selectedCellIndexPath == indexPath {
+//            
+//            let selectedColour = UIColor(red: 243.0/255.0, green: 243.0/255.0, blue: 243.0/255.0, alpha: 1.0);
+//            
+//            cell.contentView.backgroundColor = selectedColour
+//            
+//        }
         
         return cell
         
     }
+    
+//    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+//        let delete = UITableViewRowAction(style: .Destructive, title: "Delete") { (action, indexPath) in
+//            // delete item at indexPath
+//        }
+//        
+//        let share = UITableViewRowAction(style: .Normal, title: "Disable") { (action, indexPath) in
+//            // share item at indexPath
+//        }
+//        
+//        share.backgroundColor = UIColor.blueColor()
+//        
+//        return [delete, share]
+//    }
     
     @IBAction func getPhraseJSON() {
         
@@ -264,11 +318,59 @@ class PhrasesViewController: UITableViewController {
         
     }
     
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if (self.tableView.editing) {
+            return UITableViewCellEditingStyle.Delete
+        }
+        return UITableViewCellEditingStyle.None
+    }
+    
     // We need to override the normal editing method for the ViewController so we can force a UITableview refresh.
     override func setEditing(editing: Bool, animated: Bool) {
         
         super.setEditing(editing, animated: animated)
-        self.tableView.setEditing(editing, animated: animated)
+        
+        
+        if editing {
+            
+            if selectedCellIndexPath != nil {
+                
+                deactivatePhraseCell(selectedCellIndexPath!, isEditing: editing)
+                
+            }
+            
+            
+            for cell in self.tableView.visibleCells {
+                let test = cell as! PhraseTableViewCell
+                test.btnAddRevision.hidden = true
+                test.btnAddRevision.slideInFromLeft()
+                
+            }
+            
+            self.tableView.setEditing(editing, animated: animated)
+            
+        } else {
+            
+            if selectedCellIndexPath != nil {
+                
+                activatePhraseCell(selectedCellIndexPath!)
+                
+            }
+            
+            
+            for cell in self.tableView.visibleCells {
+                let test = cell as! PhraseTableViewCell
+                
+                test.btnAddRevision.hidden = false
+                test.btnAddRevision.slideInFromRight()
+                
+            }
+            
+            self.tableView.setEditing(editing, animated: animated)
+            
+        }
+        
+        
         
         // Make sure to refresh the UITableView so that all of the row heights reset back to normal.
         self.tableView.beginUpdates()
@@ -276,4 +378,48 @@ class PhrasesViewController: UITableViewController {
         
     }
 
+}
+
+extension UIView {
+    // Name this function in a way that makes sense to you...
+    // slideFromLeft, slideRight, slideLeftToRight, etc. are great alternative names
+    func slideInFromLeft(duration: NSTimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+        // Create a CATransition animation
+        let slideInFromLeftTransition = CATransition()
+        
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromLeftTransition.delegate = delegate
+        }
+        
+        // Customize the animation's properties
+        slideInFromLeftTransition.type = kCATransitionPush
+        slideInFromLeftTransition.subtype = kCATransitionFromLeft
+        slideInFromLeftTransition.duration = duration
+        slideInFromLeftTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideInFromLeftTransition.fillMode = kCAFillModeRemoved
+        
+        // Add the animation to the View's layer
+        self.layer.addAnimation(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
+    }
+    
+    func slideInFromRight(duration: NSTimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+        // Create a CATransition animation
+        let slideInFromRightTransition = CATransition()
+        
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromRightTransition.delegate = delegate
+        }
+        
+        // Customize the animation's properties
+        slideInFromRightTransition.type = kCATransitionPush
+        slideInFromRightTransition.subtype = kCATransitionFromRight
+        slideInFromRightTransition.duration = duration
+        slideInFromRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideInFromRightTransition.fillMode = kCAFillModeBoth
+        
+        // Add the animation to the View's layer
+        self.layer.addAnimation(slideInFromRightTransition, forKey: "slideInFromRightTransition")
+    }
 }

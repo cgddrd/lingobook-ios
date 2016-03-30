@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'LingoBook' do
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+  pod 'ChameleonFramework/Swift'
 end
 
 target 'LingoBookTests' do
