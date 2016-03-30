@@ -157,6 +157,9 @@ class PhrasesViewController: UITableViewController {
         
         activeCell.contentView.backgroundColor = UIColor.clearColor()
         
+        activeCell.btnSpeak.slideInFromLeft()
+        activeCell.btnSpeak.hidden = true
+        
     }
     
     func activatePhraseCell(indexPath: NSIndexPath) {
@@ -166,6 +169,9 @@ class PhrasesViewController: UITableViewController {
         activeCell.btnAddRevision.hidden = false
         activeCell.labelTranslatedPhrase.hidden = false
         activeCell.labelTags.hidden = false
+        
+        activeCell.btnSpeak.hidden = false
+        activeCell.btnSpeak.slideInFromRight(0.3)
         
         let selectedColour = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0);
 
@@ -281,19 +287,16 @@ class PhrasesViewController: UITableViewController {
         
     }
     
-//    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-//        let delete = UITableViewRowAction(style: .Destructive, title: "Delete") { (action, indexPath) in
-//            // delete item at indexPath
-//        }
-//        
-//        let share = UITableViewRowAction(style: .Normal, title: "Disable") { (action, indexPath) in
-//            // share item at indexPath
-//        }
-//        
-//        share.backgroundColor = UIColor.blueColor()
-//        
-//        return [delete, share]
-//    }
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .Destructive, title: "Delete") { (action, indexPath) in
+            // delete item at indexPath
+        }
+        
+        delete.backgroundColor = UIColor.flatWatermelonColor()
+        
+        return [delete]
+    }
     
     @IBAction func getPhraseJSON() {
         
@@ -342,9 +345,10 @@ class PhrasesViewController: UITableViewController {
             
             for cell in self.tableView.visibleCells {
                 let test = cell as! PhraseTableViewCell
+                test.labelTags.hidden = true
+                test.labelTranslatedPhrase.hidden = true
                 test.btnAddRevision.hidden = true
-                test.btnAddRevision.slideInFromLeft()
-                
+                test.btnAddRevision.slideInFromLeft(0.3)
             }
             
             self.tableView.setEditing(editing, animated: animated)
@@ -362,7 +366,7 @@ class PhrasesViewController: UITableViewController {
                 let test = cell as! PhraseTableViewCell
                 
                 test.btnAddRevision.hidden = false
-                test.btnAddRevision.slideInFromRight()
+                test.btnAddRevision.slideInFromRight(0.3)
                 
             }
             

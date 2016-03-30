@@ -18,6 +18,8 @@ class PhraseTableViewCell: UITableViewCell {
     
     @IBOutlet weak var btnAddRevision: UIButton!
     
+    @IBOutlet weak var btnSpeak: UIButton!
+    
     @IBAction func btnRevisionPressed(sender: AnyObject) {
         
         self.setRevisionButtonStyleDelete()
