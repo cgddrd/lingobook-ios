@@ -157,9 +157,14 @@ class PhrasesViewController: UITableViewController {
         
         activeCell.contentView.backgroundColor = UIColor.clearColor()
         
-        activeCell.btnSpeak.slideInFromLeft()
+        activeCell.btnSpeak.slideInFromLeft(0.3, completionDelegate: self)
+        
         activeCell.btnSpeak.hidden = true
         
+    }
+    
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        print("Animation stopped")
     }
     
     func activatePhraseCell(indexPath: NSIndexPath) {
@@ -242,7 +247,7 @@ class PhrasesViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        // Make sure to use 'self.tableView' rather than just 'tableView' in order to fix 'unexpetced nil' error on Search bar component.
+        // Make sure to use 'self.tableView' rather than just 'tableView' in order to fix 'expected nil' error on Search bar component.
         // Have no idea why this is the case, but it seems to work.
         // See: http://stackoverflow.com/a/31999606/4768230 for more information.
         let cell = self.tableView.dequeueReusableCellWithIdentifier("phraseCell", forIndexPath: indexPath) as! PhraseTableViewCell

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -45,15 +44,9 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K7T-Ad-i45" id="fiI-1G-nIK">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="109.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irb-gl-kuC">
-                                            <rect key="frame" x="16" y="11" width="47" height="22"/>
-                                            <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="22"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eme-XV-XMh">
                                             <rect key="frame" x="16" y="51" width="37" height="17"/>
                                             <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="17"/>
@@ -70,12 +63,9 @@
                                             <rect key="frame" x="461" y="0.0" width="70" height="109"/>
                                             <color key="backgroundColor" red="0.98624199628829956" green="0.7796865701675415" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="70" id="TP5-qD-VtR"/>
+                                                <constraint firstAttribute="width" constant="70" id="ooI-X8-0W5"/>
                                             </constraints>
-                                            <state key="normal" image="glasses"/>
-                                            <connections>
-                                                <action selector="btnRevisionPressed:" destination="K7T-Ad-i45" eventType="touchUpInside" id="XtZ-cR-vaR"/>
-                                            </connections>
+                                            <state key="normal" image="speaker"/>
                                         </button>
                                         <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQV-aG-W4X">
                                             <rect key="frame" x="530" y="0.0" width="70" height="109"/>
@@ -88,20 +78,25 @@
                                                 <action selector="btnRevisionPressed:" destination="K7T-Ad-i45" eventType="touchUpInside" id="EC4-7w-08A"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irb-gl-kuC">
+                                            <rect key="frame" x="16" y="8" width="47" height="22"/>
+                                            <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="22"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="SQV-aG-W4X" firstAttribute="top" secondItem="fiI-1G-nIK" secondAttribute="top" id="1id-AL-Cx3"/>
                                         <constraint firstAttribute="trailing" secondItem="SQV-aG-W4X" secondAttribute="trailing" id="1re-n9-CYr"/>
-                                        <constraint firstItem="szL-FV-Qcl" firstAttribute="baseline" secondItem="SQV-aG-W4X" secondAttribute="baseline" id="97B-Sp-mhx"/>
-                                        <constraint firstItem="szL-FV-Qcl" firstAttribute="leading" secondItem="SQV-aG-W4X" secondAttribute="leading" constant="-69" id="L1b-8i-czJ"/>
-                                        <constraint firstItem="szL-FV-Qcl" firstAttribute="firstBaseline" secondItem="SQV-aG-W4X" secondAttribute="firstBaseline" id="TEz-fq-Ig8"/>
-                                        <constraint firstItem="szL-FV-Qcl" firstAttribute="top" secondItem="SQV-aG-W4X" secondAttribute="top" id="Uxs-Le-eQN"/>
+                                        <constraint firstItem="szL-FV-Qcl" firstAttribute="top" secondItem="SQV-aG-W4X" secondAttribute="top" id="26z-Wu-bs2"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="szL-FV-Qcl" secondAttribute="trailing" constant="61" id="4Vc-wE-EuK"/>
                                         <constraint firstItem="Irb-gl-kuC" firstAttribute="top" secondItem="fiI-1G-nIK" secondAttribute="topMargin" constant="3" id="WIy-rI-38s"/>
                                         <constraint firstItem="Irb-gl-kuC" firstAttribute="leading" secondItem="fiI-1G-nIK" secondAttribute="leadingMargin" constant="8" id="cld-l7-4CN"/>
                                         <constraint firstAttribute="bottom" secondItem="SQV-aG-W4X" secondAttribute="bottom" id="f8C-JR-6Nt"/>
                                         <constraint firstItem="Eme-XV-XMh" firstAttribute="top" secondItem="Irb-gl-kuC" secondAttribute="bottom" constant="18" id="jxQ-qY-tGV"/>
                                         <constraint firstItem="Irb-gl-kuC" firstAttribute="leading" secondItem="Eme-XV-XMh" secondAttribute="leading" id="omH-Oy-Isy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="SQV-aG-W4X" secondAttribute="trailing" constant="-8" id="p7R-hU-BvI"/>
+                                        <constraint firstItem="szL-FV-Qcl" firstAttribute="bottom" secondItem="SQV-aG-W4X" secondAttribute="bottom" id="pFi-Px-9sm"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -142,10 +137,10 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static1" id="DJZ-TU-Zs5" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DJZ-TU-Zs5" id="1nS-XE-0ld">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Original" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VW7-8e-m2C">
@@ -169,10 +164,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static2" id="IKJ-Dz-cUe" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="158" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IKJ-Dz-cUe" id="1GC-pm-Kcm">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Translation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-Os-bmH">
@@ -196,10 +191,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static3" rowHeight="132" id="ow2-Sk-OUS" customClass="AddPhraseNoteTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="202" width="600" height="132"/>
+                                <rect key="frame" x="0.0" y="201.5" width="600" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ow2-Sk-OUS" id="kFE-XF-ged">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="131"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="131.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGt-bP-vlR">
@@ -221,10 +216,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dynamic" id="hPd-1U-A7T" customClass="AddPhraseTagTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="334" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="333.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hPd-1U-A7T" id="Nks-VT-GyZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Add Tag" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crF-Rm-AKn">
@@ -293,7 +288,7 @@
                                         <rect key="frame" x="0.0" y="99" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6ze-mR-ALT" id="A9f-h8-hph">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Translated Text" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DLG-Bg-ld0">
@@ -314,18 +309,18 @@
                                         <rect key="frame" x="0.0" y="143" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8ea-cj-rrh" id="few-H6-l7T">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R64-tK-e5f">
-                                                    <rect key="frame" x="15" y="12" width="72" height="20"/>
+                                                    <rect key="frame" x="15" y="12" width="72" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hha-HJ-Sfp">
-                                                    <rect key="frame" x="543" y="12" width="42" height="20"/>
+                                                    <rect key="frame" x="543.5" y="12" width="41.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -338,7 +333,7 @@
                                         <rect key="frame" x="0.0" y="187" width="600" height="214"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oAJ-OV-F9h" id="pMo-Z3-MBp">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="213"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="213.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3i-1Z-ATP">
@@ -416,7 +411,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hgh-1B-5PV" id="6rL-x1-uvD">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -504,10 +499,10 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static1" id="8YJ-sk-RiA" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8YJ-sk-RiA" id="f54-8Z-8w0">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Original" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zsa-Mh-Cbj">
@@ -531,10 +526,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static2" id="ArW-K7-lxP" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="158" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ArW-K7-lxP" id="011-Oy-o7M">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Translation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tHP-qn-uZI">
@@ -558,10 +553,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static3" rowHeight="132" id="H0Q-tx-sbS" customClass="AddPhraseNoteTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="202" width="600" height="132"/>
+                                <rect key="frame" x="0.0" y="201.5" width="600" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H0Q-tx-sbS" id="v5y-iq-7qj">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="131"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="131.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gv-Ck-zOU">
@@ -583,10 +578,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dynamic" id="vj4-qh-eoS" customClass="AddPhraseTagTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="334" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="333.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vj4-qh-eoS" id="lC0-gR-7od">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Add Tag" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="URA-dX-EtJ">
@@ -607,9 +602,9 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="tYr-g9-nFT"/>
-                                            <exclude reference="bCD-v3-Kcf"/>
                                             <exclude reference="UyS-Iy-4yi"/>
+                                            <exclude reference="bCD-v3-Kcf"/>
+                                            <exclude reference="tYr-g9-nFT"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -643,7 +638,6 @@
         <!--Navigation Controller-->
         <scene sceneID="ppa-QD-4KH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DKt-8e-ZCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="db7-KH-BWG" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CEh-mw-il7">
@@ -659,6 +653,7 @@
                         <segue destination="Vym-gG-5or" kind="relationship" relationship="rootViewController" id="yFu-mO-CpR"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DKt-8e-ZCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2102" y="440"/>
         </scene>
@@ -666,5 +661,6 @@
     <resources>
         <image name="glasses" width="44" height="44"/>
         <image name="notebook" width="32" height="32"/>
+        <image name="speaker" width="22" height="22"/>
     </resources>
 </document>
