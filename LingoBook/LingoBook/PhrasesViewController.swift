@@ -111,7 +111,7 @@ class PhrasesViewController: UITableViewController {
             
             //SweetAlert().showAlert("Here's a message!", subTitle: "It's pretty, isn't it?", style: AlertStyle.None)
             
-            performSegueWithIdentifier("PhraseEditSegue", sender: self)
+            performSegueWithIdentifier("EditPhraseSegue", sender: tableView.cellForRowAtIndexPath(indexPath))
             
         }
         
@@ -163,9 +163,9 @@ class PhrasesViewController: UITableViewController {
         
     }
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
-        print("Animation stopped")
-    }
+//    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+//        print("Animation stopped")
+//    }
     
     func activatePhraseCell(indexPath: NSIndexPath) {
         
@@ -384,6 +384,29 @@ class PhrasesViewController: UITableViewController {
         // Make sure to refresh the UITableView so that all of the row heights reset back to normal.
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "EditPhraseSegue" {
+            
+            let editPhraseNavigationController = segue.destinationViewController as! UINavigationController
+            
+            // Get the ViewController from the top of the navigation stack (will always be 'EditPhraseViewController' - only one view).
+            let editPhraseViewController = editPhraseNavigationController.topViewController as! EditPhraseViewController
+            
+            if let selectedPhraseCell = sender as? PhraseTableViewCell {
+                
+                let indexPath = self.tableView.indexPathForCell(selectedPhraseCell)
+                
+                let selectedPhrase = phrases![indexPath!.row]
+                
+                editPhraseViewController.currentPhrase = selectedPhrase.toPhraseData()
+                
+            }
+            
+        }
         
     }
 

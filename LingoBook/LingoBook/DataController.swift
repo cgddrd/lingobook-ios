@@ -100,26 +100,6 @@ class DataController {
         
     }
     
-    func addTranslations(originPhrase: OriginPhrase, translations: [(locale: String, textValue: String)]) -> [TranslatedPhrase]{
-        
-        var newTranslatedPhrases = [TranslatedPhrase]()
-        
-        for newTranslation in translations {
-            
-            let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: moc)
-            let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: moc)
-            
-            newTranslatedPhrase.locale = newTranslation.locale
-            newTranslatedPhrase.textValue = newTranslation.textValue
-            
-            newTranslatedPhrases.append(newTranslatedPhrase)
-            
-        }
-        
-        return newTranslatedPhrases
-        
-    }
-    
     private func saveManagedContext() -> NSError? {
         
         do {
@@ -134,6 +114,12 @@ class DataController {
         
         return nil
         
+    }
+    
+    func updateExistingPhrase(phrase: PhraseData) {
+        
+        
+            
     }
     
     func addPhraseTranslation(originPhrase: OriginPhrase, translationText: String, translationLocale: String) -> TranslatedPhrase? {
@@ -195,54 +181,6 @@ class DataController {
         return newOriginPhrase
         
     }
-    
-//    func addNewPhrase(originPhraseText: String, translatedPhraseText: String, phraseTags: [String], phraseNote: String) {
-//        
-//        let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: moc)
-//        let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: moc)
-//        
-//        let newOriginPhrase = OriginPhrase(entity: newOriginPhraseEntity!, insertIntoManagedObjectContext: moc)
-//        let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: moc)
-//        
-//        newOriginPhrase.setValue(moc, forKey: "managedObjectContext")
-//        
-//        newOriginPhrase.textValue = originPhraseText
-//        newOriginPhrase.note = phraseNote
-//        
-//        newTranslatedPhrase.textValue = translatedPhraseText
-//        newTranslatedPhrase.origin = newOriginPhrase
-//        
-//        let translations = newOriginPhrase.translations!.mutableCopy() as! NSMutableSet
-//        translations.addObject(newTranslatedPhrase)
-//        newOriginPhrase.translations = translations as NSSet
-//        
-//        for newTagName in phraseTags {
-//            
-//            let trimmedTagName = newTagName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-//            
-//            let currentTag = findOrCreateTag(trimmedTagName)
-//
-//            let mutableOriginWords = currentTag.originWords?.mutableCopy() as! NSMutableSet
-//            mutableOriginWords.addObject(newOriginPhrase)
-//            currentTag.originWords = mutableOriginWords as NSSet
-//            
-//            let mutableNewPhraseTags = newOriginPhrase.tags?.mutableCopy() as! NSMutableSet
-//            mutableNewPhraseTags.addObject(currentTag)
-//            newOriginPhrase.tags = mutableNewPhraseTags as NSSet
-//            
-//        }
-//        
-//        do {
-//            
-//            try moc.save()
-//            
-//        } catch let error as NSError {
-//            
-//            print ("SOMETHING WENT WRONG: \(error)")
-//            
-//        }
-//        
-//    }
     
     func processJSON(data: NSData) {
         

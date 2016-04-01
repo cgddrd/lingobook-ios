@@ -10,6 +10,7 @@
 		9911310C1C9A184C00FE0D42 /* LingoBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9911310A1C9A184C00FE0D42 /* LingoBook.xcdatamodeld */; };
 		9919E4B31CAAE5E0003E32FD /* PhrasesViewControllerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919E4B21CAAE5E0003E32FD /* PhrasesViewControllerSearch.swift */; };
 		9941C72C1CA69790009A2638 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9941C72B1CA69790009A2638 /* NetworkController.swift */; };
+		994E91BD1CAE737500D5578D /* EditPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E91BC1CAE737500D5578D /* EditPhraseViewController.swift */; };
 		996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996694EB1CA0852700058701 /* AddPhraseViewController.swift */; };
 		996F00641C988D9000FDC20F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 996F00631C98898D00FDC20F /* Bariol_Regular.otf */; };
 		999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993213F1C8F654400BA86F5 /* AppDelegate.swift */; };
@@ -36,6 +37,7 @@
 		9994FB2B1CA3568200675259 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB2A1CA3568200675259 /* DataController.swift */; };
 		9994FB311CA42F5500675259 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB301CA42F5500675259 /* SweetAlert.swift */; };
 		9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */; };
+		99FBC3E51CAE7BDC00BC9EE9 /* PhraseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FBC3E41CAE7BDC00BC9EE9 /* PhraseData.swift */; };
 		A443DF5C7DAE60556E482B61 /* Pods_LingoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 879349E7E7D59241290C1065 /* Pods_LingoBook.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,7 @@
 		9911310B1C9A184C00FE0D42 /* LingoBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LingoBook.xcdatamodel; sourceTree = "<group>"; };
 		9919E4B21CAAE5E0003E32FD /* PhrasesViewControllerSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesViewControllerSearch.swift; sourceTree = "<group>"; };
 		9941C72B1CA69790009A2638 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		994E91BC1CAE737500D5578D /* EditPhraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPhraseViewController.swift; sourceTree = "<group>"; };
 		996694EB1CA0852700058701 /* AddPhraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseViewController.swift; sourceTree = "<group>"; };
 		996F00631C98898D00FDC20F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
 		9993213C1C8F654400BA86F5 /* LingoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LingoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +97,7 @@
 		9994FB2A1CA3568200675259 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9994FB301CA42F5500675259 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = ../SweetAlert.swift; sourceTree = "<group>"; };
 		9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseTableViewCell.swift; sourceTree = "<group>"; };
+		99FBC3E41CAE7BDC00BC9EE9 /* PhraseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseData.swift; sourceTree = "<group>"; };
 		AD2B756DAD6CB926BB100ACB /* Pods-LingoBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LingoBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-LingoBook/Pods-LingoBook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,12 +218,8 @@
 		9994FB1E1CA29DD200675259 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9994FB111CA29AD300675259 /* TranslatedPhrase+CoreDataProperties.swift */,
-				9994FB121CA29AD300675259 /* TranslatedPhrase.swift */,
-				9994FB131CA29AD300675259 /* Tag+CoreDataProperties.swift */,
-				9994FB141CA29AD300675259 /* Tag.swift */,
-				9994FB151CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift */,
-				9994FB161CA29AD300675259 /* OriginPhrase.swift */,
+				99FBC3E41CAE7BDC00BC9EE9 /* PhraseData.swift */,
+				99FBC3E61CAE7D8900BC9EE9 /* CoreData */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -232,6 +232,7 @@
 				999321431C8F654400BA86F5 /* RevisionViewController.swift */,
 				9994FB0F1CA1F65300675259 /* AddTranslationTableViewController.swift */,
 				996694EB1CA0852700058701 /* AddPhraseViewController.swift */,
+				994E91BC1CAE737500D5578D /* EditPhraseViewController.swift */,
 				9994FB0B1CA1950E00675259 /* TagsTableViewController.swift */,
 			);
 			name = ViewControllers;
@@ -262,6 +263,19 @@
 				9994FB301CA42F5500675259 /* SweetAlert.swift */,
 			);
 			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		99FBC3E61CAE7D8900BC9EE9 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9994FB111CA29AD300675259 /* TranslatedPhrase+CoreDataProperties.swift */,
+				9994FB121CA29AD300675259 /* TranslatedPhrase.swift */,
+				9994FB131CA29AD300675259 /* Tag+CoreDataProperties.swift */,
+				9994FB141CA29AD300675259 /* Tag.swift */,
+				9994FB151CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift */,
+				9994FB161CA29AD300675259 /* OriginPhrase.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		BD795B2E7D2E6C528CE36454 /* Frameworks */ = {
@@ -456,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9941C72C1CA69790009A2638 /* NetworkController.swift in Sources */,
+				994E91BD1CAE737500D5578D /* EditPhraseViewController.swift in Sources */,
 				9994FB231CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift in Sources */,
 				9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */,
 				9994FB1A1CA29AD300675259 /* Tag.swift in Sources */,
@@ -477,6 +492,7 @@
 				9994FB0C1CA1950E00675259 /* TagsTableViewController.swift in Sources */,
 				999321421C8F654400BA86F5 /* PhrasesViewController.swift in Sources */,
 				9994FB171CA29AD300675259 /* TranslatedPhrase+CoreDataProperties.swift in Sources */,
+				99FBC3E51CAE7BDC00BC9EE9 /* PhraseData.swift in Sources */,
 				9994FB251CA2E81200675259 /* UITableViewCellUpdateDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

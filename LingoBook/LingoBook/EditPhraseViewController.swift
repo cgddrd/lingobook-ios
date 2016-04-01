@@ -1,24 +1,21 @@
 //
-//  AddPhraseViewController.swift
+//  EditPhraseViewController.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 21/03/2016.
+//  Created by Connor Goddard on 01/04/2016.
 //  Copyright © 2016 Connor Goddard. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDelegate {
+class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDelegate {
     
-    var phraseTags = [String]()
-    var phraseOriginalText = String()
-    var phraseTranslatedtext = String()
-    var phraseNote = String()
+    var managedContext : NSManagedObjectContext! = nil
     
-    var managedContext : NSManagedObjectContext! = nil;
+    var dataController = DataController.sharedInstance
     
-    var dataController = DataController.sharedInstance;
+    var currentPhrase: PhraseData?
     
     override func viewDidLoad() {
         
@@ -26,11 +23,8 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         
         super.setEditing(true, animated: true)
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        print(currentPhrase?.originPhrase)
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     func displayErrorMessage(messageString: String) {
@@ -41,38 +35,38 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         
     }
     
-    @IBAction func donePressed(sender: AnyObject) {
-        
-        var errorMessage : String? = nil;
-        
-        if let newPhrase = dataController.addNewPhrase(phraseOriginalText, phraseTags: phraseTags, phraseNote: phraseNote) {
-            
-            // For now, we only allow a single translation in Welsh, but 'DataController.swift' has pre-exisiting support to add more translations in future.
-            let newPhraseTranslation = dataController.addPhraseTranslation(newPhrase, translationText: self.phraseTranslatedtext, translationLocale: "cy")
-            
-            if newPhraseTranslation == nil {
-                errorMessage = "An error has occured whilst adding a new translation to the phrase. Please try again later."
-            }
-            
-        } else {
-                
-            errorMessage = "An error has occured whilst adding a new phrase. Please try again later."
-            
-        }
-        
-        if (errorMessage != nil) {
-            
-            let alertView = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
-            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            presentViewController(alertView, animated: true, completion: nil)
-            
-        }
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-        //SweetAlert().showAlert("Good job!", subTitle: "You clicked the button!", style: AlertStyle.Success)
-        
-    }
+//    @IBAction func donePressed(sender: AnyObject) {
+//        
+//        var errorMessage : String? = nil;
+//
+//        if let newPhrase = dataController.addNewPhrase(phraseOriginalText, phraseTags: phraseTags, phraseNote: phraseNote) {
+//            
+//            // For now, we only allow a single translation in Welsh, but 'DataController.swift' has pre-exisiting support to add more translations in future.
+//            let newPhraseTranslation = dataController.addPhraseTranslation(newPhrase, translationText: self.phraseTranslatedtext, translationLocale: "cy")
+//            
+//            if newPhraseTranslation == nil {
+//                errorMessage = "An error has occured whilst adding a new translation to the phrase. Please try again later."
+//            }
+//            
+//        } else {
+//            
+//            errorMessage = "An error has occured whilst adding a new phrase. Please try again later."
+//            
+//        }
+//        
+//        if (errorMessage != nil) {
+//            
+//            let alertView = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
+//            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+//            presentViewController(alertView, animated: true, completion: nil)
+//            
+//        }
+//        
+//        self.dismissViewControllerAnimated(true, completion: nil)
+//        
+//        //SweetAlert().showAlert("Good job!", subTitle: "You clicked the button!", style: AlertStyle.Success)
+//        
+//    }
     
     @IBAction func cancelPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -123,7 +117,7 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         case 0:
             return 2
         case 1:
-            return phraseTags.count + 1
+            return currentPhrase!.tags.count + 1
         case 2:
             return 1
         default:
@@ -138,9 +132,9 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         switch section {
             
         case 0:
-            return "Enter the translation for the new phrase."
+            return "Enter the translation for the phrase."
         case 1:
-            return "Enter any tags associated with the new phrase. (Optional)"
+            return "Enter any tags associated with the phrase. (Optional)"
         case 2:
             return "Enter a note associated with the new phrase. (Optional)"
         default:
@@ -153,10 +147,12 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         
         if indexPath.section == 0 {
             
-            let cellIdentifier = indexPath.row == 0 ? "static1" : "static2"
+            let cellIdentifier = (indexPath.row == 0) ? "static1" : "static2"
             
             if let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? AddPhraseTextTableViewCell {
                 
+                cell.textPhrase.text = (indexPath.row == 0) ? currentPhrase!.originPhrase : currentPhrase!.translatedPhrase
+
                 cell.delegate = self
                 
                 return cell
@@ -168,9 +164,9 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
             
             if let cell = tableView.dequeueReusableCellWithIdentifier("dynamic") as? AddPhraseTagTableViewCell {
                 
-                if indexPath.row < phraseTags.count {
+                if indexPath.row < currentPhrase!.tags.count {
                     
-                    cell.textTag.text = phraseTags[indexPath.row]
+                    cell.textTag.text = currentPhrase!.tags[indexPath.row]
                     
                 }
                 
@@ -183,6 +179,8 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
             //return tableView.dequeueReusableCellWithIdentifier("static3")!
             
             if let cell = tableView.dequeueReusableCellWithIdentifier("static3") as? AddPhraseNoteTableViewCell {
+                
+                cell.textPhraseNote.text = currentPhrase!.note
                 
                 cell.delegate = self
                 
@@ -199,7 +197,7 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         
         if indexPath.section == 1 {
             
-            if indexPath.row >= phraseTags.count {
+            if indexPath.row >= currentPhrase!.tags.count {
                 
                 return .Insert
                 
@@ -235,21 +233,21 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
                     
                 } else {
                     
-                    phraseTags.append(currentCell.textTag.text!)
+                    currentPhrase!.tags.append(currentCell.textTag.text!)
                     
                     self.tableView.beginUpdates()
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                     self.tableView.endUpdates()
                     
                     // Force the "new" input cell to be blank in order to display the placeholder text.
-                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: phraseTags.count, inSection: 1)) as! AddPhraseTagTableViewCell
+                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: currentPhrase!.tags.count, inSection: 1)) as! AddPhraseTagTableViewCell
                     currentCell.textTag.text = ""
                     
                 }
                 
             } else if editingStyle == UITableViewCellEditingStyle.Delete {
                 
-                phraseTags.removeAtIndex(indexPath.row)
+                currentPhrase!.tags.removeAtIndex(indexPath.row)
                 
                 self.tableView.beginUpdates()
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -272,10 +270,10 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
                 
                 switch indexPath.row {
                 case 0:
-                    self.phraseOriginalText = currentCell.textPhrase.text!
+                    currentPhrase!.originPhrase = currentCell.textPhrase.text!
                     break
                 case 1:
-                    self.phraseTranslatedtext = currentCell.textPhrase.text!
+                    currentPhrase!.translatedPhrase = currentCell.textPhrase.text!
                     break
                     
                 default:
@@ -288,7 +286,7 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
             
             if let currentCell = senderCell as? AddPhraseNoteTableViewCell {
                 
-                self.phraseNote = currentCell.textPhraseNote.text
+                currentPhrase!.note = currentCell.textPhraseNote.text
                 
             }
             
@@ -297,3 +295,4 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
     }
     
 }
+
