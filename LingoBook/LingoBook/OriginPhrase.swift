@@ -14,15 +14,26 @@ class OriginPhrase: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     
-    func addNewTranslation(newTranslation: TranslatedPhrase) {
+    func addTranslation(newTranslation: TranslatedPhrase) {
         
         let translations = self.translations!.mutableCopy() as! NSMutableSet
+        
+        translations.removeAllObjects()
+        
         translations.addObject(newTranslation)
         self.translations = translations as NSSet
         
     }
     
-    func addNewTag(newTag: Tag) {
+    func addTagByName(newTagName: String) {
+        
+        let newTag = Tag()
+        newTag.name = newTagName
+        self.addTag(newTag)
+        
+    }
+    
+    func addTag(newTag: Tag) {
         
         let tags = self.tags!.mutableCopy() as! NSMutableSet
         tags.addObject(newTag)
@@ -45,26 +56,6 @@ class OriginPhrase: NSManagedObject {
         
         return nil
         
-    }
-    
-    func toPhraseData() -> PhraseData {
-        
-        var test = PhraseData()
-        
-        test.originPhrase = self.textValue!
-        test.translatedPhrase = (self.getFirstTranslation()?.textValue)!
-        test.note = self.note!
-        
-        if let blah = self.tags?.allObjects as? [Tag] {
-            
-             test.tags = blah.map({ (tag: Tag) -> String in return tag.name! }) as [String]
-            
-        }
-        
-        test.objectURI = self.objectID.URIRepresentation()
-        
-        return test
-       
     }
 
 }

@@ -92,6 +92,14 @@ class PhrasesViewController: UITableViewController {
         
         tableView.reloadData()
         
+        for cell in self.tableView.visibleCells {
+            let test = cell as! PhraseTableViewCell
+            test.labelTags.hidden = true
+            test.labelTranslatedPhrase.hidden = true
+            test.btnSpeak.hidden = true
+            test.contentView.backgroundColor = UIColor.clearColor()
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -347,7 +355,6 @@ class PhrasesViewController: UITableViewController {
                 
             }
             
-            
             for cell in self.tableView.visibleCells {
                 let test = cell as! PhraseTableViewCell
                 test.labelTags.hidden = true
@@ -400,9 +407,9 @@ class PhrasesViewController: UITableViewController {
                 
                 let indexPath = self.tableView.indexPathForCell(selectedPhraseCell)
                 
-                let selectedPhrase = phrases![indexPath!.row]
+                let selectedPhrase = phrases![indexPath!.row] as OriginPhrase
                 
-                editPhraseViewController.currentPhrase = selectedPhrase.toPhraseData()
+                editPhraseViewController.currentPhrase = PhraseModel(existingPhrase: selectedPhrase)
                 
             }
             

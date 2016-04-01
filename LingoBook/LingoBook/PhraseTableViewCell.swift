@@ -26,6 +26,8 @@ class PhraseTableViewCell: UITableViewCell {
         
     }
     
+    let activeColour = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0);
+    
     override func awakeFromNib() {
         
         super.awakeFromNib()
@@ -50,7 +52,45 @@ class PhraseTableViewCell: UITableViewCell {
                 self.btnAddRevision.setImage(image, forState: .Normal)
             }
         })
+    
+    }
+    
+    func setActiveState(active: Bool, animated: Bool, isEditing: Bool = false) {
         
+        if active {
+            
+            self.btnAddRevision.hidden = false
+            
+            if !isEditing {
+                
+                if animated {
+                    self.btnSpeak.slideInFromRight(0.3, completionDelegate: self)
+                }
+                
+                self.labelTranslatedPhrase.hidden = false
+                self.labelTags.hidden = false
+                self.btnSpeak.hidden = false
+                
+                self.contentView.backgroundColor = activeColour
+                
+            }
+            
+        } else {
+            
+            if animated {
+                self.btnSpeak.slideInFromLeft(0.3, completionDelegate: self)
+            }
+            
+            self.btnAddRevision.hidden = isEditing
+            self.btnSpeak.hidden = true
+            self.labelTranslatedPhrase.hidden = true
+            self.labelTags.hidden = true
+            
+            self.contentView.backgroundColor = UIColor.clearColor()
+            
+        }
+        
+
         
     }
 

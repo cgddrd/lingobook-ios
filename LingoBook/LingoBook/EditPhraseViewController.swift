@@ -15,15 +15,13 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
     
     var dataController = DataController.sharedInstance
     
-    var currentPhrase: PhraseData?
+    var currentPhrase: PhraseModel?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         super.setEditing(true, animated: true)
-        
-        print(currentPhrase?.originPhrase)
         
     }
     
@@ -35,38 +33,13 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
         
     }
     
-//    @IBAction func donePressed(sender: AnyObject) {
-//        
-//        var errorMessage : String? = nil;
-//
-//        if let newPhrase = dataController.addNewPhrase(phraseOriginalText, phraseTags: phraseTags, phraseNote: phraseNote) {
-//            
-//            // For now, we only allow a single translation in Welsh, but 'DataController.swift' has pre-exisiting support to add more translations in future.
-//            let newPhraseTranslation = dataController.addPhraseTranslation(newPhrase, translationText: self.phraseTranslatedtext, translationLocale: "cy")
-//            
-//            if newPhraseTranslation == nil {
-//                errorMessage = "An error has occured whilst adding a new translation to the phrase. Please try again later."
-//            }
-//            
-//        } else {
-//            
-//            errorMessage = "An error has occured whilst adding a new phrase. Please try again later."
-//            
-//        }
-//        
-//        if (errorMessage != nil) {
-//            
-//            let alertView = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
-//            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-//            presentViewController(alertView, animated: true, completion: nil)
-//            
-//        }
-//        
-//        self.dismissViewControllerAnimated(true, completion: nil)
-//        
-//        //SweetAlert().showAlert("Good job!", subTitle: "You clicked the button!", style: AlertStyle.Success)
-//        
-//    }
+    @IBAction func donePressed(sender: AnyObject) {
+        
+        dataController.createOrUpdatePhrase(currentPhrase!)
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
     
     @IBAction func cancelPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -151,7 +124,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
             
             if let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? AddPhraseTextTableViewCell {
                 
-                cell.textPhrase.text = (indexPath.row == 0) ? currentPhrase!.originPhrase : currentPhrase!.translatedPhrase
+                cell.textPhrase.text = (indexPath.row == 0) ? currentPhrase?.originPhraseText : currentPhrase?.translatedPhrases.first?.translatedText
 
                 cell.delegate = self
                 
@@ -164,19 +137,21 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
             
             if let cell = tableView.dequeueReusableCellWithIdentifier("dynamic") as? AddPhraseTagTableViewCell {
                 
-                if indexPath.row < currentPhrase!.tags.count {
+                if let currentTags = currentPhrase?.tags {
                     
-                    cell.textTag.text = currentPhrase!.tags[indexPath.row]
+                    if indexPath.row < currentTags.count {
+                        
+                        cell.textTag.text = currentTags[indexPath.row]
+                        
+                    }
                     
                 }
-                
+            
                 return cell
                 
             }
             
         } else if indexPath.section == 2 {
-            
-            //return tableView.dequeueReusableCellWithIdentifier("static3")!
             
             if let cell = tableView.dequeueReusableCellWithIdentifier("static3") as? AddPhraseNoteTableViewCell {
                 
@@ -197,7 +172,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
         
         if indexPath.section == 1 {
             
-            if indexPath.row >= currentPhrase!.tags.count {
+            if indexPath.row >= currentPhrase?.tags.count {
                 
                 return .Insert
                 
@@ -247,7 +222,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
                 
             } else if editingStyle == UITableViewCellEditingStyle.Delete {
                 
-                currentPhrase!.tags.removeAtIndex(indexPath.row)
+                currentPhrase?.tags.removeAtIndex(indexPath.row)
                 
                 self.tableView.beginUpdates()
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -270,10 +245,10 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
                 
                 switch indexPath.row {
                 case 0:
-                    currentPhrase!.originPhrase = currentCell.textPhrase.text!
+                    currentPhrase?.originPhraseText = currentCell.textPhrase.text!
                     break
                 case 1:
-                    currentPhrase!.translatedPhrase = currentCell.textPhrase.text!
+                    currentPhrase?.translatedPhrases = [TranslationModel(translatedText: currentCell.textPhrase.text!, locale: "cy")]
                     break
                     
                 default:
@@ -286,7 +261,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
             
             if let currentCell = senderCell as? AddPhraseNoteTableViewCell {
                 
-                currentPhrase!.note = currentCell.textPhraseNote.text
+                currentPhrase?.note = currentCell.textPhraseNote.text
                 
             }
             
