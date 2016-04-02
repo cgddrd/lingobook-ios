@@ -373,7 +373,7 @@ class PhrasesViewController: UITableViewController {
                 
             }
             
-            
+//            
             for cell in self.tableView.visibleCells {
                 let test = cell as! PhraseTableViewCell
                 
@@ -460,5 +460,45 @@ extension UIView {
         
         // Add the animation to the View's layer
         self.layer.addAnimation(slideInFromRightTransition, forKey: "slideInFromRightTransition")
+    }
+    
+    func slideInFromTop(duration: NSTimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+        // Create a CATransition animation
+        let slideInFromRightTransition = CATransition()
+        
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromRightTransition.delegate = delegate
+        }
+        
+        // Customize the animation's properties
+        slideInFromRightTransition.type = kCATransitionPush
+        slideInFromRightTransition.subtype = kCATransitionFromTop
+        slideInFromRightTransition.duration = duration
+        slideInFromRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideInFromRightTransition.fillMode = kCAFillModeBoth
+        
+        // Add the animation to the View's layer
+        self.layer.addAnimation(slideInFromRightTransition, forKey: "slideInFromTopTransition")
+    }
+    
+    func slideInFromBottom(duration: NSTimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+        // Create a CATransition animation
+        let slideInFromRightTransition = CATransition()
+        
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromRightTransition.delegate = delegate
+        }
+        
+        // Customize the animation's properties
+        slideInFromRightTransition.type = kCATransitionPush
+        slideInFromRightTransition.subtype = kCATransitionFromBottom
+        slideInFromRightTransition.duration = duration
+        slideInFromRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideInFromRightTransition.fillMode = kCAFillModeBoth
+        
+        // Add the animation to the View's layer
+        self.layer.addAnimation(slideInFromRightTransition, forKey: "slideInFromBottomTransition")
     }
 }

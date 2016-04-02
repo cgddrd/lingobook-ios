@@ -9,6 +9,9 @@
         <mutableArray key="Bariol_Regular.otf">
             <string>Bariol-Regular</string>
             <string>Bariol-Regular</string>
+            <string>Bariol-Regular</string>
+            <string>Bariol-Regular</string>
+            <string>Bariol-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -24,12 +27,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="YDF-a1-z9b" kind="relationship" relationship="viewControllers" id="952-az-rbx"/>
-                        <segue destination="NE2-Pu-1xf" kind="relationship" relationship="viewControllers" id="iMS-uN-Ug2"/>
+                        <segue destination="VGK-iv-PTF" kind="relationship" relationship="viewControllers" id="QZi-0G-fow"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-117" y="53"/>
+            <point key="canvasLocation" x="-45" y="165"/>
         </scene>
         <!--Phrases-->
         <scene sceneID="85f-BK-PAw">
@@ -44,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K7T-Ad-i45" id="fiI-1G-nIK">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="110"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="109.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eme-XV-XMh">
@@ -78,8 +81,8 @@
                                                 <action selector="btnRevisionPressed:" destination="K7T-Ad-i45" eventType="touchUpInside" id="EC4-7w-08A"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irb-gl-kuC">
-                                            <rect key="frame" x="16" y="8" width="47" height="22"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irb-gl-kuC">
+                                            <rect key="frame" x="16" y="11" width="47" height="22"/>
                                             <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="22"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -140,10 +143,10 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static1" id="DJZ-TU-Zs5" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DJZ-TU-Zs5" id="1nS-XE-0ld">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Original" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VW7-8e-m2C">
@@ -167,10 +170,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static2" id="IKJ-Dz-cUe" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="158" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IKJ-Dz-cUe" id="1GC-pm-Kcm">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Translation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-Os-bmH">
@@ -194,10 +197,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static3" rowHeight="132" id="ow2-Sk-OUS" customClass="AddPhraseNoteTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="202" width="600" height="132"/>
+                                <rect key="frame" x="0.0" y="201.5" width="600" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ow2-Sk-OUS" id="kFE-XF-ged">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="132"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="131.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGt-bP-vlR">
@@ -219,10 +222,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dynamic" id="hPd-1U-A7T" customClass="AddPhraseTagTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="334" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="333.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hPd-1U-A7T" id="Nks-VT-GyZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Add Tag" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crF-Rm-AKn">
@@ -315,7 +318,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hgh-1B-5PV" id="6rL-x1-uvD">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -329,7 +332,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAT-WR-E1E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1359" y="390"/>
+            <point key="canvasLocation" x="2171" y="390"/>
         </scene>
         <!--Revision-->
         <scene sceneID="2Sk-aL-p2a">
@@ -347,7 +350,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X1S-uM-Kdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="662" y="390"/>
+            <point key="canvasLocation" x="1474" y="390"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4UP-Pk-Cxx">
@@ -371,6 +374,143 @@
             </objects>
             <point key="canvasLocation" x="2102" y="-342"/>
         </scene>
+        <!--Revision-->
+        <scene sceneID="fa7-Sa-rL8">
+            <objects>
+                <viewController id="fDZ-wA-UgE" customClass="RevisionViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fQh-mg-YF5"/>
+                        <viewControllerLayoutGuide type="bottom" id="q8U-ZP-55r"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dw9-7J-4Yp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFO-Ge-Lz7">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <connections>
+                                    <segue destination="Coj-oW-bPh" kind="embed" id="XOX-lW-8Xt"/>
+                                </connections>
+                            </containerView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="oIL-gC-IdQ">
+                                <rect key="frame" x="281" y="506" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BFO-Ge-Lz7" firstAttribute="leading" secondItem="Dw9-7J-4Yp" secondAttribute="leadingMargin" constant="-20" id="0Nb-Fj-nuO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BFO-Ge-Lz7" secondAttribute="trailing" constant="-20" id="InK-IB-I6W"/>
+                            <constraint firstItem="q8U-ZP-55r" firstAttribute="top" secondItem="BFO-Ge-Lz7" secondAttribute="bottom" id="Jyf-xP-p75"/>
+                            <constraint firstItem="BFO-Ge-Lz7" firstAttribute="top" secondItem="fQh-mg-YF5" secondAttribute="bottom" id="Ro5-S1-G65"/>
+                            <constraint firstItem="oIL-gC-IdQ" firstAttribute="centerX" secondItem="BFO-Ge-Lz7" secondAttribute="centerX" id="ufN-dT-iax"/>
+                            <constraint firstItem="q8U-ZP-55r" firstAttribute="top" secondItem="oIL-gC-IdQ" secondAttribute="bottom" constant="8" symbolic="YES" id="ujZ-XH-M3A"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Revision" id="EGc-x7-P44"/>
+                    <connections>
+                        <outlet property="containerView" destination="BFO-Ge-Lz7" id="ZaO-Pd-tGw"/>
+                        <outlet property="pageDots" destination="oIL-gC-IdQ" id="dXB-w8-zVY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MmE-4T-Cnq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="767" y="893"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="fxe-yA-jQB">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Coj-oW-bPh" customClass="RevisionPageViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Fjv-BE-dWd"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1r-l5-9bk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-45" y="1581.5"/>
+        </scene>
+        <!--Flash View Controller-->
+        <scene sceneID="pUK-Xd-kd8">
+            <objects>
+                <viewController storyboardIdentifier="CardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="db1-ON-4dZ" customClass="FlashViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="63z-Ni-fXM"/>
+                        <viewControllerLayoutGuide type="bottom" id="I5V-sn-TM4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lCc-ae-aL2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rsi-Ch-d0j">
+                                <rect key="frame" x="97" y="104" width="418" height="320"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeB-sP-nRj">
+                                        <rect key="frame" x="142" y="161" width="134" height="110"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="110" id="guY-ig-AK3"/>
+                                            <constraint firstAttribute="width" constant="134" id="iHy-P2-Sml"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="40"/>
+                                        <color key="textColor" red="0.53409618139266968" green="0.59629547595977783" blue="0.81492191553115845" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irj-qt-mMl">
+                                        <rect key="frame" x="142" y="48" width="134" height="110"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="134" id="DdX-wv-sWa"/>
+                                            <constraint firstAttribute="height" constant="110" id="QOe-JI-unr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="40"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpd-Ye-4LW">
+                                        <rect key="frame" x="0.0" y="0.0" width="418" height="320"/>
+                                        <connections>
+                                            <action selector="cardButtonPressed:" destination="db1-ON-4dZ" eventType="touchUpInside" id="dcp-ee-QXU"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJu-2i-bGq">
+                                        <rect key="frame" x="142" y="161" width="134" height="110"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="110" id="0aH-pX-gLf"/>
+                                            <constraint firstAttribute="width" constant="134" id="hPH-gA-AMN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="40"/>
+                                        <color key="textColor" red="0.53409618140000004" green="0.59629547599999999" blue="0.81492191550000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Irj-qt-mMl" firstAttribute="centerX" secondItem="Rsi-Ch-d0j" secondAttribute="centerX" id="1kj-q1-4hq"/>
+                                    <constraint firstItem="FJu-2i-bGq" firstAttribute="leading" secondItem="KeB-sP-nRj" secondAttribute="leading" id="Aio-oD-NNZ"/>
+                                    <constraint firstItem="FJu-2i-bGq" firstAttribute="baseline" secondItem="KeB-sP-nRj" secondAttribute="baseline" id="apa-EP-Wct"/>
+                                    <constraint firstItem="KeB-sP-nRj" firstAttribute="top" secondItem="Irj-qt-mMl" secondAttribute="bottom" constant="3" id="fxD-J9-64c"/>
+                                    <constraint firstItem="KeB-sP-nRj" firstAttribute="leading" secondItem="Irj-qt-mMl" secondAttribute="leading" id="gpr-V9-eOJ"/>
+                                    <constraint firstItem="Irj-qt-mMl" firstAttribute="top" secondItem="Rsi-Ch-d0j" secondAttribute="top" constant="48" id="oZT-yH-msE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Rsi-Ch-d0j" firstAttribute="centerY" secondItem="lCc-ae-aL2" secondAttribute="centerY" constant="-36" id="GsM-uZ-X2H"/>
+                            <constraint firstItem="Rsi-Ch-d0j" firstAttribute="leading" secondItem="lCc-ae-aL2" secondAttribute="leadingMargin" constant="77" id="WFV-9B-POn"/>
+                            <constraint firstItem="Rsi-Ch-d0j" firstAttribute="centerX" secondItem="lCc-ae-aL2" secondAttribute="centerX" constant="6" id="g3m-VT-JwY"/>
+                            <constraint firstItem="Rsi-Ch-d0j" firstAttribute="top" secondItem="63z-Ni-fXM" secondAttribute="bottom" constant="84" id="yBY-GM-87y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="answerLabel" destination="KeB-sP-nRj" id="bz6-En-VVD"/>
+                        <outlet property="placeholderLabel" destination="FJu-2i-bGq" id="hnK-P5-tQd"/>
+                        <outlet property="questionLabel" destination="Irj-qt-mMl" id="cVj-H4-vOj"/>
+                        <outlet property="testView" destination="Rsi-Ch-d0j" id="pIx-xc-4rP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Xc-K6-SzW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="606" y="1638"/>
+        </scene>
         <!--Edit Phrase-->
         <scene sceneID="Swb-Ae-eub">
             <objects>
@@ -381,10 +521,10 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static1" id="8YJ-sk-RiA" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8YJ-sk-RiA" id="f54-8Z-8w0">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Original" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zsa-Mh-Cbj">
@@ -408,10 +548,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static2" id="ArW-K7-lxP" customClass="AddPhraseTextTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="158" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ArW-K7-lxP" id="011-Oy-o7M">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Translation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tHP-qn-uZI">
@@ -435,10 +575,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="static3" rowHeight="132" id="H0Q-tx-sbS" customClass="AddPhraseNoteTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="202" width="600" height="132"/>
+                                <rect key="frame" x="0.0" y="201.5" width="600" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H0Q-tx-sbS" id="v5y-iq-7qj">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="132"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="131.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gv-Ck-zOU">
@@ -460,10 +600,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dynamic" id="vj4-qh-eoS" customClass="AddPhraseTagTableViewCell" customModule="LingoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="334" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="333.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vj4-qh-eoS" id="lC0-gR-7od">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Add Tag" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="URA-dX-EtJ">
@@ -515,7 +655,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="abA-2f-MwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3564" y="414"/>
+            <point key="canvasLocation" x="4376" y="414"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7yA-x8-8oO">
@@ -533,7 +673,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="16V-Dy-Oy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2752" y="414"/>
+            <point key="canvasLocation" x="3564" y="414"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="c7i-d3-LRr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VGK-iv-PTF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="5Ks-Kc-A0B"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1jJ-xP-EWL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fDZ-wA-UgE" kind="relationship" relationship="rootViewController" id="MXi-Kb-f2r"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K12-qk-U7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-45" y="893"/>
         </scene>
     </scenes>
     <resources>

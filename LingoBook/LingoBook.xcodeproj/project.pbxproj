@@ -15,7 +15,6 @@
 		996F00641C988D9000FDC20F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 996F00631C98898D00FDC20F /* Bariol_Regular.otf */; };
 		999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993213F1C8F654400BA86F5 /* AppDelegate.swift */; };
 		999321421C8F654400BA86F5 /* PhrasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999321411C8F654400BA86F5 /* PhrasesViewController.swift */; };
-		999321441C8F654400BA86F5 /* RevisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999321431C8F654400BA86F5 /* RevisionViewController.swift */; };
 		999321471C8F654400BA86F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 999321451C8F654400BA86F5 /* Main.storyboard */; };
 		999321491C8F654400BA86F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 999321481C8F654400BA86F5 /* Assets.xcassets */; };
 		9993214C1C8F654400BA86F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9993214A1C8F654400BA86F5 /* LaunchScreen.storyboard */; };
@@ -37,6 +36,9 @@
 		9994FB2B1CA3568200675259 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB2A1CA3568200675259 /* DataController.swift */; };
 		9994FB311CA42F5500675259 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB301CA42F5500675259 /* SweetAlert.swift */; };
 		9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */; };
+		99BA95E41CAFCBD100E63DC6 /* FlashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA95E31CAFCBD100E63DC6 /* FlashViewController.swift */; };
+		99BA95E61CAFCCBC00E63DC6 /* RevisionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA95E51CAFCCBC00E63DC6 /* RevisionPageViewController.swift */; };
+		99BA95EA1CAFCFCF00E63DC6 /* RevisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA95E91CAFCFCF00E63DC6 /* RevisionViewController.swift */; };
 		99FBC3E51CAE7BDC00BC9EE9 /* PhraseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FBC3E41CAE7BDC00BC9EE9 /* PhraseModel.swift */; };
 		A443DF5C7DAE60556E482B61 /* Pods_LingoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 879349E7E7D59241290C1065 /* Pods_LingoBook.framework */; };
 /* End PBXBuildFile section */
@@ -70,7 +72,6 @@
 		9993213C1C8F654400BA86F5 /* LingoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LingoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9993213F1C8F654400BA86F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		999321411C8F654400BA86F5 /* PhrasesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesViewController.swift; sourceTree = "<group>"; };
-		999321431C8F654400BA86F5 /* RevisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionViewController.swift; sourceTree = "<group>"; };
 		999321461C8F654400BA86F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		999321481C8F654400BA86F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9993214B1C8F654400BA86F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -97,6 +98,9 @@
 		9994FB2A1CA3568200675259 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9994FB301CA42F5500675259 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = ../SweetAlert.swift; sourceTree = "<group>"; };
 		9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseTableViewCell.swift; sourceTree = "<group>"; };
+		99BA95E31CAFCBD100E63DC6 /* FlashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashViewController.swift; sourceTree = "<group>"; };
+		99BA95E51CAFCCBC00E63DC6 /* RevisionPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevisionPageViewController.swift; sourceTree = "<group>"; };
+		99BA95E91CAFCFCF00E63DC6 /* RevisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevisionViewController.swift; sourceTree = "<group>"; };
 		99FBC3E41CAE7BDC00BC9EE9 /* PhraseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseModel.swift; sourceTree = "<group>"; };
 		AD2B756DAD6CB926BB100ACB /* Pods-LingoBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LingoBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-LingoBook/Pods-LingoBook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +181,9 @@
 				9911310A1C9A184C00FE0D42 /* LingoBook.xcdatamodeld */,
 				9993213F1C8F654400BA86F5 /* AppDelegate.swift */,
 				999321451C8F654400BA86F5 /* Main.storyboard */,
+				99BA95E51CAFCCBC00E63DC6 /* RevisionPageViewController.swift */,
+				99BA95E91CAFCFCF00E63DC6 /* RevisionViewController.swift */,
+				99BA95E31CAFCBD100E63DC6 /* FlashViewController.swift */,
 				999321481C8F654400BA86F5 /* Assets.xcassets */,
 				9993214A1C8F654400BA86F5 /* LaunchScreen.storyboard */,
 				9993214D1C8F654400BA86F5 /* Info.plist */,
@@ -229,7 +236,6 @@
 			children = (
 				999321411C8F654400BA86F5 /* PhrasesViewController.swift */,
 				9919E4B21CAAE5E0003E32FD /* PhrasesViewControllerSearch.swift */,
-				999321431C8F654400BA86F5 /* RevisionViewController.swift */,
 				9994FB0F1CA1F65300675259 /* AddTranslationTableViewController.swift */,
 				996694EB1CA0852700058701 /* AddPhraseViewController.swift */,
 				994E91BC1CAE737500D5578D /* EditPhraseViewController.swift */,
@@ -474,8 +480,8 @@
 				9994FB231CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift in Sources */,
 				9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */,
 				9994FB1A1CA29AD300675259 /* Tag.swift in Sources */,
-				999321441C8F654400BA86F5 /* RevisionViewController.swift in Sources */,
 				9994FB291CA354A400675259 /* CoreDataStack.swift in Sources */,
+				99BA95E41CAFCBD100E63DC6 /* FlashViewController.swift in Sources */,
 				9994FB101CA1F65300675259 /* AddTranslationTableViewController.swift in Sources */,
 				996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */,
 				999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */,
@@ -484,9 +490,11 @@
 				9994FB1C1CA29AD300675259 /* OriginPhrase.swift in Sources */,
 				9994FB0E1CA1BDBB00675259 /* AddPhraseTagTableViewCell.swift in Sources */,
 				9994FB2B1CA3568200675259 /* DataController.swift in Sources */,
+				99BA95E61CAFCCBC00E63DC6 /* RevisionPageViewController.swift in Sources */,
 				9994FB311CA42F5500675259 /* SweetAlert.swift in Sources */,
 				9994FB1B1CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift in Sources */,
 				9994FB181CA29AD300675259 /* TranslatedPhrase.swift in Sources */,
+				99BA95EA1CAFCFCF00E63DC6 /* RevisionViewController.swift in Sources */,
 				9994FB191CA29AD300675259 /* Tag+CoreDataProperties.swift in Sources */,
 				9994FB211CA29E4F00675259 /* AddPhraseTextTableViewCell.swift in Sources */,
 				9994FB0C1CA1950E00675259 /* TagsTableViewController.swift in Sources */,
