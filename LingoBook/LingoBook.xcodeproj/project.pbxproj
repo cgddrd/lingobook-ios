@@ -13,6 +13,7 @@
 		994E91BD1CAE737500D5578D /* EditPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E91BC1CAE737500D5578D /* EditPhraseViewController.swift */; };
 		996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996694EB1CA0852700058701 /* AddPhraseViewController.swift */; };
 		996F00641C988D9000FDC20F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 996F00631C98898D00FDC20F /* Bariol_Regular.otf */; };
+		998E056F1CB17823007C28C5 /* PhraseTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E056E1CB17823007C28C5 /* PhraseTableViewCellDelegate.swift */; };
 		999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993213F1C8F654400BA86F5 /* AppDelegate.swift */; };
 		999321421C8F654400BA86F5 /* PhrasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999321411C8F654400BA86F5 /* PhrasesViewController.swift */; };
 		999321471C8F654400BA86F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 999321451C8F654400BA86F5 /* Main.storyboard */; };
@@ -69,6 +70,7 @@
 		994E91BC1CAE737500D5578D /* EditPhraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPhraseViewController.swift; sourceTree = "<group>"; };
 		996694EB1CA0852700058701 /* AddPhraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseViewController.swift; sourceTree = "<group>"; };
 		996F00631C98898D00FDC20F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
+		998E056E1CB17823007C28C5 /* PhraseTableViewCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		9993213C1C8F654400BA86F5 /* LingoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LingoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9993213F1C8F654400BA86F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		999321411C8F654400BA86F5 /* PhrasesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */,
+				998E056E1CB17823007C28C5 /* PhraseTableViewCellDelegate.swift */,
 				9994FB221CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift */,
 				9994FB0D1CA1BDBB00675259 /* AddPhraseTagTableViewCell.swift */,
 				9994FB201CA29E4F00675259 /* AddPhraseTextTableViewCell.swift */,
@@ -490,6 +493,7 @@
 				9994FB1C1CA29AD300675259 /* OriginPhrase.swift in Sources */,
 				9994FB0E1CA1BDBB00675259 /* AddPhraseTagTableViewCell.swift in Sources */,
 				9994FB2B1CA3568200675259 /* DataController.swift in Sources */,
+				998E056F1CB17823007C28C5 /* PhraseTableViewCellDelegate.swift in Sources */,
 				99BA95E61CAFCCBC00E63DC6 /* RevisionPageViewController.swift in Sources */,
 				9994FB311CA42F5500675259 /* SweetAlert.swift in Sources */,
 				9994FB1B1CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift in Sources */,

@@ -295,6 +295,14 @@ class DataController {
         
     }
     
+    func deletePhrase(phraseToDelete: OriginPhrase) {
+        
+        moc.deleteObject(phraseToDelete)
+        
+        self.saveManagedContext()
+        
+    }
+    
     // We return an Optional here in case the save to Core Data fails for some reason.
     // TODO: Maybe this should be changed to just return the NSError Optional?
 //    func addNewPhrase(originPhraseText: String, phraseTags: [String], phraseNote: String) -> OriginPhrase? {
@@ -343,13 +351,47 @@ class DataController {
     
     func processJSON(json: JSON?) {
         
+        var phrases = [PhraseModel]()
+        
         if (json != nil) {
             
             let phraseCollection = json!["phrases"]
             
             for (index, subJson):(String, JSON) in phraseCollection {
+                
                 print(index)
                 print(subJson)
+                
+                if let jsonPhraseData = subJson.dictionary {
+                    
+                    var test = PhraseModel()
+                    
+                    test.originPhraseText = (jsonPhraseData["text"]?.string)!
+                    test.note = (jsonPhraseData["note"]?.string)!
+                    
+                    for (_, translationJson):(String, JSON) in jsonPhraseData["translations"]! {
+                        
+                        if let translationData = translationJson.dictionary {
+                        
+                            print(translationJson)
+                            
+                            var newTranslation = TranslationModel()
+                            
+                            newTranslation.translatedText = (translationData["text"]?.string)!
+                            newTranslation.locale=(translationData["locale"]?.string)!
+                            
+                            test.translatedPhrases.append(newTranslation)
+                        }
+                        
+                    
+                    }
+                    
+                    phrases.append(test)
+                    
+                    self.createOrUpdatePhrase(test)
+                    
+                }
+
             }
             
         }

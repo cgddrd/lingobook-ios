@@ -10,6 +10,8 @@ import UIKit
 
 class RevisionPageViewController: UIPageViewController {
     
+    var revisionPhrases: [String : OriginPhrase]?
+    
     private(set) lazy var orderedViewControllers = [UIViewController]()
     
     private func newColoredViewController() -> UIViewController {
@@ -18,36 +20,63 @@ class RevisionPageViewController: UIPageViewController {
     
     weak var revisionDelegate: RevisionPageViewControllerDelegate?
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         dataSource = self
         delegate = self
         
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        for i in 0..<10 {
-            let test = newColoredViewController() as! FlashViewController
-            test.message = "Test \(i)"
-            orderedViewControllers.append(test)
+        self.loadRevisionPhrases()
+        
+        if self.revisionPhrases != nil {
+            
+            for (_, phraseData) in self.revisionPhrases! {
+                
+                let test = newColoredViewController() as! FlashViewController
+                test.questionLabel.text = phraseData.textValue
+                test.answerLabel.text = phraseData.getFirstTranslation()?.textValue
+                orderedViewControllers.append(test)
+                
+            }
         }
         
         if let firstViewController = orderedViewControllers.first {
+            
             setViewControllers([firstViewController],
-                               direction: .Forward,
+                               direction: UIPageViewControllerNavigationDirection.Forward,
                                animated: true,
                                completion: nil)
+            
         }
         
         revisionDelegate?.revisionPageViewController(self, didUpdatePageCount: orderedViewControllers.count)
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadRevisionPhrases() {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let savedPhrases = defaults.dictionaryForKey("SavedPhrases") {
+            
+            self.revisionPhrases = savedPhrases as? [String : OriginPhrase]
+            
+        } else {
+            
+            self.revisionPhrases = [String : OriginPhrase]()
+            
+        }
+        
     }
     
 

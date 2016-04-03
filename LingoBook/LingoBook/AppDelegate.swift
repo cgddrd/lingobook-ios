@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     lazy var coreDataStack = CoreDataStack()
-//    lazy var dataController = DataController()
     
     let appFont = UIFont (name: "Bariol", size: 20);
     let barTintColour = UIColor.flatYellowColor()

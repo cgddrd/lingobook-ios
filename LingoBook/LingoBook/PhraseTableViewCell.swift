@@ -20,11 +20,9 @@ class PhraseTableViewCell: UITableViewCell {
     
     @IBOutlet weak var btnSpeak: UIButton!
     
-    @IBAction func btnRevisionPressed(sender: AnyObject) {
-        
-        self.setRevisionButtonStyleDelete()
-        
-    }
+    var delegate: PhraseTableViewCellDelegate?
+    
+    var indexPath: NSIndexPath?
     
     let activeColour = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0);
     
@@ -33,6 +31,8 @@ class PhraseTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         // Initialization code
+        
+        self.btnAddRevision.backgroundColor = UIColor.flatGreenColor()
         
     }
 
@@ -43,54 +43,70 @@ class PhraseTableViewCell: UITableViewCell {
         
     }
     
-    func setRevisionButtonStyleDelete() {
+    @IBAction func btnRevisionPressed(sender: AnyObject) {
+        
+        //self.setRevisionButtonStyleDelete()
+        
+        if delegate != nil {
+            
+            delegate?.addRevisionButtonPressed(self, indexPath: indexPath!)
+            
+        }
+        
+    }
+    
+    func setRevisionButtonStyle(isAddEvent: Bool) {
+        
+        let buttonColour = isAddEvent ? UIColor.flatWatermelonColor() : UIColor.flatGreenColor()
+        let buttonImage = isAddEvent ? "glasses-filled" : "glasses"
         
         UIView.animateWithDuration(0.1, animations: { () -> Void in
-            self.btnAddRevision.backgroundColor = UIColor.flatWatermelonColor()
             
-            if let image = UIImage(named: "glasses-filled") {
+            self.btnAddRevision.backgroundColor = buttonColour
+            
+            if let image = UIImage(named: buttonImage) {
                 self.btnAddRevision.setImage(image, forState: .Normal)
             }
+            
         })
     
     }
     
-    func setActiveState(active: Bool, animated: Bool, isEditing: Bool = false) {
+    func setEditState(editing: Bool) {
         
-        if active {
+        self.btnAddRevision.hidden = editing
+        
+        if editing {
             
-            self.btnAddRevision.hidden = false
-            
-            if !isEditing {
-                
-                if animated {
-                    self.btnSpeak.slideInFromRight(0.3, completionDelegate: self)
-                }
-                
-                self.labelTranslatedPhrase.hidden = false
-                self.labelTags.hidden = false
-                self.btnSpeak.hidden = false
-                
-                self.contentView.backgroundColor = activeColour
-                
-            }
-            
-        } else {
-            
-            if animated {
-                self.btnSpeak.slideInFromLeft(0.3, completionDelegate: self)
-            }
-            
-            self.btnAddRevision.hidden = isEditing
-            self.btnSpeak.hidden = true
             self.labelTranslatedPhrase.hidden = true
             self.labelTags.hidden = true
-            
-            self.contentView.backgroundColor = UIColor.clearColor()
+            self.btnSpeak.hidden = true
             
         }
+    
+    }
+    
+    func setSelectedState(active: Bool, animated: Bool = true) {
+    
+        self.labelTranslatedPhrase.hidden = !active
+        self.labelTags.hidden = !active
+        self.btnSpeak.hidden = !active
         
-
+        self.contentView.backgroundColor = active ? activeColour : UIColor.clearColor()
+        
+        if animated {
+            
+            if active {
+                
+                self.btnSpeak.slideInFromRight(0.3, completionDelegate: self)
+                
+            } else {
+                
+                self.btnSpeak.slideInFromLeft(0.3, completionDelegate: self)
+                
+            }
+            
+        }
         
     }
 

@@ -10,13 +10,17 @@ import UIKit
 import CoreData
 import SwiftyJSON
 
-class PhrasesViewController: UITableViewController {
+class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate {
     
     var managedContext: NSManagedObjectContext! = nil;
     
     var phrases: [OriginPhrase]?
     
     var phrasesSearchResults: [OriginPhrase]?
+    
+    var phrasesDict: [String : OriginPhrase]?
+    
+    var revisionPhrases: [OriginPhrase]?
     
     var dataController = DataController.sharedInstance
     
@@ -55,13 +59,37 @@ class PhrasesViewController: UITableViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    @IBAction func refreshButtonPressed(sender: AnyObject) {
         
-        super.viewWillAppear(animated)
+        self.getPhraseJSON()
+      
+    }
+    
+    func loadRevisionPhrases() {
         
-        if let retrievedPhrases = dataController.getPhrases() {
-            phrases = retrievedPhrases
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let savedPhrases = defaults.dictionaryForKey("SavedPhrases") as? [String : OriginPhrase] {
+            
+            self.phrasesDict = savedPhrases
+
+        } else {
+            
+            self.phrasesDict = [String : OriginPhrase]()
+            
         }
+        
+    }
+    
+    func saveRevisionPhrases() {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        defaults.setObject(self.phrasesDict, forKey: "SavedPhrases")
+        
+    }
+    
+    func checkEmptyTable() {
         
         if (phrases != nil) && (phrases!.count > 0) {
             
@@ -88,17 +116,36 @@ class PhrasesViewController: UITableViewController {
             self.tableView.backgroundView = emptyLabel
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         }
-
+        
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        if let retrievedPhrases = dataController.getPhrases() {
+            phrases = retrievedPhrases
+        }
+        
+        self.loadRevisionPhrases()
+    
+        self.checkEmptyTable()
         
         tableView.reloadData()
         
         for cell in self.tableView.visibleCells {
             let test = cell as! PhraseTableViewCell
-            test.labelTags.hidden = true
-            test.labelTranslatedPhrase.hidden = true
-            test.btnSpeak.hidden = true
-            test.contentView.backgroundColor = UIColor.clearColor()
+            test.setSelectedState(false, animated: false)
         }
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        
+        self.saveRevisionPhrases()
         
     }
     
@@ -116,8 +163,6 @@ class PhrasesViewController: UITableViewController {
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         
         if self.editing {
-            
-            //SweetAlert().showAlert("Here's a message!", subTitle: "It's pretty, isn't it?", style: AlertStyle.None)
             
             performSegueWithIdentifier("EditPhraseSegue", sender: tableView.cellForRowAtIndexPath(indexPath))
             
@@ -155,46 +200,7 @@ class PhrasesViewController: UITableViewController {
         
     }
     
-    func deactivatePhraseCell(indexPath: NSIndexPath, isEditing: Bool = false) {
-        
-        let activeCell = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
-        
-        activeCell.btnAddRevision.hidden = isEditing
-        activeCell.labelTranslatedPhrase.hidden = true
-        activeCell.labelTags.hidden = true
-        
-        activeCell.contentView.backgroundColor = UIColor.clearColor()
-        
-        activeCell.btnSpeak.slideInFromLeft(0.3, completionDelegate: self)
-        
-        activeCell.btnSpeak.hidden = true
-        
-    }
-    
-//    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
-//        print("Animation stopped")
-//    }
-    
-    func activatePhraseCell(indexPath: NSIndexPath) {
-        
-        let activeCell = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
-        
-        activeCell.btnAddRevision.hidden = false
-        activeCell.labelTranslatedPhrase.hidden = false
-        activeCell.labelTags.hidden = false
-        
-        activeCell.btnSpeak.hidden = false
-        activeCell.btnSpeak.slideInFromRight(0.3)
-        
-        let selectedColour = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0);
-
-        activeCell.contentView.backgroundColor = selectedColour
-        
-    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-//        let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
         
         if selectedCellIndexPath != nil && selectedCellIndexPath == indexPath {
             
@@ -204,7 +210,9 @@ class PhrasesViewController: UITableViewController {
             
             if selectedCellIndexPath != nil && selectedCellIndexPath != indexPath {
                 
-                deactivatePhraseCell(selectedCellIndexPath!)
+                let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as! PhraseTableViewCell
+                
+                selectedCell.setSelectedState(false, animated: true)
                 
             }
             
@@ -217,7 +225,9 @@ class PhrasesViewController: UITableViewController {
         
         if selectedCellIndexPath != nil {
             
-            activatePhraseCell(selectedCellIndexPath!)
+            let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as! PhraseTableViewCell
+            
+            selectedCell.setSelectedState(true, animated: true)
             
             // This ensures, that the cell is fully visible once expanded
             tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
@@ -225,23 +235,6 @@ class PhrasesViewController: UITableViewController {
         }
         
     }
-    
-//    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-//        
-//       // if selectedCellIndexPath != nil {
-//            
-//            let cellToDeSelect = tableView.cellForRowAtIndexPath(indexPath) as! PhraseTableViewCell
-////            cellToDeSelect.contentView.backgroundColor = UIColor.clearColor()
-//            
-////            UIView.animateWithDuration(0.2, animations: {
-////                cellToDeSelect.imageArrow.transform = CGAffineTransformMakeRotation((0.0 * CGFloat(M_PI)) / 180.0)
-////            })
-//            
-//            //cellToDeSelect.btnAddRevision.hidden = true
-//            
-//      //  }
-//        
-//    }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
@@ -259,6 +252,8 @@ class PhrasesViewController: UITableViewController {
         // Have no idea why this is the case, but it seems to work.
         // See: http://stackoverflow.com/a/31999606/4768230 for more information.
         let cell = self.tableView.dequeueReusableCellWithIdentifier("phraseCell", forIndexPath: indexPath) as! PhraseTableViewCell
+        cell.delegate = self
+        cell.indexPath = indexPath
         
         var originPhrase: OriginPhrase? = nil
         
@@ -288,14 +283,6 @@ class PhrasesViewController: UITableViewController {
             
         }
         
-//        if selectedCellIndexPath != nil && selectedCellIndexPath == indexPath {
-//            
-//            let selectedColour = UIColor(red: 243.0/255.0, green: 243.0/255.0, blue: 243.0/255.0, alpha: 1.0);
-//            
-//            cell.contentView.backgroundColor = selectedColour
-//            
-//        }
-        
         return cell
         
     }
@@ -303,7 +290,13 @@ class PhrasesViewController: UITableViewController {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         let delete = UITableViewRowAction(style: .Destructive, title: "Delete") { (action, indexPath) in
-            // delete item at indexPath
+            
+            self.dataController.deletePhrase(self.phrases![indexPath.row])
+            
+            self.phrases?.removeAtIndex(indexPath.row)
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
         }
         
         delete.backgroundColor = UIColor.flatWatermelonColor()
@@ -311,9 +304,13 @@ class PhrasesViewController: UITableViewController {
         return [delete]
     }
     
-    @IBAction func getPhraseJSON() {
+    func getPhraseJSON() {
+       
+        //let url = "http://users.aber.ac.uk/clg11/sem2220/lingobook.json";
         
-        let url = "http://users.aber.ac.uk/clg11/sem2220/lingobook.json";
+        let url = "http://localhost:8888/sem2220/lingobook.json"
+        
+        print("Downloading JSON")
         
         networkController.performFileDownload(url) { (data, response, error) in
             
@@ -321,11 +318,22 @@ class PhrasesViewController: UITableViewController {
                 
                 //let json = JSON(data: downloadedData)
                 
-               // dispatch_async(dispatch_get_main_queue()) {
+                dispatch_async(dispatch_get_main_queue()) {
                     //print("Data is: \(json)")
                     print("Processing JSON on main thread")
+                    
                     self.dataController.processJSON(downloadedData)
-               // }
+                    
+                    //self.tableView.reloadData()
+                    
+                    self.phrases = self.dataController.getPhrases()
+                    
+                    self.checkEmptyTable()
+                    
+                    self.tableView.reloadData()
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                }
                 
             } else {
                 print("downloaded data was empty \(error?.localizedDescription)")
@@ -349,38 +357,29 @@ class PhrasesViewController: UITableViewController {
         
         if editing {
             
-            if selectedCellIndexPath != nil {
-                
-                deactivatePhraseCell(selectedCellIndexPath!, isEditing: editing)
-                
-            }
-            
             for cell in self.tableView.visibleCells {
                 let test = cell as! PhraseTableViewCell
-                test.labelTags.hidden = true
-                test.labelTranslatedPhrase.hidden = true
-                test.btnAddRevision.hidden = true
-                test.btnAddRevision.slideInFromLeft(0.3)
+                test.setEditState(true)
             }
             
             self.tableView.setEditing(editing, animated: animated)
             
         } else {
             
-            if selectedCellIndexPath != nil {
-                
-                activatePhraseCell(selectedCellIndexPath!)
+            for cell in self.tableView.visibleCells {
+                let test = cell as! PhraseTableViewCell
+                test.setEditState(false)
                 
             }
             
-//            
-            for cell in self.tableView.visibleCells {
-                let test = cell as! PhraseTableViewCell
+            if selectedCellIndexPath != nil {
+
+                let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as! PhraseTableViewCell
                 
-                test.btnAddRevision.hidden = false
-                test.btnAddRevision.slideInFromRight(0.3)
+                selectedCell.setSelectedState(true, animated: true)
                 
             }
+            
             
             self.tableView.setEditing(editing, animated: animated)
             
@@ -410,6 +409,34 @@ class PhrasesViewController: UITableViewController {
                 let selectedPhrase = phrases![indexPath!.row] as OriginPhrase
                 
                 editPhraseViewController.currentPhrase = PhraseModel(existingPhrase: selectedPhrase)
+                
+            }
+            
+        }
+        
+    }
+    
+    func addRevisionButtonPressed(sender: PhraseTableViewCell, indexPath: NSIndexPath) {
+        
+        if phrasesDict != nil && phrases != nil {
+            
+            if phrases?.count > indexPath.row {
+                
+                let selectedPhrase = phrases![indexPath.row]
+                
+                // If we find an entry for the phrase inside the dictionary of revision indexes, we want to remove it.
+                
+                if let revisionPhraseDictIndex = phrasesDict?.indexForKey(selectedPhrase.textValue!) {
+                    
+                    phrasesDict!.removeAtIndex(revisionPhraseDictIndex)
+                    sender.setRevisionButtonStyle(false)
+                    
+                } else {
+                    
+                    phrasesDict![selectedPhrase.textValue!] = selectedPhrase
+                    sender.setRevisionButtonStyle(true)
+                    
+                }
                 
             }
             

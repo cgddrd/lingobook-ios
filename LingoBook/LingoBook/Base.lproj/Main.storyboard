@@ -117,7 +117,13 @@
                             <outlet property="delegate" destination="axk-sh-aoN" id="o3T-Ax-wFg"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="refresh" id="cjg-T1-7Ld">
+                            <connections>
+                                <action selector="refreshButtonPressed:" destination="axk-sh-aoN" id="tvg-Hd-kHY"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Phrases" id="ePI-Cx-VWr">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zpk-K9-Oyo">
                             <connections>
@@ -131,7 +137,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuI-aG-URQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1377" y="-342"/>
+            <point key="canvasLocation" x="1375" y="-342"/>
         </scene>
         <!--Add Phrase-->
         <scene sceneID="Kvh-Bm-c3t">
@@ -282,9 +288,10 @@
         <!--Phrases-->
         <scene sceneID="z6Y-ba-ywx">
             <objects>
-                <navigationController id="YDF-a1-z9b" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="YDF-a1-z9b" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Phrases" image="notebook" id="Lgb-9V-oYl"/>
                     <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F3e-ki-oo0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -293,7 +300,7 @@
                             <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="16"/>
                         </textAttributes>
                     </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Cap-1f-O0C">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Cap-1f-O0C">
                         <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
@@ -509,7 +516,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Xc-K6-SzW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="606" y="1638"/>
+            <point key="canvasLocation" x="595" y="1638"/>
         </scene>
         <!--Edit Phrase-->
         <scene sceneID="Swb-Ae-eub">
@@ -675,11 +682,11 @@
             </objects>
             <point key="canvasLocation" x="3564" y="414"/>
         </scene>
-        <!--Item-->
+        <!--Revision-->
         <scene sceneID="c7i-d3-LRr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VGK-iv-PTF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="5Ks-Kc-A0B"/>
+                    <tabBarItem key="tabBarItem" title="Revision" image="glasses" id="5Ks-Kc-A0B"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1jJ-xP-EWL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

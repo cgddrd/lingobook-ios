@@ -54,6 +54,13 @@ struct TranslationModel {
     var translatedText: String
     var locale: String
     
+    init() {
+        
+        self.translatedText = ""
+        self.locale = ""
+
+    }
+    
     init(translatedText: String, locale: String) {
         
         self.translatedText = translatedText

@@ -72,7 +72,7 @@ class FlashViewController: UIViewController {
         
         self.questionLabel.layer.addSublayer(border)
         
-        self.questionLabel.layer.sublayers?.first?.backgroundColor = UIColor.brownColor().CGColor
+       // self.questionLabel.layer.sublayers?.first?.backgroundColor = UIColor.brownColor().CGColor
         
         
         
