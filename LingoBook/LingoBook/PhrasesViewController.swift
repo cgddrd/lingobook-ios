@@ -17,7 +17,7 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
     var phrases: [OriginPhrase]?
     
     var phrasesSearchResults: [OriginPhrase]?
-    
+
     var phrasesDict: [String : OriginPhrase]?
     
     var revisionPhrases: [OriginPhrase]?
@@ -57,6 +57,10 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
         
         searchController.searchBar.delegate = self
         
+        // Load in the collection of saved phrases.
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.phrasesDict = appDel.revisionPhrases
+        
     }
     
     @IBAction func refreshButtonPressed(sender: AnyObject) {
@@ -64,31 +68,7 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
         self.getPhraseJSON()
       
     }
-    
-    func loadRevisionPhrases() {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if let savedPhrases = defaults.dictionaryForKey("SavedPhrases") as? [String : OriginPhrase] {
-            
-            self.phrasesDict = savedPhrases
-
-        } else {
-            
-            self.phrasesDict = [String : OriginPhrase]()
-            
-        }
-        
-    }
-    
-    func saveRevisionPhrases() {
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        defaults.setObject(self.phrasesDict, forKey: "SavedPhrases")
-        
-    }
-    
     func checkEmptyTable() {
         
         if (phrases != nil) && (phrases!.count > 0) {
@@ -128,8 +108,6 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
             phrases = retrievedPhrases
         }
         
-        self.loadRevisionPhrases()
-    
         self.checkEmptyTable()
         
         tableView.reloadData()
@@ -144,8 +122,6 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
     override func viewWillDisappear(animated: Bool) {
         
         super.viewWillDisappear(animated)
-        
-        self.saveRevisionPhrases()
         
     }
     
@@ -278,6 +254,16 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
                     cell.labelTranslatedPhrase.text = retrievedTranslations.first?.textValue
                     
                 }
+                
+            }
+            
+            if phrasesDict?.indexForKey(originPhrase!.textValue!) != nil {
+                
+                cell.setRevisionButtonStyle(true)
+                
+            } else {
+                
+                cell.setRevisionButtonStyle(false)
                 
             }
             
@@ -434,11 +420,16 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
                 } else {
                     
                     phrasesDict![selectedPhrase.textValue!] = selectedPhrase
+            
                     sender.setRevisionButtonStyle(true)
                     
                 }
                 
             }
+            
+            // Update changes to shared collection of phrases.
+            let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDel.revisionPhrases = self.phrasesDict!
             
         }
         

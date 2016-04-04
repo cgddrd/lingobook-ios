@@ -19,6 +19,15 @@ class RevisionViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Reset page dots ready for new collection of flash cards to be displayed.
+        self.pageDots.currentPage = 0
+        self.pageDots.numberOfPages = 0
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

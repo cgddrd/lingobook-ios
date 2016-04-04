@@ -12,7 +12,7 @@ class RevisionPageViewController: UIPageViewController {
     
     var revisionPhrases: [String : OriginPhrase]?
     
-    private(set) lazy var orderedViewControllers = [UIViewController]()
+     var orderedViewControllers = [UIViewController]()
     
     private func newColoredViewController() -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CardViewController")
@@ -20,33 +20,40 @@ class RevisionPageViewController: UIPageViewController {
     
     weak var revisionDelegate: RevisionPageViewControllerDelegate?
     
+    var dataController = DataController.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         dataSource = self
         delegate = self
         
+        self.orderedViewControllers = [UIViewController]()
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
-        self.loadRevisionPhrases()
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        self.revisionPhrases = appDel.revisionPhrases
+        
+        self.orderedViewControllers = [UIViewController]()
         
         if self.revisionPhrases != nil {
             
-            for (_, phraseData) in self.revisionPhrases! {
+            for (_, phrase) in self.revisionPhrases! {
                 
                 let test = newColoredViewController() as! FlashViewController
-                test.questionLabel.text = phraseData.textValue
-                test.answerLabel.text = phraseData.getFirstTranslation()?.textValue
-                orderedViewControllers.append(test)
+                test.question = phrase.textValue!
+                test.answer = (phrase.getFirstTranslation()?.textValue)!
+                self.orderedViewControllers.append(test)
                 
             }
         }
         
-        if let firstViewController = orderedViewControllers.first {
+        if let firstViewController = self.orderedViewControllers.first {
             
             setViewControllers([firstViewController],
                                direction: UIPageViewControllerNavigationDirection.Forward,
@@ -56,6 +63,8 @@ class RevisionPageViewController: UIPageViewController {
         }
         
         revisionDelegate?.revisionPageViewController(self, didUpdatePageCount: orderedViewControllers.count)
+        
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,23 +72,6 @@ class RevisionPageViewController: UIPageViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func loadRevisionPhrases() {
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if let savedPhrases = defaults.dictionaryForKey("SavedPhrases") {
-            
-            self.revisionPhrases = savedPhrases as? [String : OriginPhrase]
-            
-        } else {
-            
-            self.revisionPhrases = [String : OriginPhrase]()
-            
-        }
-        
-    }
-    
-
     /*
     // MARK: - Navigation
 

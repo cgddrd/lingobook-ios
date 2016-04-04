@@ -27,6 +27,29 @@ class DataController {
         return appDel.coreDataStack.managedObjectContext
     }()
     
+    // ManagedObjectContext from AppDelegate
+    lazy var psc: NSPersistentStoreCoordinator = {
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDel.coreDataStack.persistentStoreCoordinator
+    }()
+    
+    
+    func getPhraseByIdUrl(url: NSURL) -> OriginPhrase? {
+        
+        if let objectId = psc.managedObjectIDForURIRepresentation(url) {
+            
+            if let data = moc.objectWithID(objectId) as? OriginPhrase {
+                
+                return data
+                
+            }
+            
+        }
+        
+        return nil
+        
+    }
+    
     func getPhrases() -> [OriginPhrase]? {
         
         do {
@@ -251,30 +274,6 @@ class DataController {
         
     }
     
-    
-    
-//    func addPhraseTranslation(originPhrase: OriginPhrase, translationText: String, translationLocale: String) -> TranslatedPhrase? {
-//        
-//        let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: moc)
-//        let newTranslatedPhrase = TranslatedPhrase(entity: newTranslatedPhraseEntity!, insertIntoManagedObjectContext: moc)
-//        
-//        newTranslatedPhrase.textValue = translationText
-//        newTranslatedPhrase.locale = translationLocale
-//        newTranslatedPhrase.origin = originPhrase
-//        
-//        originPhrase.addNewTranslation(newTranslatedPhrase)
-//        
-//        if let error = self.saveManagedContext() {
-//            
-//            print("An error has occured whilst saving the new translated phrase: \(error.localizedDescription)")
-//            return nil
-//            
-//        }
-//        
-//        return newTranslatedPhrase
-//        
-//    }
-    
     private func createNewPhrase() -> OriginPhrase {
         
         let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: moc)
@@ -302,44 +301,6 @@ class DataController {
         self.saveManagedContext()
         
     }
-    
-    // We return an Optional here in case the save to Core Data fails for some reason.
-    // TODO: Maybe this should be changed to just return the NSError Optional?
-//    func addNewPhrase(originPhraseText: String, phraseTags: [String], phraseNote: String) -> OriginPhrase? {
-//        
-//        let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: moc)
-//        
-//        let newOriginPhrase = OriginPhrase(entity: newOriginPhraseEntity!, insertIntoManagedObjectContext: moc)
-//        
-//        newOriginPhrase.textValue = originPhraseText
-//        newOriginPhrase.note = phraseNote
-//        
-//        for newTagName in phraseTags {
-//            
-//            let trimmedTagName = newTagName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-//            
-//            let currentTag = findOrCreateTag(trimmedTagName)
-//            
-//            let mutableOriginWords = currentTag.originWords?.mutableCopy() as! NSMutableSet
-//            mutableOriginWords.addObject(newOriginPhrase)
-//            currentTag.originWords = mutableOriginWords as NSSet
-//            
-//            let mutableNewPhraseTags = newOriginPhrase.tags?.mutableCopy() as! NSMutableSet
-//            mutableNewPhraseTags.addObject(currentTag)
-//            newOriginPhrase.tags = mutableNewPhraseTags as NSSet
-//            
-//        }
-//        
-//        if let error = self.saveManagedContext() {
-//            
-//            print("An error has occured whilst saving the new origin phrase: \(error.localizedDescription)")
-//            return nil
-//            
-//        }
-//        
-//        return newOriginPhrase
-//        
-//    }
     
     func processJSON(data: NSData) {
         
@@ -398,5 +359,49 @@ class DataController {
         
     }
     
-}
+    func loadSavedRevisionPhrases() -> [String : OriginPhrase]? {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let data = defaults.valueForKey("SavedPhrases") as? NSData {
+            
+            if let savedPhrases = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String : NSURL] {
+                
+                var loadedPhrases = [String : OriginPhrase]()
+                
+                for (phraseKey, phraseURL) in savedPhrases {
+                    
+                    if let locatedPhrase = self.getPhraseByIdUrl(phraseURL) {
+                        
+                        loadedPhrases[phraseKey] = locatedPhrase
+                        
+                    }
+                    
+                }
+                
+                return loadedPhrases
+                
+            }
+            
+        }
+        
+        return nil
+    }
+    
+    func saveRevisionPhrases(phrases : [String : OriginPhrase]) {
+        
+        var phraseDictUrls = [String : NSURL]()
+    
+        for (phraseKey, phrase) in phrases as [String : OriginPhrase] {
+            
+            phraseDictUrls[phraseKey] = phrase.objectID.URIRepresentation()
+            
+        }
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let data = NSKeyedArchiver.archivedDataWithRootObject(phraseDictUrls)
+        defaults.setValue(data, forKey: "SavedPhrases")
+        
+    }
 
+}

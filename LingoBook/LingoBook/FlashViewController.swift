@@ -10,7 +10,8 @@ import UIKit
 
 class FlashViewController: UIViewController {
     
-    var message: String = "Good Morning"
+    var question: String = ""
+    var answer: String = ""
 
     @IBOutlet weak var testView: UIView!
     
@@ -53,7 +54,8 @@ class FlashViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.questionLabel.text = message
+        self.questionLabel.text = question
+        self.answerLabel.text = answer
         self.answerLabel.hidden = true
         self.answerLabel.alpha = 0.0
         
