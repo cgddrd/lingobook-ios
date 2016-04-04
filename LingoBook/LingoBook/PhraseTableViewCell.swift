@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-class PhraseTableViewCell: UITableViewCell {
+class PhraseTableViewCell: UITableViewCell, AVSpeechSynthesizerDelegate {
 
     @IBOutlet weak var labelOriginPhrase: UILabel!
     
@@ -26,6 +27,8 @@ class PhraseTableViewCell: UITableViewCell {
     
     let activeColour = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0);
     
+    let synth = AVSpeechSynthesizer()
+    
     override func awakeFromNib() {
         
         super.awakeFromNib()
@@ -35,12 +38,34 @@ class PhraseTableViewCell: UITableViewCell {
         self.btnAddRevision.backgroundColor = UIColor.flatGreenColor()
         self.btnAddRevision.hidden = false
         
+        synth.delegate = self
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
+    }
+    
+    @IBAction func btnSpeakPressed(sender: AnyObject) {
+        
+        if let image = UIImage(named: "speaker-filled") {
+            self.btnSpeak.setImage(image, forState: .Normal)
+        }
+        
+        let utterance = AVSpeechUtterance(string: "\(self.labelOriginPhrase.text!)--\(self.labelTranslatedPhrase.text!)")
+        utterance.rate = 0.3
+        synth.speakUtterance(utterance)
+        
+    }
+    
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
+        
+        if let image = UIImage(named: "speaker") {
+            self.btnSpeak.setImage(image, forState: .Normal)
+        }
         
     }
     
@@ -53,6 +78,7 @@ class PhraseTableViewCell: UITableViewCell {
             delegate?.addRevisionButtonPressed(self, indexPath: indexPath!)
             
         }
+        
         
     }
     
