@@ -33,6 +33,7 @@ class PhraseTableViewCell: UITableViewCell {
         // Initialization code
         
         self.btnAddRevision.backgroundColor = UIColor.flatGreenColor()
+        self.btnAddRevision.hidden = false
         
     }
 

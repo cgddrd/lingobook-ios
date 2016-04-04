@@ -12,6 +12,8 @@
             <string>Bariol-Regular</string>
             <string>Bariol-Regular</string>
             <string>Bariol-Regular</string>
+            <string>Bariol-Regular</string>
+            <string>Bariol-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -117,13 +119,7 @@
                             <outlet property="delegate" destination="axk-sh-aoN" id="o3T-Ax-wFg"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem systemItem="refresh" id="cjg-T1-7Ld">
-                            <connections>
-                                <action selector="refreshButtonPressed:" destination="axk-sh-aoN" id="tvg-Hd-kHY"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Phrases" id="ePI-Cx-VWr">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zpk-K9-Oyo">
                             <connections>
@@ -299,10 +295,9 @@
         <!--Phrases-->
         <scene sceneID="z6Y-ba-ywx">
             <objects>
-                <navigationController toolbarHidden="NO" id="YDF-a1-z9b" sceneMemberID="viewController">
+                <navigationController id="YDF-a1-z9b" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Phrases" image="notebook" id="Lgb-9V-oYl"/>
                     <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F3e-ki-oo0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -467,8 +462,8 @@
                                             <constraint firstAttribute="height" constant="110" id="guY-ig-AK3"/>
                                             <constraint firstAttribute="width" constant="134" id="iHy-P2-Sml"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="40"/>
-                                        <color key="textColor" red="0.53409618139266968" green="0.59629547595977783" blue="0.81492191553115845" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="36"/>
+                                        <color key="textColor" red="0.18198148906230927" green="0.69426733255386353" blue="0.53024792671203613" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irj-qt-mMl">
@@ -478,18 +473,18 @@
                                             <constraint firstAttribute="width" constant="134" id="DdX-wv-sWa"/>
                                             <constraint firstAttribute="height" constant="110" id="QOe-JI-unr"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="40"/>
+                                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="36"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJu-2i-bGq">
-                                        <rect key="frame" x="142" y="161" width="134" height="110"/>
+                                        <rect key="frame" x="142" y="162" width="134" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="110" id="0aH-pX-gLf"/>
                                             <constraint firstAttribute="width" constant="134" id="hPH-gA-AMN"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="40"/>
-                                        <color key="textColor" red="0.53409618140000004" green="0.59629547599999999" blue="0.81492191550000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpd-Ye-4LW">
@@ -711,6 +706,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K12-qk-U7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-45" y="893"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="CnM-vj-70D">
+            <objects>
+                <viewController storyboardIdentifier="TestController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cif-Qd-BN3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BQ6-sk-mGq"/>
+                        <viewControllerLayoutGuide type="bottom" id="u3e-z6-Vi9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cqq-VR-Y5k">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woops! You have no saved phrases!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGi-2J-cIn">
+                                <rect key="frame" x="159" y="244" width="282" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="282" id="PEj-mM-Ng8"/>
+                                    <constraint firstAttribute="height" constant="21" id="UEf-sp-ryD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to the 'Phrases' tab to add phrases." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v00-z4-41v">
+                                <rect key="frame" x="150" y="283" width="300" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="nUu-MM-EyN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="v00-z4-41v" firstAttribute="top" secondItem="PGi-2J-cIn" secondAttribute="bottom" constant="18" id="5YO-Hh-QFD"/>
+                            <constraint firstItem="PGi-2J-cIn" firstAttribute="centerX" secondItem="v00-z4-41v" secondAttribute="centerX" id="L5e-ig-Te2"/>
+                            <constraint firstItem="PGi-2J-cIn" firstAttribute="top" secondItem="BQ6-sk-mGq" secondAttribute="bottom" constant="224" id="QAX-BC-vnm"/>
+                            <constraint firstItem="PGi-2J-cIn" firstAttribute="centerY" secondItem="Cqq-VR-Y5k" secondAttribute="centerY" id="S4w-Te-Gd3"/>
+                            <constraint firstItem="u3e-z6-Vi9" firstAttribute="top" secondItem="v00-z4-41v" secondAttribute="bottom" constant="296" id="XeF-gw-C29"/>
+                            <constraint firstItem="v00-z4-41v" firstAttribute="top" secondItem="PGi-2J-cIn" secondAttribute="bottom" constant="18" id="YM9-MJ-AfE"/>
+                            <constraint firstItem="PGi-2J-cIn" firstAttribute="centerX" secondItem="Cqq-VR-Y5k" secondAttribute="centerX" id="kXV-S5-fhn"/>
+                            <constraint firstItem="PGi-2J-cIn" firstAttribute="top" secondItem="BQ6-sk-mGq" secondAttribute="bottom" constant="224" id="usl-GG-96k"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="S4w-Te-Gd3"/>
+                                <exclude reference="usl-GG-96k"/>
+                                <exclude reference="5YO-Hh-QFD"/>
+                                <exclude reference="XeF-gw-C29"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="csA-gd-OTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1224" y="1638"/>
         </scene>
     </scenes>
     <resources>

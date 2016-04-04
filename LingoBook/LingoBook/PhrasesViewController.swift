@@ -42,7 +42,6 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
-        
         // Set up search controller - See: https://www.raywenderlich.com/113772/uisearchcontroller-tutorial for more information.
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -54,8 +53,9 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
         
         // Set a custom placeholder.
         searchController.searchBar.placeholder = "Search Phrasebook"
-        
         searchController.searchBar.delegate = self
+        
+        self.refreshControl?.addTarget(self, action: "handleRefresh:", forControlEvents: .ValueChanged)
         
         // Load in the collection of saved phrases.
         let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -63,15 +63,41 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
         
     }
     
-    @IBAction func refreshButtonPressed(sender: AnyObject) {
+    func handleRefresh(refreshControl: UIRefreshControl) {
         
-        self.getPhraseJSON()
-      
+        let url = "http://users.aber.ac.uk/clg11/sem2220/lingobook.json";
+        
+        networkController.performFileDownload(url) { (data, response, error) in
+            
+            if let downloadedData = data {
+                
+                dispatch_async(dispatch_get_main_queue()) {
+
+                    print("Processing JSON on main thread")
+                    
+                    self.dataController.processJSON(downloadedData)
+                
+                    self.phrases = self.dataController.getPhrases()
+                    
+                    self.checkEmptyTable()
+                    
+                    self.tableView.reloadData()
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                }
+                
+            } else {
+                print("downloaded data was empty \(error?.localizedDescription)")
+            }
+        }
+        
+        refreshControl.endRefreshing()
+        
     }
         
     func checkEmptyTable() {
         
-        if (phrases != nil) && (phrases!.count > 0) {
+        if (self.phrases != nil) && (self.phrases!.count > 0) {
             
             self.tableView.backgroundView = nil
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
@@ -267,6 +293,11 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
                 
             }
             
+            
+            if !self.editing {
+                cell.btnAddRevision.hidden = false
+            }
+            
         }
         
         return cell
@@ -276,6 +307,19 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         let delete = UITableViewRowAction(style: .Destructive, title: "Delete") { (action, indexPath) in
+            
+            let phrase = self.phrases![indexPath.row]
+            
+            // Remove at saved phrases.
+            if let test = self.phrasesDict?.indexForKey(phrase.textValue!) {
+                
+                self.phrasesDict?.removeAtIndex(test)
+                
+                // Update changes to shared collection of phrases.
+                let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDel.revisionPhrases = self.phrasesDict!
+                
+            }
             
             self.dataController.deletePhrase(self.phrases![indexPath.row])
             
@@ -290,43 +334,6 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
         return [delete]
     }
     
-    func getPhraseJSON() {
-       
-        //let url = "http://users.aber.ac.uk/clg11/sem2220/lingobook.json";
-        
-        let url = "http://localhost:8888/sem2220/lingobook.json"
-        
-        print("Downloading JSON")
-        
-        networkController.performFileDownload(url) { (data, response, error) in
-            
-            if let downloadedData = data {
-                
-                //let json = JSON(data: downloadedData)
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    //print("Data is: \(json)")
-                    print("Processing JSON on main thread")
-                    
-                    self.dataController.processJSON(downloadedData)
-                    
-                    //self.tableView.reloadData()
-                    
-                    self.phrases = self.dataController.getPhrases()
-                    
-                    self.checkEmptyTable()
-                    
-                    self.tableView.reloadData()
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
-                }
-                
-            } else {
-                print("downloaded data was empty \(error?.localizedDescription)")
-            }
-        }
-        
-    }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         if (self.tableView.editing) {

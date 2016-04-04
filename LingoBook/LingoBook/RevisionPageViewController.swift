@@ -12,7 +12,7 @@ class RevisionPageViewController: UIPageViewController {
     
     var revisionPhrases: [String : OriginPhrase]?
     
-     var orderedViewControllers = [UIViewController]()
+    var orderedViewControllers = [UIViewController]()
     
     private func newColoredViewController() -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CardViewController")
@@ -23,25 +23,27 @@ class RevisionPageViewController: UIPageViewController {
     var dataController = DataController.sharedInstance
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
         
         dataSource = self
         delegate = self
-        
-        self.orderedViewControllers = [UIViewController]()
-        
-        // Do any additional setup after loading the view.
+    
     }
     
     override func viewWillAppear(animated: Bool) {
         
+        super.viewWillAppear(animated)
+
         let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
         
         self.revisionPhrases = appDel.revisionPhrases
         
-        self.orderedViewControllers = [UIViewController]()
+        self.orderedViewControllers.removeAll()
         
-        if self.revisionPhrases != nil {
+        if self.revisionPhrases != nil && self.revisionPhrases?.count > 0 {
             
             for (_, phrase) in self.revisionPhrases! {
                 
@@ -57,36 +59,51 @@ class RevisionPageViewController: UIPageViewController {
             
             setViewControllers([firstViewController],
                                direction: UIPageViewControllerNavigationDirection.Forward,
-                               animated: true,
+                               animated: false,
                                completion: nil)
+            
+            
+            // See: http://stackoverflow.com/a/17330606/4768230 for an explanation of why we have to do this.
+//            setViewControllers(
+//                [firstViewController],
+//                direction: UIPageViewControllerNavigationDirection.Forward,
+//                animated: true,
+//                completion: { [weak self] (finished: Bool) in
+//                    
+//                    if finished {
+//                        
+//                        dispatch_async(dispatch_get_main_queue(), {
+//                            
+//                            self!.setViewControllers(
+//                                [firstViewController],
+//                                direction: UIPageViewControllerNavigationDirection.Forward,
+//                                animated: false,
+//                                completion: nil
+//                            )
+//                            
+//                        })
+//                    }
+//                    
+//                })
             
         }
         
         revisionDelegate?.revisionPageViewController(self, didUpdatePageCount: orderedViewControllers.count)
+
         
-        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension RevisionPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        
         guard let viewControllerIndex = orderedViewControllers.indexOf(viewController) else {
             return nil
         }
@@ -111,6 +128,7 @@ extension RevisionPageViewController: UIPageViewControllerDataSource {
             }
             
             let nextIndex = viewControllerIndex + 1
+        
             let orderedViewControllersCount = orderedViewControllers.count
             
             guard orderedViewControllersCount != nextIndex else {
@@ -143,24 +161,12 @@ extension RevisionPageViewController: UIPageViewControllerDelegate {
     
 }
 
+// The 'class' keyword here sets this protocol to be a 'Class-Only' protocol. (i.e. only class types can adopt the protocol (structs or enums couldn't).
+// See: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-ID281 for more information.
 protocol RevisionPageViewControllerDelegate: class {
     
-    /**
-     Called when the number of pages is updated.
-     
-     - parameter tutorialPageViewController: the TutorialPageViewController instance
-     - parameter count: the total number of pages.
-     */
-    func revisionPageViewController(revisionPageViewController: RevisionPageViewController,
-                                    didUpdatePageCount count: Int)
+    func revisionPageViewController(revisionPageViewController: RevisionPageViewController, didUpdatePageCount count: Int)
     
-    /**
-     Called when the current index is updated.
-     
-     - parameter tutorialPageViewController: the TutorialPageViewController instance
-     - parameter index: the index of the currently visible page.
-     */
-    func revisionPageViewController(revisionPageViewController: RevisionPageViewController,
-                                    didUpdatePageIndex index: Int)
+    func revisionPageViewController(revisionPageViewController: RevisionPageViewController, didUpdatePageIndex index: Int)
     
 }
