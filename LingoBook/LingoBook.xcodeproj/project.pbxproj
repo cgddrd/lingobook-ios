@@ -23,15 +23,14 @@
 		999321621C8F654400BA86F5 /* LingoBookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999321611C8F654400BA86F5 /* LingoBookUITests.swift */; };
 		9994FB0C1CA1950E00675259 /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB0B1CA1950E00675259 /* TagsTableViewController.swift */; };
 		9994FB0E1CA1BDBB00675259 /* AddPhraseTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB0D1CA1BDBB00675259 /* AddPhraseTagTableViewCell.swift */; };
-		9994FB101CA1F65300675259 /* AddTranslationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB0F1CA1F65300675259 /* AddTranslationTableViewController.swift */; };
 		9994FB171CA29AD300675259 /* TranslatedPhrase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB111CA29AD300675259 /* TranslatedPhrase+CoreDataProperties.swift */; };
 		9994FB181CA29AD300675259 /* TranslatedPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB121CA29AD300675259 /* TranslatedPhrase.swift */; };
 		9994FB191CA29AD300675259 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB131CA29AD300675259 /* Tag+CoreDataProperties.swift */; };
 		9994FB1A1CA29AD300675259 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB141CA29AD300675259 /* Tag.swift */; };
 		9994FB1B1CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB151CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift */; };
 		9994FB1C1CA29AD300675259 /* OriginPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB161CA29AD300675259 /* OriginPhrase.swift */; };
-		9994FB211CA29E4F00675259 /* AddPhraseTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB201CA29E4F00675259 /* AddPhraseTextTableViewCell.swift */; };
-		9994FB231CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB221CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift */; };
+		9994FB211CA29E4F00675259 /* TextFieldInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB201CA29E4F00675259 /* TextFieldInputTableViewCell.swift */; };
+		9994FB231CA2E7A800675259 /* TextViewInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB221CA2E7A800675259 /* TextViewInputTableViewCell.swift */; };
 		9994FB251CA2E81200675259 /* UITableViewCellUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB241CA2E81200675259 /* UITableViewCellUpdateDelegate.swift */; };
 		9994FB291CA354A400675259 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB281CA354A400675259 /* CoreDataStack.swift */; };
 		9994FB2B1CA3568200675259 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB2A1CA3568200675259 /* DataController.swift */; };
@@ -87,15 +86,14 @@
 		999321631C8F654400BA86F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9994FB0B1CA1950E00675259 /* TagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		9994FB0D1CA1BDBB00675259 /* AddPhraseTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseTagTableViewCell.swift; sourceTree = "<group>"; };
-		9994FB0F1CA1F65300675259 /* AddTranslationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTranslationTableViewController.swift; sourceTree = "<group>"; };
 		9994FB111CA29AD300675259 /* TranslatedPhrase+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TranslatedPhrase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9994FB121CA29AD300675259 /* TranslatedPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslatedPhrase.swift; sourceTree = "<group>"; };
 		9994FB131CA29AD300675259 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9994FB141CA29AD300675259 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		9994FB151CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OriginPhrase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9994FB161CA29AD300675259 /* OriginPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginPhrase.swift; sourceTree = "<group>"; };
-		9994FB201CA29E4F00675259 /* AddPhraseTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseTextTableViewCell.swift; sourceTree = "<group>"; };
-		9994FB221CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhraseNoteTableViewCell.swift; sourceTree = "<group>"; };
+		9994FB201CA29E4F00675259 /* TextFieldInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldInputTableViewCell.swift; sourceTree = "<group>"; };
+		9994FB221CA2E7A800675259 /* TextViewInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInputTableViewCell.swift; sourceTree = "<group>"; };
 		9994FB241CA2E81200675259 /* UITableViewCellUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCellUpdateDelegate.swift; sourceTree = "<group>"; };
 		9994FB281CA354A400675259 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9994FB2A1CA3568200675259 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -220,9 +218,9 @@
 			children = (
 				9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */,
 				998E056E1CB17823007C28C5 /* PhraseTableViewCellDelegate.swift */,
-				9994FB221CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift */,
+				9994FB221CA2E7A800675259 /* TextViewInputTableViewCell.swift */,
 				9994FB0D1CA1BDBB00675259 /* AddPhraseTagTableViewCell.swift */,
-				9994FB201CA29E4F00675259 /* AddPhraseTextTableViewCell.swift */,
+				9994FB201CA29E4F00675259 /* TextFieldInputTableViewCell.swift */,
 				9994FB241CA2E81200675259 /* UITableViewCellUpdateDelegate.swift */,
 			);
 			name = CustomUITableViewCells;
@@ -242,7 +240,6 @@
 			children = (
 				999321411C8F654400BA86F5 /* PhrasesViewController.swift */,
 				9919E4B21CAAE5E0003E32FD /* PhrasesViewControllerSearch.swift */,
-				9994FB0F1CA1F65300675259 /* AddTranslationTableViewController.swift */,
 				996694EB1CA0852700058701 /* AddPhraseViewController.swift */,
 				994E91BC1CAE737500D5578D /* EditPhraseViewController.swift */,
 				9994FB0B1CA1950E00675259 /* TagsTableViewController.swift */,
@@ -484,12 +481,11 @@
 			files = (
 				9941C72C1CA69790009A2638 /* NetworkController.swift in Sources */,
 				994E91BD1CAE737500D5578D /* EditPhraseViewController.swift in Sources */,
-				9994FB231CA2E7A800675259 /* AddPhraseNoteTableViewCell.swift in Sources */,
+				9994FB231CA2E7A800675259 /* TextViewInputTableViewCell.swift in Sources */,
 				9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */,
 				9994FB1A1CA29AD300675259 /* Tag.swift in Sources */,
 				9994FB291CA354A400675259 /* CoreDataStack.swift in Sources */,
 				99BA95E41CAFCBD100E63DC6 /* FlashViewController.swift in Sources */,
-				9994FB101CA1F65300675259 /* AddTranslationTableViewController.swift in Sources */,
 				996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */,
 				999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */,
 				9911310C1C9A184C00FE0D42 /* LingoBook.xcdatamodeld in Sources */,
@@ -504,7 +500,7 @@
 				9994FB181CA29AD300675259 /* TranslatedPhrase.swift in Sources */,
 				99BA95EA1CAFCFCF00E63DC6 /* RevisionViewController.swift in Sources */,
 				9994FB191CA29AD300675259 /* Tag+CoreDataProperties.swift in Sources */,
-				9994FB211CA29E4F00675259 /* AddPhraseTextTableViewCell.swift in Sources */,
+				9994FB211CA29E4F00675259 /* TextFieldInputTableViewCell.swift in Sources */,
 				9994FB0C1CA1950E00675259 /* TagsTableViewController.swift in Sources */,
 				999321421C8F654400BA86F5 /* PhrasesViewController.swift in Sources */,
 				9994FB171CA29AD300675259 /* TranslatedPhrase+CoreDataProperties.swift in Sources */,

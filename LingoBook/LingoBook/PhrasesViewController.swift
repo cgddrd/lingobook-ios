@@ -65,7 +65,9 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
     
     func handleRefresh(refreshControl: UIRefreshControl) {
         
-        let url = "http://users.aber.ac.uk/clg11/sem2220/lingobook.json";
+        //let url = "http://users.aber.ac.uk/clg11/sem2220/lingobook.json";
+        
+        let url = "http://localhost:8888/sem2220/lingobook.json"
         
         networkController.performFileDownload(url) { (data, response, error) in
             
@@ -283,6 +285,22 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
                 
             }
             
+            if originPhrase?.note != nil && originPhrase?.note?.isEmpty == false {
+                
+                cell.labelTags.text = originPhrase?.note
+                
+            } else if let phraseTags = originPhrase?.tags?.allObjects as? [Tag] {
+                
+                let tagNames = phraseTags.map({(tag: Tag) -> String in return tag.name!}) as [String]
+                
+                cell.labelTags.text  = tagNames.joinWithSeparator(", ")
+                
+            } else {
+                
+                cell.labelTags.text = ""
+                
+            }
+            
             if phrasesDict?.indexForKey(originPhrase!.textValue!) != nil {
                 
                 cell.setRevisionButtonStyle(true)
@@ -401,7 +419,7 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
                 
                 let selectedPhrase = phrases![indexPath!.row] as OriginPhrase
                 
-                editPhraseViewController.currentPhrase = PhraseModel(existingPhrase: selectedPhrase)
+                editPhraseViewController.phraseDetails = PhraseModel(existingPhrase: selectedPhrase)
                 
             }
             

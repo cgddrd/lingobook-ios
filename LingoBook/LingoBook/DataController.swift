@@ -238,6 +238,7 @@ class DataController {
         
         phrase.textValue = phraseData.originPhraseText
         phrase.note = phraseData.note
+        phrase.type = phraseData.type
         
         for newTagName in phraseData.tags {
             
@@ -312,48 +313,93 @@ class DataController {
     
     func processJSON(json: JSON?) {
         
-        var phrases = [PhraseModel]()
-        
         if (json != nil) {
             
             let phraseCollection = json!["phrases"]
             
-            for (index, subJson):(String, JSON) in phraseCollection {
-                
-                print(index)
-                print(subJson)
+            for (_, subJson):(String, JSON) in phraseCollection {
                 
                 if let jsonPhraseData = subJson.dictionary {
                     
-                    var test = PhraseModel()
+                    var newPhrase = PhraseModel()
                     
-                    test.originPhraseText = (jsonPhraseData["text"]?.string)!
-                    test.note = (jsonPhraseData["note"]?.string)!
-                    
-                    for (_, translationJson):(String, JSON) in jsonPhraseData["translations"]! {
+                    if let originPhraseText = jsonPhraseData["text"] {
                         
-                        if let translationData = translationJson.dictionary {
+                        newPhrase.originPhraseText = originPhraseText.string!
                         
-                            print(translationJson)
-                            
-                            var newTranslation = TranslationModel()
-                            
-                            newTranslation.translatedText = (translationData["text"]?.string)!
-                            newTranslation.locale=(translationData["locale"]?.string)!
-                            
-                            test.translatedPhrases.append(newTranslation)
-                        }
-                        
-                    
                     }
                     
-                    phrases.append(test)
+                    if let phraseNote = jsonPhraseData["note"] {
+                        
+                        newPhrase.note = phraseNote.string!
+                        
+                    }
                     
-                    self.createOrUpdatePhrase(test)
+                    if let phraseType = jsonPhraseData["type"] {
+                        
+                        newPhrase.type = phraseType.string!
+                        
+                    }
+                    
+                    if let phraseTranslations = jsonPhraseData["translations"] {
+                        
+                        for (_, translationJson):(String, JSON) in phraseTranslations {
+                            
+                            if let translationData = translationJson.dictionary {
+                                
+                                var newTranslation = TranslationModel()
+                                
+                                if let translatedPhraseText = translationData["text"] {
+                                    
+                                    newTranslation.translatedText = translatedPhraseText.string!
+                                    
+                                }
+                                
+                                if let translatedPhraseLocale = translationData["locale"] {
+                                    
+                                    newTranslation.locale = translatedPhraseLocale.string!
+                                    
+                                }
+                                
+                                newPhrase.translatedPhrases.append(newTranslation)
+                                
+                            }
+                            
+                        }
+                        
+                    } else {
+                        
+                        print("WARNING: No translations found for current phrase in JSON data.")
+                        
+                    }
+                    
+                    if let phraseTags = jsonPhraseData["tags"] {
+                        
+                        for tag in phraseTags.arrayValue {
+                            
+                            if !tag.stringValue.isEmpty {
+                                
+                                newPhrase.tags.append(tag.stringValue)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    self.createOrUpdatePhrase(newPhrase)
+                    
+                } else {
+                    
+                    print("Error: Cannot convert JSON data into Dictionary for processing. Aborting.")
                     
                 }
 
             }
+            
+        } else {
+            
+            print("Error: JSON data value set to 'nil'. No data to process. Aborting.")
             
         }
         

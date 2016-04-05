@@ -71,8 +71,6 @@ class PhraseTableViewCell: UITableViewCell, AVSpeechSynthesizerDelegate {
     
     @IBAction func btnRevisionPressed(sender: AnyObject) {
         
-        //self.setRevisionButtonStyleDelete()
-        
         if delegate != nil {
             
             delegate?.addRevisionButtonPressed(self, indexPath: indexPath!)

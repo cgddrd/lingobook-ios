@@ -85,7 +85,7 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -94,8 +94,10 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         case 0:
             return "Translation"
         case 1:
-            return "Tags"
+            return "Type"
         case 2:
+            return "Tags"
+        case 3:
             return "Notes"
         default:
             return ""
@@ -105,7 +107,7 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if (indexPath.section == 2) {
+        if (indexPath.section == 3) {
             
             return 120;
             
@@ -121,12 +123,11 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
             
         case 0:
             return 2
-        case 1:
-            return phraseDetails.tags.count + 1
-        case 2:
+        case 1, 3:
             return 1
+        case 2:
+            return phraseDetails.tags.count + 1
         default:
-            assert(false, "section \(section)")
             return 0
             
         }
@@ -139,8 +140,10 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         case 0:
             return "Enter the translation for the new phrase."
         case 1:
-            return "Enter any tags associated with the new phrase. (Optional)"
+            return "Enter the type of phrase (e.g. 'noun' or 'adjective') (Optional)"
         case 2:
+            return "Enter any tags associated with the new phrase. (Optional)"
+        case 3:
             return "Enter a note associated with the new phrase. (Optional)"
         default:
             return ""
@@ -152,9 +155,19 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         
         if indexPath.section == 0 {
             
-            let cellIdentifier = indexPath.row == 0 ? "static1" : "static2"
+            let cellIdentifier = indexPath.row == 0 ? "cellPhraseOrigin_Static" : "cellPhraseTranslation_Static"
             
-            if let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? AddPhraseTextTableViewCell {
+            if let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? TextFieldInputTableViewCell {
+                
+                cell.delegate = self
+                
+                return cell
+                
+            }
+        
+        } else if indexPath.section == 1 {
+            
+            if let cell = tableView.dequeueReusableCellWithIdentifier("cellPhraseType_Static") as? TextFieldInputTableViewCell {
                 
                 cell.delegate = self
                 
@@ -162,10 +175,9 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
                 
             }
             
+        } else if indexPath.section == 2 {
             
-        } else if indexPath.section == 1 {
-            
-            if let cell = tableView.dequeueReusableCellWithIdentifier("dynamic") as? AddPhraseTagTableViewCell {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("cellPhraseTag_Dynamic") as? AddPhraseTagTableViewCell {
                 
                 if indexPath.row < phraseDetails.tags.count {
                     
@@ -177,11 +189,9 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
                 
             }
             
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 3 {
             
-            //return tableView.dequeueReusableCellWithIdentifier("static3")!
-            
-            if let cell = tableView.dequeueReusableCellWithIdentifier("static3") as? AddPhraseNoteTableViewCell {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("cellPhraseNote_Static") as? TextViewInputTableViewCell {
                 
                 cell.delegate = self
                 
@@ -190,13 +200,13 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
             }
         }
         
-        return tableView.dequeueReusableCellWithIdentifier("static1")!;
+        return tableView.dequeueReusableCellWithIdentifier("cellPhraseOrigin_Static")!;
         
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             
             if indexPath.row >= phraseDetails.tags.count {
                 
@@ -216,13 +226,13 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
     
     override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-        return indexPath.section == 1
+        return indexPath.section == 2
         
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             
             if editingStyle == UITableViewCellEditingStyle.Insert {
                 
@@ -241,7 +251,7 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
                     self.tableView.endUpdates()
                     
                     // Force the "new" input cell to be blank in order to display the placeholder text.
-                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: phraseDetails.tags.count, inSection: 1)) as! AddPhraseTagTableViewCell
+                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: phraseDetails.tags.count, inSection: indexPath.section)) as! AddPhraseTagTableViewCell
                     currentCell.textTag.text = ""
                     
                 }
@@ -267,12 +277,14 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
         
         if indexPath.section == 0 {
             
-            if let currentCell = senderCell as? AddPhraseTextTableViewCell {
+            if let currentCell = senderCell as? TextFieldInputTableViewCell {
                 
                 switch indexPath.row {
                 case 0:
+                    
                     phraseDetails.originPhraseText = currentCell.textPhrase.text!
                     break
+                    
                 case 1:
                     
                     // At some point we could change this to add multiple phrases.
@@ -285,9 +297,17 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
                 
             }
             
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 1 {
             
-            if let currentCell = senderCell as? AddPhraseNoteTableViewCell {
+            if let currentCell = senderCell as? TextFieldInputTableViewCell {
+                
+                phraseDetails.type = currentCell.textPhrase.text!
+                
+            }
+            
+        } else if indexPath.section == 3 {
+            
+            if let currentCell = senderCell as? TextViewInputTableViewCell {
                 
                 phraseDetails.note = currentCell.textPhraseNote.text
                 

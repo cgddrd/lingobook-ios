@@ -14,6 +14,7 @@ struct PhraseModel {
     var translatedPhrases: [TranslationModel]
     var tags: [String]
     var note: String
+    var type: String
     //var objectURI: NSURL?
     
     init() {
@@ -22,6 +23,7 @@ struct PhraseModel {
         self.translatedPhrases = [TranslationModel]()
         self.tags = [String]()
         self.note = ""
+        self.type = ""
         
     }
     
@@ -32,6 +34,8 @@ struct PhraseModel {
         self.translatedPhrases = [TranslationModel(existingTranslation: (existingPhrase.getFirstTranslation())!)]
         
         self.note = existingPhrase.note!
+        
+        self.type = existingPhrase.type!
         
         if let existingTags = existingPhrase.tags!.allObjects as? [Tag] {
             

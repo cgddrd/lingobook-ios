@@ -21,7 +21,6 @@ class NetworkController {
         
         let url = NSURL(string: url)
         
-
         // let task = session!.dataTaskWithURL(url!, completionHandler: {
         //    
         //    (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in

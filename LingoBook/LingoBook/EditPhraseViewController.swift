@@ -15,7 +15,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
     
     var dataController = DataController.sharedInstance
     
-    var currentPhrase: PhraseModel?
+    var phraseDetails: PhraseModel?
     
     override func viewDidLoad() {
         
@@ -35,7 +35,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
     
     @IBAction func donePressed(sender: AnyObject) {
         
-        dataController.createOrUpdatePhrase(currentPhrase!)
+        dataController.createOrUpdatePhrase(phraseDetails!)
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
@@ -53,7 +53,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -62,8 +62,10 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
         case 0:
             return "Translation"
         case 1:
-            return "Tags"
+            return "Type"
         case 2:
+            return "Tags"
+        case 3:
             return "Notes"
         default:
             return ""
@@ -73,7 +75,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if (indexPath.section == 2) {
+        if (indexPath.section == 3) {
             
             return 120;
             
@@ -89,12 +91,11 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
             
         case 0:
             return 2
-        case 1:
-            return currentPhrase!.tags.count + 1
-        case 2:
+        case 1, 3:
             return 1
+        case 2:
+            return phraseDetails!.tags.count + 1
         default:
-            assert(false, "section \(section)")
             return 0
             
         }
@@ -105,10 +106,12 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
         switch section {
             
         case 0:
-            return "Enter the translation for the phrase."
+            return "Enter the translation for the new phrase."
         case 1:
-            return "Enter any tags associated with the phrase. (Optional)"
+            return "Enter the type of phrase (e.g. 'noun' or 'adjective') (Optional)"
         case 2:
+            return "Enter any tags associated with the new phrase. (Optional)"
+        case 3:
             return "Enter a note associated with the new phrase. (Optional)"
         default:
             return ""
@@ -120,42 +123,49 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
         
         if indexPath.section == 0 {
             
-            let cellIdentifier = (indexPath.row == 0) ? "static1" : "static2"
+            let cellIdentifier = indexPath.row == 0 ? "cellPhraseOrigin_Static" : "cellPhraseTranslation_Static"
             
-            if let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? AddPhraseTextTableViewCell {
+            if let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? TextFieldInputTableViewCell {
                 
-                cell.textPhrase.text = (indexPath.row == 0) ? currentPhrase?.originPhraseText : currentPhrase?.translatedPhrases.first?.translatedText
-
+                cell.textPhrase.text = (indexPath.row == 0) ? phraseDetails?.originPhraseText : phraseDetails?.translatedPhrases.first?.translatedText
+                
                 cell.delegate = self
                 
                 return cell
                 
             }
             
-            
         } else if indexPath.section == 1 {
             
-            if let cell = tableView.dequeueReusableCellWithIdentifier("dynamic") as? AddPhraseTagTableViewCell {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("cellPhraseType_Static") as? TextFieldInputTableViewCell {
                 
-                if let currentTags = currentPhrase?.tags {
-                    
-                    if indexPath.row < currentTags.count {
-                        
-                        cell.textTag.text = currentTags[indexPath.row]
-                        
-                    }
-                    
-                }
-            
+                cell.textPhrase.text = phraseDetails?.type
+                
+                cell.delegate = self
+                
                 return cell
                 
             }
             
         } else if indexPath.section == 2 {
             
-            if let cell = tableView.dequeueReusableCellWithIdentifier("static3") as? AddPhraseNoteTableViewCell {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("cellPhraseTag_Dynamic") as? AddPhraseTagTableViewCell {
                 
-                cell.textPhraseNote.text = currentPhrase!.note
+                if indexPath.row < phraseDetails!.tags.count {
+                    
+                    cell.textTag.text = phraseDetails!.tags[indexPath.row]
+                    
+                }
+                
+                return cell
+                
+            }
+            
+        } else if indexPath.section == 3 {
+            
+            if let cell = tableView.dequeueReusableCellWithIdentifier("cellPhraseNote_Static") as? TextViewInputTableViewCell {
+                
+                cell.textPhraseNote.text = phraseDetails?.note
                 
                 cell.delegate = self
                 
@@ -164,15 +174,15 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
             }
         }
         
-        return tableView.dequeueReusableCellWithIdentifier("static1")!;
+        return tableView.dequeueReusableCellWithIdentifier("cellPhraseOrigin_Static")!;
         
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             
-            if indexPath.row >= currentPhrase?.tags.count {
+            if indexPath.row >= phraseDetails?.tags.count {
                 
                 return .Insert
                 
@@ -190,13 +200,13 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
     
     override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-        return indexPath.section == 1
+        return indexPath.section == 2
         
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             
             if editingStyle == UITableViewCellEditingStyle.Insert {
                 
@@ -208,21 +218,21 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
                     
                 } else {
                     
-                    currentPhrase!.tags.append(currentCell.textTag.text!)
+                    phraseDetails!.tags.append(currentCell.textTag.text!)
                     
                     self.tableView.beginUpdates()
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                     self.tableView.endUpdates()
                     
                     // Force the "new" input cell to be blank in order to display the placeholder text.
-                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: currentPhrase!.tags.count, inSection: 1)) as! AddPhraseTagTableViewCell
+                    let currentCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: phraseDetails!.tags.count, inSection: indexPath.section)) as! AddPhraseTagTableViewCell
                     currentCell.textTag.text = ""
                     
                 }
                 
             } else if editingStyle == UITableViewCellEditingStyle.Delete {
                 
-                currentPhrase?.tags.removeAtIndex(indexPath.row)
+                phraseDetails?.tags.removeAtIndex(indexPath.row)
                 
                 self.tableView.beginUpdates()
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -241,14 +251,18 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
         
         if indexPath.section == 0 {
             
-            if let currentCell = senderCell as? AddPhraseTextTableViewCell {
+            if let currentCell = senderCell as? TextFieldInputTableViewCell {
                 
                 switch indexPath.row {
                 case 0:
-                    currentPhrase?.originPhraseText = currentCell.textPhrase.text!
+                    
+                    phraseDetails!.originPhraseText = currentCell.textPhrase.text!
                     break
+                    
                 case 1:
-                    currentPhrase?.translatedPhrases = [TranslationModel(translatedText: currentCell.textPhrase.text!, locale: "cy")]
+                    
+                    // At some point we could change this to add multiple phrases.
+                    phraseDetails!.translatedPhrases = [TranslationModel(translatedText: currentCell.textPhrase.text!, locale: "cy")]
                     break
                     
                 default:
@@ -257,11 +271,19 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
                 
             }
             
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 1 {
             
-            if let currentCell = senderCell as? AddPhraseNoteTableViewCell {
+            if let currentCell = senderCell as? TextFieldInputTableViewCell {
                 
-                currentPhrase?.note = currentCell.textPhraseNote.text
+                phraseDetails!.type = currentCell.textPhrase.text!
+                
+            }
+            
+        } else if indexPath.section == 3 {
+            
+            if let currentCell = senderCell as? TextViewInputTableViewCell {
+                
+                phraseDetails!.note = currentCell.textPhraseNote.text
                 
             }
             

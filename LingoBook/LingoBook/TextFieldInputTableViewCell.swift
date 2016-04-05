@@ -1,5 +1,5 @@
 //
-//  AddPhraseNoteTableViewCell.swift
+//  AddPhraseTableViewCell.swift
 //  LingoBook
 //
 //  Created by Connor Goddard on 23/03/2016.
@@ -8,18 +8,15 @@
 
 import UIKit
 
-class AddPhraseNoteTableViewCell: UITableViewCell, UITextViewDelegate {
-    
-    @IBOutlet weak var textPhraseNote: UITextView!
+class TextFieldInputTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var textPhrase: UITextField!
     
     var delegate: UITableViewCellUpdateDelegate?
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         // Initialization code
-        
-        textPhraseNote.delegate = self
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -27,10 +24,11 @@ class AddPhraseNoteTableViewCell: UITableViewCell, UITextViewDelegate {
 
         // Configure the view for the selected state
     }
-    
-    func textViewDidChange(textView: UITextView) {
+
+    @IBAction func textPhraseValueChanged(sender: AnyObject) {
         
         self.delegate?.cellDidChangeValue(self)
+        
     }
 
 }
