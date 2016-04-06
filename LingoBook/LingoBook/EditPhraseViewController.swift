@@ -13,7 +13,7 @@ class EditPhraseViewController: UITableViewController, UITableViewCellUpdateDele
     
     var managedContext : NSManagedObjectContext! = nil
     
-    var dataController = DataController.sharedInstance
+    var dataController = DataController()
     
     var phraseDetails: PhraseModel?
     

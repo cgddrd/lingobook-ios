@@ -20,7 +20,7 @@ class RevisionPageViewController: UIPageViewController {
     
     weak var revisionDelegate: RevisionPageViewControllerDelegate?
     
-    var dataController = DataController.sharedInstance
+    var dataController = DataController()
     
     override func viewDidLoad() {
         

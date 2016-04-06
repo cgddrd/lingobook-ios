@@ -22,7 +22,7 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
     
     var revisionPhrases: [OriginPhrase]?
     
-    var dataController = DataController.sharedInstance
+    var dataController = DataController()
     
     var networkController = NetworkController();
     
@@ -84,8 +84,8 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
                     self.checkEmptyTable()
                     
                     self.tableView.reloadData()
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
+                    
+                    self.disableSelectedStateOnVisibleCells()
                 }
                 
             } else {
@@ -140,9 +140,15 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
         
         tableView.reloadData()
         
+        disableSelectedStateOnVisibleCells()
+        
+    }
+    
+    func disableSelectedStateOnVisibleCells() {
+        
         for cell in self.tableView.visibleCells {
-            let test = cell as! PhraseTableViewCell
-            test.setSelectedState(false, animated: false)
+            let currentCell = cell as! PhraseTableViewCell
+            currentCell.setSelectedState(false, animated: false)
         }
         
     }
@@ -213,6 +219,8 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
         } else {
             
             if selectedCellIndexPath != nil && selectedCellIndexPath != indexPath {
+                
+                print(indexPath.row)
                 
                 let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as! PhraseTableViewCell
                 

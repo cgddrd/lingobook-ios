@@ -8,9 +8,17 @@
 
 import CoreData
 
-class CoreDataStack {
+class CoreDataStackController {
     
     let modelName = "LingoBook"
+    
+    // By having a STATIC variable for the shared instance, we are guaranteeing that the Singleton is THREAD-SAFE.
+    // This is because under-the-hood, 'static let' calls 'dispatch_once', which guarantees the GCD will only ever run this code ONCE AND ONLY ONCE!
+    // See: http://stackoverflow.com/a/24147830/4768230 for more information.
+    static let sharedInstance = CoreDataStackController()
+    
+    //This prevents others from using the default '()' initializer for this class.
+    private init() {}
     
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file.

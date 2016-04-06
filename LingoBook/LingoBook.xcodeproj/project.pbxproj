@@ -32,9 +32,8 @@
 		9994FB211CA29E4F00675259 /* TextFieldInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB201CA29E4F00675259 /* TextFieldInputTableViewCell.swift */; };
 		9994FB231CA2E7A800675259 /* TextViewInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB221CA2E7A800675259 /* TextViewInputTableViewCell.swift */; };
 		9994FB251CA2E81200675259 /* UITableViewCellUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB241CA2E81200675259 /* UITableViewCellUpdateDelegate.swift */; };
-		9994FB291CA354A400675259 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB281CA354A400675259 /* CoreDataStack.swift */; };
+		9994FB291CA354A400675259 /* CoreDataStackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB281CA354A400675259 /* CoreDataStackController.swift */; };
 		9994FB2B1CA3568200675259 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB2A1CA3568200675259 /* DataController.swift */; };
-		9994FB311CA42F5500675259 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB301CA42F5500675259 /* SweetAlert.swift */; };
 		9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */; };
 		99BA95E41CAFCBD100E63DC6 /* FlashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA95E31CAFCBD100E63DC6 /* FlashViewController.swift */; };
 		99BA95E61CAFCCBC00E63DC6 /* RevisionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BA95E51CAFCCBC00E63DC6 /* RevisionPageViewController.swift */; };
@@ -95,9 +94,8 @@
 		9994FB201CA29E4F00675259 /* TextFieldInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldInputTableViewCell.swift; sourceTree = "<group>"; };
 		9994FB221CA2E7A800675259 /* TextViewInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInputTableViewCell.swift; sourceTree = "<group>"; };
 		9994FB241CA2E81200675259 /* UITableViewCellUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCellUpdateDelegate.swift; sourceTree = "<group>"; };
-		9994FB281CA354A400675259 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9994FB281CA354A400675259 /* CoreDataStackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackController.swift; sourceTree = "<group>"; };
 		9994FB2A1CA3568200675259 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		9994FB301CA42F5500675259 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = ../SweetAlert.swift; sourceTree = "<group>"; };
 		9994FB351CA43D3500675259 /* PhraseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseTableViewCell.swift; sourceTree = "<group>"; };
 		99BA95E31CAFCBD100E63DC6 /* FlashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashViewController.swift; sourceTree = "<group>"; };
 		99BA95E51CAFCCBC00E63DC6 /* RevisionPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevisionPageViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				9941C72D1CA697A0009A2638 /* Network */,
-				9994FB321CA42F5B00675259 /* ThirdParty */,
 				9994FB2C1CA3FD2200675259 /* Data */,
 				9994FB2D1CA3FD4500675259 /* UI */,
 				9911310A1C9A184C00FE0D42 /* LingoBook.xcdatamodeld */,
@@ -250,7 +247,7 @@
 		9994FB2C1CA3FD2200675259 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				9994FB281CA354A400675259 /* CoreDataStack.swift */,
+				9994FB281CA354A400675259 /* CoreDataStackController.swift */,
 				9994FB2A1CA3568200675259 /* DataController.swift */,
 				9994FB1E1CA29DD200675259 /* Models */,
 			);
@@ -264,14 +261,6 @@
 				9994FB1D1CA29DA700675259 /* CustomUITableViewCells */,
 			);
 			name = UI;
-			sourceTree = "<group>";
-		};
-		9994FB321CA42F5B00675259 /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				9994FB301CA42F5500675259 /* SweetAlert.swift */,
-			);
-			name = ThirdParty;
 			sourceTree = "<group>";
 		};
 		99FBC3E61CAE7D8900BC9EE9 /* CoreData */ = {
@@ -484,7 +473,7 @@
 				9994FB231CA2E7A800675259 /* TextViewInputTableViewCell.swift in Sources */,
 				9994FB361CA43D3500675259 /* PhraseTableViewCell.swift in Sources */,
 				9994FB1A1CA29AD300675259 /* Tag.swift in Sources */,
-				9994FB291CA354A400675259 /* CoreDataStack.swift in Sources */,
+				9994FB291CA354A400675259 /* CoreDataStackController.swift in Sources */,
 				99BA95E41CAFCBD100E63DC6 /* FlashViewController.swift in Sources */,
 				996694EC1CA0852700058701 /* AddPhraseViewController.swift in Sources */,
 				999321401C8F654400BA86F5 /* AppDelegate.swift in Sources */,
@@ -495,7 +484,6 @@
 				9994FB2B1CA3568200675259 /* DataController.swift in Sources */,
 				998E056F1CB17823007C28C5 /* PhraseTableViewCellDelegate.swift in Sources */,
 				99BA95E61CAFCCBC00E63DC6 /* RevisionPageViewController.swift in Sources */,
-				9994FB311CA42F5500675259 /* SweetAlert.swift in Sources */,
 				9994FB1B1CA29AD300675259 /* OriginPhrase+CoreDataProperties.swift in Sources */,
 				9994FB181CA29AD300675259 /* TranslatedPhrase.swift in Sources */,
 				99BA95EA1CAFCFCF00E63DC6 /* RevisionViewController.swift in Sources */,

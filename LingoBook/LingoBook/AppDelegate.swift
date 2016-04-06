@@ -15,13 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    lazy var coreDataStack = CoreDataStack()
+   // lazy var coreDataStack = CoreDataStack()
     
     let appFont = UIFont (name: "Bariol", size: 20);
     let barTintColour = UIColor.flatYellowColor()
     let barTextColour = UIColor.init(contrastingBlackOrWhiteColorOn: UIColor.flatYellowColor(), isFlat: true)
     
     var revisionPhrases = [String : OriginPhrase]()
+    
+    var dataController = DataController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -38,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Load saved revision phrases.
-        if let loadedPhrases = DataController.sharedInstance.loadSavedRevisionPhrases() {
+        if let loadedPhrases = dataController.loadSavedRevisionPhrases() {
             
             self.revisionPhrases = loadedPhrases
             
@@ -56,9 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        coreDataStack.saveContext()
+        dataController.coreDataStack.saveContext()
         
-        DataController.sharedInstance.saveRevisionPhrases(self.revisionPhrases)
+        dataController.saveRevisionPhrases(self.revisionPhrases)
         
     }
 
@@ -73,9 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
-        coreDataStack.saveContext()
+        //coreDataStack.saveContext()
         
-        DataController.sharedInstance.saveRevisionPhrases(self.revisionPhrases)
+        dataController.coreDataStack.saveContext()
+        
+        dataController.saveRevisionPhrases(self.revisionPhrases)
         
     }
     

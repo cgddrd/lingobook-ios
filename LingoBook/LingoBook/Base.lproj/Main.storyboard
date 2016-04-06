@@ -264,7 +264,7 @@
                                     <outlet property="textPhraseNote" destination="ZGt-bP-vlR" id="bNL-kP-LlN"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellPhraseNote_Dynamic" id="hPd-1U-A7T" customClass="AddPhraseTagTableViewCell" customModule="LingoBook" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellPhraseTag_Dynamic" id="hPd-1U-A7T" customClass="AddPhraseTagTableViewCell" customModule="LingoBook" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="377.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hPd-1U-A7T" id="Nks-VT-GyZ">

@@ -56,7 +56,7 @@ class PhraseTableViewCell: UITableViewCell, AVSpeechSynthesizerDelegate {
         }
         
         let utterance = AVSpeechUtterance(string: "\(self.labelOriginPhrase.text!)--\(self.labelTranslatedPhrase.text!)")
-        utterance.rate = 0.3
+        utterance.rate = 0.4
         synth.speakUtterance(utterance)
         
     }

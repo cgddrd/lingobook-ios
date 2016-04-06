@@ -15,7 +15,7 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
     
     var managedContext : NSManagedObjectContext! = nil;
     
-    var dataController = DataController.sharedInstance;
+    var dataController = DataController();
     
     override func viewDidLoad() {
         
@@ -200,7 +200,8 @@ class AddPhraseViewController: UITableViewController, UITableViewCellUpdateDeleg
             }
         }
         
-        return tableView.dequeueReusableCellWithIdentifier("cellPhraseOrigin_Static")!;
+        
+        return UITableViewCell()
         
     }
     
