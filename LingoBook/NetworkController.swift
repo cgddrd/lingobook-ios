@@ -2,17 +2,18 @@
 //  NetworkController.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 26/03/2016.
-//  Copyright © 2016 Connor Goddard. All rights reserved.
+//  Student No: 110024253
 //
 
 import Foundation
 import UIKit
 
+// Responsible for all network-related tasks required by the application.
 class NetworkController {
     
     var session: NSURLSession?
     
+    // Configures and initiates a new NSURLSession.dataTaskWithURL call to the specified URL, before passing either the recieved data result or NSError to the specified closure.
     func performFileDownload(url: String, completion: (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void) {
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()

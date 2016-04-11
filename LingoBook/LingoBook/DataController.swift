@@ -2,8 +2,7 @@
 //  DataController.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 23/03/2016.
-//  Copyright © 2016 Connor Goddard. All rights reserved.
+//  Student No: 110024253
 //
 
 import Foundation
@@ -11,21 +10,40 @@ import CoreData
 import UIKit
 import SwiftyJSON
 
+// Responsible for all data management and persistent tasks related to Core Data and NSUserDefaults.
 class DataController {
 
+    // Obtain a reference to the shared SINGLETON instance of the Core Data stack.
     lazy var coreDataStack = CoreDataStackController.sharedInstance
     
-    // ManagedObjectContext from AppDelegate
+    // ManagedObjectContext from CoreDataStackControler
     lazy var moc: NSManagedObjectContext = {
         return self.coreDataStack.managedObjectContext
     }()
     
-    // ManagedObjectContext from AppDelegate
+    // ManagedObjectContext from CoreDataStackControler
     lazy var psc: NSPersistentStoreCoordinator = {
         return self.coreDataStack.persistentStoreCoordinator
     }()
     
+    // Save the managed object context to disk via CoreDataStackController.
+    private func saveManagedContext() -> NSError? {
+        
+        do {
+            
+            try moc.save()
+            
+        } catch let error as NSError {
+            
+            return error
+            
+        }
+        
+        return nil
+        
+    }
     
+    // Retrieves an OriginPhrase entity via the unique object ID, or nil if a match isn't found.
     func getPhraseByIdUrl(url: NSURL) -> OriginPhrase? {
         
         if let objectId = psc.managedObjectIDForURIRepresentation(url) {
@@ -42,6 +60,7 @@ class DataController {
         
     }
     
+    // Returns all OriginPhrase entities currently stored within the Core Data object graph, or nil if an error occures.
     func getPhrases() -> [OriginPhrase]? {
         
         do {
@@ -63,6 +82,7 @@ class DataController {
         
     }
     
+    // Returns a Tag entity identified by a given tag name, or nil if no matching tag is found.
     func findExistingTag(tagName: String) -> Tag? {
         
         do {
@@ -74,6 +94,7 @@ class DataController {
             
             if let retrievedTags = try moc.executeFetchRequest(tagFetch) as? [Tag] {
                 
+                // Really, we should only ever find a single instance of a given tag name.
                 if (retrievedTags.count > 0) {
                     
                     return retrievedTags.first
@@ -91,6 +112,7 @@ class DataController {
         
     }
     
+    // Returns an OriginPhrase entity identified by a given phrase text, or nil if no matching phrase is found.
     func findExistingPhrase(phraseOriginText: String) -> OriginPhrase? {
         
         do {
@@ -118,13 +140,14 @@ class DataController {
         return nil
     }
     
+    // Returns an TranslatedPhrase entity identified by a given translated phrase text, or nil if no matching translation is found.
     func findExistingTranslation(phraseTranslatedText: String, locale: String) -> TranslatedPhrase? {
         
         do {
             
             let originPhraseFetch = NSFetchRequest(entityName: "TranslatedPhrase")
             
-            // '[c]' tells the predicate to use case-insensitive equality comparison.
+            // Note here that we use both the text value AND the locale of the phrase in order to locate a unique instance of a translation.
             originPhraseFetch.predicate = NSPredicate(format: "textValue LIKE[c] %@ AND locale LIKE[c] %@", phraseTranslatedText, locale)
             
             if let retrievedPhrases = try moc.executeFetchRequest(originPhraseFetch) as? [TranslatedPhrase] {
@@ -145,11 +168,14 @@ class DataController {
         return nil
     }
     
+    // Returns either an existing instance of a Tag entity identified by a given tag name, or creates a new instance.
     func findOrCreateTag(tagName: String) -> Tag {
         
         var currentTag : Tag
         
         if let existingTag = findExistingTag(tagName) {
+            
+            print("Found existing tag: \(tagName)")
             
             currentTag = existingTag
             
@@ -169,23 +195,7 @@ class DataController {
         
     }
     
-    private func saveManagedContext() -> NSError? {
-        
-        do {
-    
-            try moc.save()
-            
-        } catch let error as NSError {
-            
-            return error
-            
-        }
-        
-        return nil
-        
-    }
-    
-    
+    // Returns either an existing instance of an OriginPhrase entity identified by a given phrase text, or creates a new instance.
     func findOrCreatePhrase(phraseOriginText: String) -> OriginPhrase {
         
         var phrase: OriginPhrase
@@ -205,6 +215,7 @@ class DataController {
         
     }
     
+    // Returns either an existing instance of an TranslatedPhrase entity identified by a given translation text, or creates a new instance.
     func findOrCreateTranslation(phraseTranslatedText: String, locale: String) -> TranslatedPhrase {
         
         var phrase: TranslatedPhrase
@@ -223,29 +234,35 @@ class DataController {
         return phrase
         
     }
- 
+    
+    // Either updates an existing instance of a phrase entity (including OriginPhrase, TranslatedPhrase and Tag CD entities), or creates a new instance using the specified values.
     func createOrUpdatePhrase(phraseData: PhraseModel) -> OriginPhrase? {
         
+        // Find or create a new OriginPhrase instance.
         let phrase = findOrCreatePhrase(phraseData.originPhraseText) as OriginPhrase
         
         phrase.textValue = phraseData.originPhraseText
         phrase.note = phraseData.note
         phrase.type = phraseData.type
         
+        // Process the specified phrase tags.
         for newTagName in phraseData.tags {
             
             let trimmedTagName = newTagName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             
+            // Use an existing instance of Tag, or create a new one.
             let currentTag = findOrCreateTag(trimmedTagName)
             
+            // Create a new relationship between the Tag and OriginPhrase entities.
             currentTag.addPhrase(phrase)
             phrase.addTag(currentTag)
             
         }
         
+        // Process the new translations.
         for newTranslation in phraseData.translatedPhrases {
             
-            
+            // Use an existing instance of TranslatedPhrase, or create a new one.
             let currentTranslation = findOrCreateTranslation(newTranslation.translatedText, locale: newTranslation.locale)
             
             currentTranslation.textValue = newTranslation.translatedText
@@ -267,6 +284,7 @@ class DataController {
         
     }
     
+    // Initialises and returns a new OriginPhrase entity using the shared ManagedObjectContent.
     private func createNewPhrase() -> OriginPhrase {
         
         let newOriginPhraseEntity = NSEntityDescription.entityForName("OriginPhrase", inManagedObjectContext: moc)
@@ -277,6 +295,7 @@ class DataController {
         
     }
     
+    // Initialises and returns a new TranslatedPhrase entity using the shared ManagedObjectContent.
     private func createNewTranslatedPhrase() -> TranslatedPhrase {
         
         let newTranslatedPhraseEntity = NSEntityDescription.entityForName("TranslatedPhrase", inManagedObjectContext: moc)
@@ -287,7 +306,9 @@ class DataController {
         
     }
     
-    func deletePhrase(phraseToDelete: OriginPhrase) {
+    // Deletes an existing OriginPhrase entity from the Core Data object graph.
+    // Note: The associated TranslatedPhrase entity is automatically deleted via the 'Cascade' deletion rule in effect.
+    func deleteExisitingPhrase(phraseToDelete: OriginPhrase) {
         
         moc.deleteObject(phraseToDelete)
         
@@ -295,6 +316,7 @@ class DataController {
         
     }
     
+    // Convenience function for processing JSON data stored within an NSData object.
     func processJSON(data: NSData) {
         
         let jsonData = JSON(data: data)
@@ -303,14 +325,19 @@ class DataController {
         
     }
     
+    // Processes a collection of phrases represented via JSON notation.
+    // JSON access and manipulation provided by the SwiftJSON library: https://github.com/SwiftyJSON/SwiftyJSON
     func processJSON(json: JSON?) {
         
         if (json != nil) {
             
+            // Access the array of phrases in the JSON object.
             let phraseCollection = json!["phrases"]
             
+            // Iterate through each phrase data object, and process accordingly.
             for (_, subJson):(String, JSON) in phraseCollection {
                 
+                // Attempt to access the underlying object representation for the current phrase.
                 if let jsonPhraseData = subJson.dictionary {
                     
                     var newPhrase = PhraseModel()
@@ -379,6 +406,7 @@ class DataController {
                         
                     }
                     
+                    // Process the new PhraseModel instance in the same way as if a phrase was created manually.
                     self.createOrUpdatePhrase(newPhrase)
                     
                 } else {
@@ -397,6 +425,7 @@ class DataController {
         
     }
     
+    // Returns a dictionary of saved revision phrases from NSUserDefaults, or nil if no collection is found.
     func loadSavedRevisionPhrases() -> [String : OriginPhrase]? {
         
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -407,6 +436,7 @@ class DataController {
                 
                 var loadedPhrases = [String : OriginPhrase]()
                 
+                // Iterate through each of the phrase object IDs retrieved from NSUserDefaults, and locate the corresponding ObjectPhrase entity from Core Data.
                 for (phraseKey, phraseURL) in savedPhrases {
                     
                     if let locatedPhrase = self.getPhraseByIdUrl(phraseURL) {
@@ -426,6 +456,7 @@ class DataController {
         return nil
     }
     
+    // Persist a dictionary of revision phrase object IDs to NSUserDefaults to retrieve again at a later point in time.
     func saveRevisionPhrases(phrases : [String : OriginPhrase]) {
         
         var phraseDictUrls = [String : NSURL]()

@@ -376,7 +376,7 @@ class PhrasesViewController: UITableViewController, PhraseTableViewCellDelegate 
             }
             
             // Delete the phrase from Core Data.
-            self.dataController.deletePhrase(self.phrases![indexPath.row])
+            self.dataController.deleteExisitingPhrase(self.phrases![indexPath.row])
             
             // Remove the phrase from the UITableView data source.
             self.phrases?.removeAtIndex(indexPath.row)

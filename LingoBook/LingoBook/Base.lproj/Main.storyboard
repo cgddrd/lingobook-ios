@@ -326,7 +326,7 @@
         <scene sceneID="z6Y-ba-ywx">
             <objects>
                 <navigationController id="YDF-a1-z9b" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Phrases" image="notebook" id="Lgb-9V-oYl"/>
+                    <tabBarItem key="tabBarItem" title="Phrases" image="book" id="Lgb-9V-oYl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F3e-ki-oo0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -776,8 +776,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="book" width="22" height="22"/>
         <image name="glasses" width="44" height="44"/>
-        <image name="notebook" width="32" height="32"/>
         <image name="speaker" width="22" height="22"/>
     </resources>
 </document>

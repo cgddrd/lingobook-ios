@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // 'Bariol' font used under license:
     let appFont = UIFont (name: "Bariol", size: 20);
     
-    // Color pallette providide by Chameleon Framework. See: https://github.com/ViccAlexander/Chameleon
+    // Color pallette provided by Chameleon Framework. See: https://github.com/ViccAlexander/Chameleon
     let barTintColour = UIColor.flatYellowColor()
     let barTextColour = UIColor.init(contrastingBlackOrWhiteColorOn: UIColor.flatYellowColor(), isFlat: true)
     
