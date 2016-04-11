@@ -63,7 +63,7 @@ class DataController {
         
     }
     
-    func getExistingTag(tagName: String) -> Tag? {
+    func findExistingTag(tagName: String) -> Tag? {
         
         do {
             
@@ -91,7 +91,7 @@ class DataController {
         
     }
     
-    func getExistingPhrase(phraseOriginText: String) -> OriginPhrase? {
+    func findExistingPhrase(phraseOriginText: String) -> OriginPhrase? {
         
         do {
             
@@ -118,7 +118,7 @@ class DataController {
         return nil
     }
     
-    func getExistingTranslation(phraseTranslatedText: String, locale: String) -> TranslatedPhrase? {
+    func findExistingTranslation(phraseTranslatedText: String, locale: String) -> TranslatedPhrase? {
         
         do {
             
@@ -149,7 +149,7 @@ class DataController {
         
         var currentTag : Tag
         
-        if let existingTag = getExistingTag(tagName) {
+        if let existingTag = findExistingTag(tagName) {
             
             currentTag = existingTag
             
@@ -190,7 +190,7 @@ class DataController {
         
         var phrase: OriginPhrase
         
-        if let existingPhrase = getExistingPhrase(phraseOriginText) {
+        if let existingPhrase = findExistingPhrase(phraseOriginText) {
             
             phrase = existingPhrase
             
@@ -209,7 +209,7 @@ class DataController {
         
         var phrase: TranslatedPhrase
         
-        if let existingPhrase = getExistingTranslation(phraseTranslatedText, locale: locale) {
+        if let existingPhrase = findExistingTranslation(phraseTranslatedText, locale: locale) {
             
             phrase = existingPhrase
             

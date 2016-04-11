@@ -21,6 +21,11 @@ class NetworkController {
         
         let url = NSURL(string: url)
         
+        // We need to make sure to clear the shared cache before attempting to download the file.
+        // Caches appear to be stored across application runs.
+        // See: http://stackoverflow.com/a/34808289 for more information.
+        NSURLCache.sharedURLCache().removeAllCachedResponses()
+        
         // let task = session!.dataTaskWithURL(url!, completionHandler: {
         //    
         //    (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
@@ -33,8 +38,23 @@ class NetworkController {
         // See: http://www.learnswift.io/blog/2014/6/9/writing-completion-blocks-with-closures-in-swift for more information.
         let task = session!.dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             
+            var downloadData = data
+            
+            if let httpResponse = response as? NSHTTPURLResponse {
+                
+                // By default, a 404 from the server does not count as a failure, with 'data' being set to an empty string value, rather than 'nil'. (See: http://code.tutsplus.com/tutorials/networking-with-nsurlsession-part-1--mobile-21394 for more information)
+                
+                // In the case that we get a 404, force the data property to be returned as 'nil', so we can perform appropiate error handling.
+                if httpResponse.statusCode == 404 {
+                    
+                    downloadData = nil;
+                    
+                }
+                
+            }
+            
             // Call the completion handler via the closure.
-            completion(data: data, response: response, error: error)
+            completion(data: downloadData, response: response, error: error)
             
             self.session?.finishTasksAndInvalidate()
             

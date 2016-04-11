@@ -147,12 +147,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuI-aG-URQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1375" y="-342"/>
+            <point key="canvasLocation" x="1383" y="-722"/>
         </scene>
         <!--Add Phrase-->
         <scene sceneID="Kvh-Bm-c3t">
             <objects>
-                <tableViewController id="FsZ-f8-gah" customClass="AddPhraseViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="FsZ-f8-gah" customClass="PhraseInputViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="XTW-cb-XHd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -320,7 +320,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcX-Kd-Ab6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2781" y="-342"/>
+            <point key="canvasLocation" x="2789" y="-722"/>
         </scene>
         <!--Phrases-->
         <scene sceneID="z6Y-ba-ywx">
@@ -346,54 +346,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azC-Kk-5xC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="662" y="-342"/>
-        </scene>
-        <!--Revision-->
-        <scene sceneID="ktU-hO-YIF">
-            <objects>
-                <tableViewController id="xhu-RS-Jej" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cXg-gt-Z1Z">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hgh-1B-5PV">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hgh-1B-5PV" id="6rL-x1-uvD">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="xhu-RS-Jej" id="H2K-3W-R9q"/>
-                            <outlet property="delegate" destination="xhu-RS-Jej" id="n5J-fS-FUA"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Revision" id="tIC-p9-BKs"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yAT-WR-E1E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2171" y="390"/>
-        </scene>
-        <!--Revision-->
-        <scene sceneID="2Sk-aL-p2a">
-            <objects>
-                <navigationController id="NE2-Pu-1xf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Revision" image="glasses" id="h1I-8R-jOF"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lp2-z5-KDy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.98039215686274506" green="0.83921568627450982" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="xhu-RS-Jej" kind="relationship" relationship="rootViewController" id="dNd-u2-WJ1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X1S-uM-Kdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1474" y="390"/>
+            <point key="canvasLocation" x="670" y="-722"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4UP-Pk-Cxx">
@@ -415,7 +368,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOD-tY-ITr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2102" y="-342"/>
+            <point key="canvasLocation" x="2110" y="-722"/>
         </scene>
         <!--Revision-->
         <scene sceneID="fa7-Sa-rL8">
@@ -459,7 +412,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MmE-4T-Cnq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="767" y="893"/>
+            <point key="canvasLocation" x="1419" y="697"/>
         </scene>
         <!--Item-->
         <scene sceneID="fxe-yA-jQB">
@@ -469,12 +422,12 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1r-l5-9bk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-45" y="1581.5"/>
+            <point key="canvasLocation" x="2459" y="696.5"/>
         </scene>
-        <!--Flash View Controller-->
+        <!--Flash Card View Controller-->
         <scene sceneID="pUK-Xd-kd8">
             <objects>
-                <viewController storyboardIdentifier="CardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="db1-ON-4dZ" customClass="FlashViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FlashCardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="db1-ON-4dZ" customClass="FlashCardViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="63z-Ni-fXM"/>
                         <viewControllerLayoutGuide type="bottom" id="I5V-sn-TM4"/>
@@ -545,19 +498,19 @@
                     </view>
                     <connections>
                         <outlet property="answerLabel" destination="KeB-sP-nRj" id="bz6-En-VVD"/>
+                        <outlet property="cardView" destination="Rsi-Ch-d0j" id="zHW-y4-dR7"/>
                         <outlet property="placeholderLabel" destination="FJu-2i-bGq" id="hnK-P5-tQd"/>
                         <outlet property="questionLabel" destination="Irj-qt-mMl" id="cVj-H4-vOj"/>
-                        <outlet property="testView" destination="Rsi-Ch-d0j" id="pIx-xc-4rP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Xc-K6-SzW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="595" y="1638"/>
+            <point key="canvasLocation" x="2115" y="1326"/>
         </scene>
         <!--Edit Phrase-->
         <scene sceneID="Swb-Ae-eub">
             <objects>
-                <tableViewController id="Vym-gG-5or" customClass="EditPhraseViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Vym-gG-5or" customClass="PhraseInputViewController" customModule="LingoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="enw-mb-KqA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -725,7 +678,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="abA-2f-MwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4376" y="414"/>
+            <point key="canvasLocation" x="2789" y="54"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7yA-x8-8oO">
@@ -743,7 +696,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="16V-Dy-Oy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3564" y="414"/>
+            <point key="canvasLocation" x="2102" y="54"/>
         </scene>
         <!--Revision-->
         <scene sceneID="c7i-d3-LRr">
@@ -762,12 +715,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K12-qk-U7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-45" y="893"/>
+            <point key="canvasLocation" x="670" y="697"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="CnM-vj-70D">
             <objects>
-                <viewController storyboardIdentifier="TestController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cif-Qd-BN3" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmptyRevisionListController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cif-Qd-BN3" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BQ6-sk-mGq"/>
                         <viewControllerLayoutGuide type="bottom" id="u3e-z6-Vi9"/>
@@ -783,7 +736,7 @@
                                     <constraint firstAttribute="height" constant="21" id="UEf-sp-ryD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to the 'Phrases' tab to add phrases." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v00-z4-41v">
@@ -792,7 +745,7 @@
                                     <constraint firstAttribute="width" constant="300" id="nUu-MM-EyN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -819,7 +772,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csA-gd-OTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1224" y="1638"/>
+            <point key="canvasLocation" x="2789" y="1326"/>
         </scene>
     </scenes>
     <resources>

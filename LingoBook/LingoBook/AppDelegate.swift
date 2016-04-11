@@ -2,8 +2,7 @@
 //  AppDelegate.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 08/03/2016.
-//  Copyright © 2016 Connor Goddard. All rights reserved.
+//  Student No: 110024253
 //
 
 import UIKit
@@ -15,12 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-   // lazy var coreDataStack = CoreDataStack()
-    
+    // 'Bariol' font used under license:
     let appFont = UIFont (name: "Bariol", size: 20);
+    
+    // Color pallette providide by Chameleon Framework. See: https://github.com/ViccAlexander/Chameleon
     let barTintColour = UIColor.flatYellowColor()
     let barTextColour = UIColor.init(contrastingBlackOrWhiteColorOn: UIColor.flatYellowColor(), isFlat: true)
     
+    // Initialise collection of revision phrases.
     var revisionPhrases = [String : OriginPhrase]()
     
     var dataController = DataController()
@@ -34,12 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: appFont!, NSForegroundColorAttributeName: barTextColour]
         }
         
-        // Set navigation bar colour.
+        // Override navigation bar colour for entire app.
         UINavigationBar.appearance().barTintColor = barTintColour
         UINavigationBar.appearance().tintColor = barTextColour
         
         
-        // Load saved revision phrases.
+        // Load saved revision phrases (if available) from NSUserDefaults.
         if let loadedPhrases = dataController.loadSavedRevisionPhrases() {
             
             self.revisionPhrases = loadedPhrases
@@ -58,8 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
+        // Save main CD object graph.
         dataController.coreDataStack.saveContext()
         
+        // Save any selected revision phrases to NSUserDefaults.
         dataController.saveRevisionPhrases(self.revisionPhrases)
         
     }
@@ -75,10 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
-        //coreDataStack.saveContext()
         
+        // Save main CD object graph.
         dataController.coreDataStack.saveContext()
         
+        // Save any selected revision phrases to NSUserDefaults.
         dataController.saveRevisionPhrases(self.revisionPhrases)
         
     }

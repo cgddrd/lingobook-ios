@@ -1,13 +1,13 @@
 //
-//  AddTabTableViewCell.swift
+//  AddPhraseTagTableViewCell.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 22/03/2016.
-//  Copyright © 2016 Connor Goddard. All rights reserved.
+//  Student No: 110024253
 //
 
 import UIKit
 
+// Represents a prototype cell used for inputting dynamic data values (e.g. tags).
 class AddPhraseTagTableViewCell: UITableViewCell {
     
     @IBOutlet weak var textTag: UITextField!

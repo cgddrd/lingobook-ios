@@ -2,95 +2,63 @@
 //  RevisionViewController.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 02/04/2016.
-//  Copyright © 2016 Connor Goddard. All rights reserved.
+//  Student No: 110024253
 //
 
 import UIKit
 
-class RevisionViewController: UIViewController {
+// Represents the parent UIViewController for the child UIPageViewController (embedded as a Container View).
+class RevisionViewController: UIViewController, RevisionPageViewControllerDelegate {
 
     @IBOutlet weak var pageDots: UIPageControl!
+    
+    // Container View for embedded either RevisionPageViewController or EmptyRevisionListController into current VC.
     @IBOutlet weak var containerView: UIView!
     
-    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("TestController")
+    // Obtain a reference to the View Controller containing the 'empty list' placeholder message.
+    let emptyListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("EmptyRevisionListController")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Reset page dots ready for new collection of flash cards to be displayed.
-        //self.pageDots.currentPage = 0
-        //self.pageDots.numberOfPages = 0
-        
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        
-        super.viewWillDisappear(animated)
-        
-//        for vc in self.containerView.subviews {
-//            
-//            vc.removeFromSuperview()
-//            
-//        }
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let tutorialPageViewController = segue.destinationViewController as? RevisionPageViewController {
-            tutorialPageViewController.revisionDelegate = self
+        
+        if let revisionPageViewController = segue.destinationViewController as? RevisionPageViewController {
+            
+            // Set up the delegate for the embedded UIPageViewController.
+            revisionPageViewController.revisionDelegate = self
         }
-    }
-    
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
-
-extension RevisionViewController: RevisionPageViewControllerDelegate {
-    
-    func revisionPageViewController(revisionPageViewController: RevisionPageViewController,
-                                    didUpdatePageCount count: Int) {
         
+    }
+    
+    // RevisionPageViewControllerDelegate function that fires whenever the internal page count for the UIPageViewController is updated.
+    // Modified from original source: https://spin.atomicobject.com/2015/12/23/swift-uipageviewcontroller-tutorial/
+    func revisionPageViewController(revisionPageViewController: RevisionPageViewController, didUpdatePageCount count: Int) {
+        
+        // Set the number of dots in the Page Control.
         pageDots.numberOfPages = count
         
+        // If the number of revision items is zero, then remove the UIPageViewController and replace with the 'empty list' message.
         if count <= 0 {
             
             pageDots.hidden = true
             
-            self.addChildViewController(vc)
-            vc.view.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
-            self.containerView.addSubview(vc.view)
+            self.addChildViewController(emptyListVC)
+            emptyListVC.view.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+            self.containerView.addSubview(emptyListVC.view)
             
-            vc.didMoveToParentViewController(self)
-            
+            emptyListVC.didMoveToParentViewController(self)
+        
+        // Otherwise, remove the 'empty list' message, and replace with the UIPageViewController.
         } else {
             
-            if self.containerView.subviews.contains(vc.view) {
+            if self.containerView.subviews.contains(emptyListVC.view) {
                 
-                vc.didMoveToParentViewController(nil)
-                vc.view.removeFromSuperview()
-                vc.removeFromParentViewController()
+                emptyListVC.didMoveToParentViewController(nil)
+                emptyListVC.view.removeFromSuperview()
+                emptyListVC.removeFromParentViewController()
                 
                 pageDots.hidden = false
                 
@@ -100,9 +68,10 @@ extension RevisionViewController: RevisionPageViewControllerDelegate {
         }
     }
     
-    func revisionPageViewController(revisionPageViewController: RevisionPageViewController,
-                                    didUpdatePageIndex index: Int) {
+    // RevisionPageViewControllerDelegate function that fires everytime the user swipes to a new page.
+    // Modified from original source: https://spin.atomicobject.com/2015/12/23/swift-uipageviewcontroller-tutorial/
+    func revisionPageViewController(revisionPageViewController: RevisionPageViewController, didUpdatePageIndex index: Int) {
         pageDots.currentPage = index
     }
-    
+
 }

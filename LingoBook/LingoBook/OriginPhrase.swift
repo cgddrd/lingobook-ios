@@ -2,8 +2,7 @@
 //  OriginPhrase.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 23/03/2016.
-//  Copyright © 2016 Connor Goddard. All rights reserved.
+//  Student No: 110024253
 //
 
 import Foundation

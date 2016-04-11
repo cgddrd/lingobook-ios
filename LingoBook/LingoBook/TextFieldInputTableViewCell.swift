@@ -1,18 +1,18 @@
 //
-//  AddPhraseTableViewCell.swift
+//  TextFieldInputTableViewCell.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 23/03/2016.
-//  Copyright © 2016 Connor Goddard. All rights reserved.
+//  Student No: 110024253
 //
 
 import UIKit
 
+// Represents a UITableViewCell that supports text input via a UITextField.
 class TextFieldInputTableViewCell: UITableViewCell {
 
     @IBOutlet weak var textPhrase: UITextField!
     
-    var delegate: UITableViewCellUpdateDelegate?
+    var delegate: UITableViewInputCellUpdateDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +24,8 @@ class TextFieldInputTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    // This function is triggered everytime the UITextField is updated.
     @IBAction func textPhraseValueChanged(sender: AnyObject) {
         
         self.delegate?.cellDidChangeValue(self)

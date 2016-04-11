@@ -1,13 +1,13 @@
 //
-//  PhraseData.swift
+//  PhraseModel.swift
 //  LingoBook
 //
-//  Created by Connor Goddard on 01/04/2016.
-//  Copyright © 2016 Connor Goddard. All rights reserved.
+//  Student No: 110024253
 //
 
 import Foundation
 
+// Model struct providing temporary representation for a phrase entity whilst working outside of Core Data.
 struct PhraseModel {
     
     var originPhraseText: String
@@ -15,7 +15,6 @@ struct PhraseModel {
     var tags: [String]
     var note: String
     var type: String
-    //var objectURI: NSURL?
     
     init() {
         
@@ -27,6 +26,7 @@ struct PhraseModel {
         
     }
     
+    // Convenience constructor to convert from an OriginPhrase model.
     init(existingPhrase: OriginPhrase) {
         
         self.originPhraseText = existingPhrase.textValue!
@@ -47,35 +47,6 @@ struct PhraseModel {
             
         }
         
-        //self.objectURI = existingPhrase.objectID.URIRepresentation()
-        
     }
     
-}
-
-struct TranslationModel {
-    
-    var translatedText: String
-    var locale: String
-    
-    init() {
-        
-        self.translatedText = ""
-        self.locale = ""
-
-    }
-    
-    init(translatedText: String, locale: String) {
-        
-        self.translatedText = translatedText
-        self.locale = locale
-    
-    }
-    
-    init(existingTranslation: TranslatedPhrase) {
-        
-        self.translatedText = existingTranslation.textValue!
-        self.locale = existingTranslation.locale!
-        
-    }
 }
